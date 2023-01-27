@@ -16,14 +16,14 @@ public class StageController : MonoBehaviour
     private int currentStageIndex = -1;
 
     private Stage CurrentStage
-    { 
-        get 
-        { 
+    {
+        get
+        {
             if (currentStageIndex <= stages.Count - 1)
-                return stages[currentStageIndex]; 
+                return stages[currentStageIndex];
             else
                 return null;
-        } 
+        }
     }
 
     public UnityAction<Stage> OnStageSwitch;
@@ -36,6 +36,7 @@ public class StageController : MonoBehaviour
         scp = new StageControllerPresenter(mediator);
         mediator.StageControllerPresenter = scp;
         scp.OnPartFinished += ProcessInstallFinished;
+        scp.OnPartHelperUpdate += ProcessHelperUpdate;
 
         partFactory.SpawnParts(mediator);
 
@@ -58,12 +59,21 @@ public class StageController : MonoBehaviour
         }
     }
 
+    private void ProcessHelperUpdate(CommandHelperUpdate c)
+    {
+        Debug.Log($"{c.PartData.name} - Selected: {c.IsSelected}");
+    }
+
     public void NextStage()
     {
         if (currentStageIndex < stages.Count)
         {
             currentStageIndex++;
-            if (CurrentStage != null) partFactory.ToogleSuitablePoints(CurrentStage.target);
+            if (CurrentStage != null)
+            {
+                partFactory.ToogleSuitablePoints(CurrentStage.target);
+                scp.Send(new CommandSetTarget(scp, CurrentStage.target), null);
+            }
             OnStageSwitch?.Invoke(CurrentStage);
         }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mediator
 {
-    public Collegue StageControllerPresenter {get; set;}
+    public Collegue StageControllerPresenter { get; set; }
 
     private List<PartPresenter> parts = new List<PartPresenter>();
 
@@ -15,9 +15,20 @@ public class Mediator
 
     public void Send(Command command, Collegue target)
     {
-        if (command is CommandFinished)
+        if (command is CommandFinished || command is CommandHelperUpdate)
         {
             StageControllerPresenter.Notify(command);
+        }
+        else if (command is CommandSetTarget)
+        {
+            var c = command as CommandSetTarget;
+            foreach (var i in parts)
+            {
+                if (i.PartData.ID == c.TargetData.ID)
+                {
+                    i.Notify(command);
+                }
+            }
         }
         else
         {

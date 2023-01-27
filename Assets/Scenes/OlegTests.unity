@@ -1241,8 +1241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73ba47a740d41442885f80c9ebf5ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineColor: {r: 0.107467085, g: 0.72368103, b: 0.990566, a: 0.7058824}
-  outlineWidth: 10
+  outlineColor: {r: 0.107467085, g: 0.72368103, b: 0, a: 0.7058824}
+  outlineWidth: 7
   VRTesting: 0
 --- !u!114 &858820084
 MonoBehaviour:
@@ -1464,7 +1464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1094847623
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1618,8 +1618,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 327, y: 206.14}
-  m_SizeDelta: {x: -675.25, y: -454.28}
+  m_AnchoredPosition: {x: 303.16003, y: 206.14}
+  m_SizeDelta: {x: -627.57, y: -454.28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1101230263
 MonoBehaviour:
@@ -1844,6 +1844,7 @@ MonoBehaviour:
   curStageText: {fileID: 898168073}
   orderText: {fileID: 185858841}
   timerText: {fileID: 0}
+  ProfileInfoText: {fileID: 0}
   stageController: {fileID: 858820081}
   scrollRect: {fileID: 1576411410}
   scrollContainer: {fileID: 1468451096}
@@ -2143,8 +2144,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -274.13, y: 0}
-  m_SizeDelta: {x: -548.26, y: 0}
+  m_AnchoredPosition: {x: -297.97, y: 0}
+  m_SizeDelta: {x: -595.94, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1614235389
 MonoBehaviour:
@@ -2317,8 +2318,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 327, y: -49.359955}
-  m_SizeDelta: {x: -675.25, y: -98.72}
+  m_AnchoredPosition: {x: 303.16, y: -49.359955}
+  m_SizeDelta: {x: -627.57, y: -98.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2038113024
 MonoBehaviour:

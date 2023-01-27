@@ -18,6 +18,8 @@ public class Part : MonoBehaviour
     private PartPresenter partPresenter;
     private PartAttacher partAttacher;
 
+    private bool isTarget = false;
+
     public int PartID { get; private set; }  
 
     [SerializeField]
@@ -40,6 +42,13 @@ public class Part : MonoBehaviour
         partPresenter.Send(new CommandFinished(this.partPresenter), null);
     }
 
+    public void AnimationFinished()
+    {
+        isTarget = false;
+        outline.enabled = false;
+        Install();
+    }
+
     [ContextMenu("Test")]
     public void Test()
     {
@@ -50,6 +59,7 @@ public class Part : MonoBehaviour
     {
         partPresenter = new PartPresenter(mediator, partData);
         partPresenter.OnJointPointToogle += partAttacher.ToogleJointPoint;
+        partPresenter.OnSetTarget += ProcessSetTarget;
         return partPresenter;
     }
 
@@ -61,6 +71,11 @@ public class Part : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         outline = gameObject.AddComponent<Outline>();
         partAttacher = GetComponent<PartAttacher>();
+
+        UpdateState(state);
+
+        GrabInteractable.firstSelectEntered.AddListener(OnSelectEnter);
+        GrabInteractable.lastSelectExited.AddListener(OnSelectExit);
     }
 
     private void Start()
@@ -81,8 +96,27 @@ public class Part : MonoBehaviour
 
         }
         
-        UpdateState(state);
+        
 
+    }
+
+    private void ProcessSetTarget()
+    {
+        isTarget = true;
+        outline.enabled = true;
+    }
+
+    private void OnSelectEnter(SelectEnterEventArgs args) => OnSelectEvent(true);
+
+    private void OnSelectExit(SelectExitEventArgs args) => OnSelectEvent(false);
+
+    private void OnSelectEvent(bool isSelected)
+    {
+        if (isTarget)
+        {
+            outline.enabled = !isSelected;
+        }
+        partPresenter.Send(new CommandHelperUpdate(partPresenter, transform, partData, isSelected), null);
     }
 
     private void UpdateState(PartState newState)
@@ -100,7 +134,7 @@ public class Part : MonoBehaviour
                 break;
             case PartState.Fixed:
                 rb.isKinematic = true;
-                outline.enabled = true;
+                outline.enabled = false;
                 break;
             case PartState.Installed:
                 rb.isKinematic = true;

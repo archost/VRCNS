@@ -29,3 +29,29 @@ public class CommandToogleJP : Command
         JointPointID = jointPointID;
     }
 }
+
+public class CommandHelperUpdate : Command
+{
+    public Transform PartTransform { get; private set; }
+
+    public PartData PartData { get; private set; }
+
+    public bool IsSelected { get; private set; }
+
+    public CommandHelperUpdate(Collegue sender, Transform t, PartData pd, bool isSelected) : base(sender)
+    {
+        PartTransform = t;
+        PartData = pd;
+        IsSelected = isSelected;
+    }
+}
+
+public class CommandSetTarget : Command
+{
+    public PartData TargetData { get; private set; }
+
+    public CommandSetTarget(Collegue sender, PartData targetData) : base(sender)
+    {
+        TargetData = targetData;
+    }
+}

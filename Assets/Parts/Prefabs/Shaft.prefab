@@ -101,8 +101,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jointPoints:
-  - {fileID: 0}
   - {fileID: 5130044333263843266}
+  - {fileID: 8030549388714220045}
+  - {fileID: 8932531675988554051}
+  - {fileID: 8199333867862777957}
+  - {fileID: 3412267421505403286}
   isAssemblyAttacher: 1
 --- !u!114 &4171050094324869352
 MonoBehaviour:
