@@ -287,7 +287,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374179f78921e744b98381557b3d7ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jointPoints: []
+  jointPoints:
+  - {fileID: 1735445970170520941}
+  - {fileID: 4736801241023221978}
+  - {fileID: 883069389757693372}
   isAssemblyAttacher: 1
 --- !u!114 &4555227450929806893
 MonoBehaviour:
