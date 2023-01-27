@@ -11,6 +11,9 @@ public class StageController : MonoBehaviour
 
     public List<Stage> stages;
 
+    [SerializeField]
+    private PartHelper partHelper;
+
     private PartFactory partFactory;
 
     private int currentStageIndex = -1;
@@ -53,6 +56,7 @@ public class StageController : MonoBehaviour
             var pp = command.Sender as PartPresenter;
             if (pp.PartData.ID == CurrentStage.target.ID)
             {
+                partHelper.TurnOff();
                 Debug.Log($"Successfully completed \"{CurrentStage.description}\"!");
                 NextStage();
             }
@@ -61,7 +65,10 @@ public class StageController : MonoBehaviour
 
     private void ProcessHelperUpdate(CommandHelperUpdate c)
     {
-        Debug.Log($"{c.PartData.name} - Selected: {c.IsSelected}");
+        //Debug.Log($"{c.PartData.name} - Selected: {c.IsSelected}");
+        if (c.IsSelected)
+            partHelper.SetTarget(c.PartTransform, c.PartData);
+        else partHelper.TurnOff();
     }
 
     public void NextStage()
@@ -74,6 +81,7 @@ public class StageController : MonoBehaviour
                 partFactory.ToogleSuitablePoints(CurrentStage.target);
                 scp.Send(new CommandSetTarget(scp, CurrentStage.target), null);
             }
+            else TimerScript.StopTimer(gameObject);
             OnStageSwitch?.Invoke(CurrentStage);
         }
     }

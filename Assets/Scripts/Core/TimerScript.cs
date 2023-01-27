@@ -18,6 +18,14 @@ public static class TimerScript
         }
     }
 
+    public static string CurrentTimeVerticalFormat
+    {
+        get 
+        {
+            return $"{currTime / 600}{(currTime / 60) % 10}\n{(currTime % 60) / 10}{(currTime % 60) % 10}";
+        }
+    }
+
     public static bool IsRunning => c_timer != null;
 
     public static void StartTimer(GameObject initializer)

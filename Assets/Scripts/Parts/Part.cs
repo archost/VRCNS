@@ -49,10 +49,16 @@ public class Part : MonoBehaviour
         Install();
     }
 
-    [ContextMenu("Test")]
-    public void Test()
+    [ContextMenu("Test1")]
+    public void Test1()
     {
-        partAttacher.ToogleJointPoint(0);
+        OnSelectEvent(true);
+    }
+
+    [ContextMenu("Test2")]
+    public void Test2()
+    {
+        OnSelectEvent(false);
     }
 
     public PartPresenter InitPartPresenter(Mediator mediator)
@@ -95,9 +101,6 @@ public class Part : MonoBehaviour
             PartID = partData.ID;
 
         }
-        
-        
-
     }
 
     private void ProcessSetTarget()

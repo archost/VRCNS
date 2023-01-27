@@ -58,6 +58,7 @@ public class BoardScript : MonoBehaviour
         }
     }
 
+    [ContextMenu("Start Timer")]
     public void StartTimer()
     {
         TimerScript.StartTimer(this.gameObject);
