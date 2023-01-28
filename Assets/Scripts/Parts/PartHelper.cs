@@ -20,7 +20,7 @@ public class PartHelper : MonoBehaviour
 
     private void Start()
     {
-        pl = FindObjectOfType<Player>().transform;
+        pl = Camera.main.transform;
     }
 
     public void SetTarget(Transform target, PartData data)

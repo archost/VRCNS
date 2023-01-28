@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Stage2
   m_EditorClassIdentifier: 
   ID: 2
-  description: "\u041E\u0442\u043A\u0440\u0443\u0442\u0438\u0442\u044C \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435."
-  AttachedObject: {fileID: 0}
+  description: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043A\u043E\u0440\u043F\u0443\u0441
+    \u0441\u0430\u043B\u044C\u043D\u0438\u043A\u0430 \u0432 \u043A\u0440\u044B\u0448\u043A\u0443
+    \u0432\u0441\u0430\u0441\u044B\u0432\u0430\u043D\u0438\u044F "
+  target: {fileID: 11400000, guid: c505ca91d0532d748a9e8ed0e1f7c13f, type: 2}

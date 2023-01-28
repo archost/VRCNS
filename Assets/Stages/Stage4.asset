@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Stage4
   m_EditorClassIdentifier: 
   ID: 4
-  description: "\u0412\u044B\u0432\u0435\u0440\u043D\u0443\u0442\u044C \u0433\u0430\u0439\u043A\u0438."
-  AttachedObject: {fileID: 0}
+  description: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043F\u0435\u0440\u0435\u0434\u043D\u044E\u044E
+    \u0437\u0430\u0449\u0438\u0442\u043D\u0443\u044E \u0440\u0443\u0431\u0430\u0448\u043A\u0443 "
+  target: {fileID: 11400000, guid: 82addfa9fa8ef814bbadb30db10a0c1b, type: 2}

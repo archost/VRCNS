@@ -3604,6 +3604,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PartHelper
       objectReference: {fileID: 0}
+    - target: {fileID: 7768860882097800363, guid: 312d89d48117e164ba21a7ddbc283f89,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7768860882097800365, guid: 312d89d48117e164ba21a7ddbc283f89,
         type: 3}
       propertyPath: m_RootOrder
