@@ -11,19 +11,22 @@ public class StageController : MonoBehaviour
 
     public List<Stage> stages;
 
+    [SerializeField]
+    private PartHelper partHelper;
+
     private PartFactory partFactory;
 
     private int currentStageIndex = -1;
 
     private Stage CurrentStage
-    { 
-        get 
-        { 
+    {
+        get
+        {
             if (currentStageIndex <= stages.Count - 1)
-                return stages[currentStageIndex]; 
+                return stages[currentStageIndex];
             else
                 return null;
-        } 
+        }
     }
 
     public UnityAction<Stage> OnStageSwitch;
@@ -36,6 +39,7 @@ public class StageController : MonoBehaviour
         scp = new StageControllerPresenter(mediator);
         mediator.StageControllerPresenter = scp;
         scp.OnPartFinished += ProcessInstallFinished;
+        scp.OnPartHelperUpdate += ProcessHelperUpdate;
 
         partFactory.SpawnParts(mediator);
 
@@ -52,10 +56,19 @@ public class StageController : MonoBehaviour
             var pp = command.Sender as PartPresenter;
             if (pp.PartData.ID == CurrentStage.target.ID)
             {
+                partHelper.TurnOff();
                 Debug.Log($"Successfully completed \"{CurrentStage.description}\"!");
                 NextStage();
             }
         }
+    }
+
+    private void ProcessHelperUpdate(CommandHelperUpdate c)
+    {
+        //Debug.Log($"{c.PartData.name} - Selected: {c.IsSelected}");
+        if (c.IsSelected)
+            partHelper.SetTarget(c.PartTransform, c.PartData);
+        else partHelper.TurnOff();
     }
 
     public void NextStage()
@@ -63,7 +76,12 @@ public class StageController : MonoBehaviour
         if (currentStageIndex < stages.Count)
         {
             currentStageIndex++;
-            if (CurrentStage != null) partFactory.ToogleSuitablePoints(CurrentStage.target);
+            if (CurrentStage != null)
+            {
+                partFactory.ToogleSuitablePoints(CurrentStage.target);
+                scp.Send(new CommandSetTarget(scp, CurrentStage.target), null);
+            }
+            else TimerScript.StopTimer(gameObject);
             OnStageSwitch?.Invoke(CurrentStage);
         }
     }

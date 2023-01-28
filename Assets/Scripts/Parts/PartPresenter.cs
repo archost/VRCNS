@@ -7,6 +7,8 @@ public class PartPresenter : Collegue
 {
     public UnityAction<int> OnJointPointToogle;
 
+    public UnityAction OnSetTarget;
+
     public PartData PartData { get; private set; }
 
     public PartPresenter(Mediator mediator, PartData pd) : base(mediator)
@@ -25,6 +27,11 @@ public class PartPresenter : Collegue
         {
             CommandToogleJP commandToogleJP = command as CommandToogleJP;
             OnJointPointToogle?.Invoke(commandToogleJP.JointPointID);
+        }
+        else if(command is CommandSetTarget)
+        {
+            var c = command as CommandSetTarget;
+            OnSetTarget?.Invoke();
         }
     }
 }

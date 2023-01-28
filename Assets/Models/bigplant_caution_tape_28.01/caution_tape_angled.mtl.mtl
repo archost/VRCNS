@@ -1,0 +1,22 @@
+# Blender 3.4.1 MTL File: 'caution_tape.blend'
+# www.blender.org
+
+newmtl Material
+Ns 250.000000
+Ka 0.603636 0.603636 0.603636
+Kd 0.005494 0.005735 0.102239
+Ks 0.463636 0.463636 0.463636
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+
+newmtl warning(image)
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:/Users/6acco/Downloads/texture.webp

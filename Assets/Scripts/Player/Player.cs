@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         IsReady = false;
-        wboard.OnFieldSubmit += CheckReady;
+        //wboard.OnFieldSubmit += CheckReady;
         a_s = GetComponent<AudioSource>();
     }
 
