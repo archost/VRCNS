@@ -24,7 +24,7 @@ public class PartAttacher : MonoBehaviour
         if (index >= 0 && index < jointPoints.Count)
         {
             jointPoints[index].gameObject.SetActive(true);
-            //jointPoints[index].OnPartAttached += AttachPart;
+            
         }
     }
 

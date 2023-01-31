@@ -1835,7 +1835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suitablePart: {fileID: 11400000, guid: 2e606187a995f5446b46325d630cea7e, type: 2}
-  fixedPosition: {x: -1.5, y: 0.207, z: 0.128}
+  fixedPosition: {x: -1.5, y: 0, z: 0}
   fixedRotation: {x: 1, y: 0, z: 0, w: -0.00000004371139}
 --- !u!135 &690647898
 SphereCollider:
@@ -1858,7 +1858,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 690647896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.085, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3603,11 +3603,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PartHelper
-      objectReference: {fileID: 0}
-    - target: {fileID: 7768860882097800363, guid: 312d89d48117e164ba21a7ddbc283f89,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7768860882097800365, guid: 312d89d48117e164ba21a7ddbc283f89,
         type: 3}
