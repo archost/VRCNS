@@ -21,6 +21,12 @@ namespace UnityEngine.XR.Interaction.Toolkit
         [SerializeField]
         public GameObject objectToSetActive;
 
+        [SerializeField]
+        public GameObject objectToDeactivate;
+
+        [SerializeField]
+        private AudioSource audioSource;
+
         /// <summary>
         /// The <see cref="Transform"/> that represents the teleportation destination.
         /// </summary>
@@ -66,6 +72,8 @@ namespace UnityEngine.XR.Interaction.Toolkit
             if (m_TeleportAnchorTransform == null)
                 return false;
             objectToSetActive.SetActive(true);
+            objectToDeactivate.SetActive(false);
+            if (audioSource != null) audioSource.Play();
             teleportRequest.destinationPosition = m_TeleportAnchorTransform.position;
             teleportRequest.destinationRotation = m_TeleportAnchorTransform.rotation;
             return true;
