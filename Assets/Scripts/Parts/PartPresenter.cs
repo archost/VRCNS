@@ -7,7 +7,7 @@ public class PartPresenter : Collegue
 {
     public UnityAction<int> OnJointPointToogle;
 
-    public UnityAction OnSetTarget;
+    public UnityAction<PartState?> OnSetTarget;
 
     public PartData PartData { get; private set; }
 
@@ -31,7 +31,7 @@ public class PartPresenter : Collegue
         else if(command is CommandSetTarget)
         {
             var c = command as CommandSetTarget;
-            OnSetTarget?.Invoke();
+            OnSetTarget?.Invoke(c.NewState);
         }
     }
 }

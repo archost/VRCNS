@@ -50,8 +50,31 @@ public class CommandSetTarget : Command
 {
     public PartData TargetData { get; private set; }
 
-    public CommandSetTarget(Collegue sender, PartData targetData) : base(sender)
+    public PartState? NewState { get; private set; }
+
+    public CommandSetTarget(Collegue sender, PartData targetData, PartState? newState = null) : base(sender)
     {
         TargetData = targetData;
+        NewState = newState;
+    }
+}
+
+public class CommandSetTargetAction : Command
+{
+    public string ActionCode { get; private set; }
+
+    public CommandSetTargetAction(Collegue sender, string actionCode) : base(sender)
+    {
+        ActionCode = actionCode;
+    }
+}
+
+public class CommandActionFinished : CommandFinished
+{
+    public string ActionCode { get; private set; }
+
+    public CommandActionFinished(Collegue sender, string actionCode) : base(sender)
+    {
+        ActionCode = actionCode;
     }
 }

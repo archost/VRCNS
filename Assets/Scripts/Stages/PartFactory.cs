@@ -9,7 +9,7 @@ public class PartFactory : MonoBehaviour
     [SerializeField]
     private List<SpawnInfo> spawnInfos = new List<SpawnInfo>();
 
-    private List<PartAttacher> partAttachers;
+    public List<PartAttacher> partAttachers;
 
     private void OnEnable()
     {

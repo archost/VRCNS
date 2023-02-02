@@ -80,8 +80,11 @@ public class Part : MonoBehaviour
 
         UpdateState(state);
 
-        GrabInteractable.firstSelectEntered.AddListener(OnSelectEnter);
-        GrabInteractable.lastSelectExited.AddListener(OnSelectExit);
+        if (GrabInteractable != null)
+        {
+            GrabInteractable.firstSelectEntered.AddListener(OnSelectEnter);
+            GrabInteractable.lastSelectExited.AddListener(OnSelectExit);
+        }        
     }
 
     private void Start()
@@ -103,8 +106,9 @@ public class Part : MonoBehaviour
         }
     }
 
-    private void ProcessSetTarget()
+    private void ProcessSetTarget(PartState? newState)
     {
+        if (newState != null) UpdateState(newState.Value);
         isTarget = true;
         outline.enabled = true;
     }

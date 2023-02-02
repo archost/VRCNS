@@ -8,9 +8,16 @@ public class Mediator
 
     private List<PartPresenter> parts = new List<PartPresenter>();
 
+    private List<ActionHandlerPresenter> actionHandlers = new List<ActionHandlerPresenter>();
+
     public void AddPart(PartPresenter part)
     {
         parts.Add(part);
+    }
+
+    public void AddActionHandler(ActionHandlerPresenter actionHandler)
+    {
+        actionHandlers.Add(actionHandler);
     }
 
     public void Send(Command command, Collegue target)
@@ -25,6 +32,17 @@ public class Mediator
             foreach (var i in parts)
             {
                 if (i.PartData.ID == c.TargetData.ID)
+                {
+                    i.Notify(command);
+                }
+            }
+        }
+        else if (command is CommandSetTargetAction)
+        {
+            var c = command as CommandSetTargetAction;
+            foreach (var i in actionHandlers)
+            {
+                if (i.ActionCode == c.ActionCode)
                 {
                     i.Notify(command);
                 }

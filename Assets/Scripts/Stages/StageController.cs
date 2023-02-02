@@ -38,10 +38,16 @@ public class StageController : MonoBehaviour
         mediator = new Mediator();
         scp = new StageControllerPresenter(mediator);
         mediator.StageControllerPresenter = scp;
-        scp.OnPartFinished += ProcessInstallFinished;
+        scp.OnPartFinished += ProcessFinished;
         scp.OnPartHelperUpdate += ProcessHelperUpdate;
 
         partFactory.SpawnParts(mediator);
+
+        var actionHandlers = FindObjectsOfType<ActionHandler>();
+        foreach (var item in actionHandlers) 
+        {
+            mediator.AddActionHandler(item.InitPresenter(mediator));
+        }
 
         if (stages.Count != 0)
         {
@@ -49,7 +55,7 @@ public class StageController : MonoBehaviour
         }
     }
 
-    private void ProcessInstallFinished(CommandFinished command)
+    private void ProcessFinished(CommandFinished command)
     {
         if (command.Sender is PartPresenter)
         {
@@ -57,6 +63,15 @@ public class StageController : MonoBehaviour
             if (pp.PartData.ID == CurrentStage.target.ID)
             {
                 partHelper.TurnOff();
+                Debug.Log($"Successfully completed \"{CurrentStage.description}\"!");
+                NextStage();
+            }
+        }
+        else if (command.Sender is ActionHandlerPresenter)
+        {
+            var c = command as CommandActionFinished;
+            if (c.ActionCode == CurrentStage.actionCode)
+            {
                 Debug.Log($"Successfully completed \"{CurrentStage.description}\"!");
                 NextStage();
             }
@@ -78,8 +93,17 @@ public class StageController : MonoBehaviour
             currentStageIndex++;
             if (CurrentStage != null)
             {
-                partFactory.ToogleSuitablePoints(CurrentStage.target);
-                scp.Send(new CommandSetTarget(scp, CurrentStage.target), null);
+                if (CurrentStage.goalType == StageGoalType.PartPlacing)
+                {
+                    partFactory.ToogleSuitablePoints(CurrentStage.target);
+                    scp.Send(new CommandSetTarget(scp, CurrentStage.target,
+                        CurrentStage.initPartState == PartState.Idle ? null : CurrentStage.initPartState), null);
+                }
+                else if (CurrentStage.goalType == StageGoalType.Action)
+                {
+                    scp.Send(new CommandSetTargetAction(scp, CurrentStage.actionCode), null);
+                }
+                
             }
             else TimerScript.StopTimer(gameObject);
             OnStageSwitch?.Invoke(CurrentStage);
