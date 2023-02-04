@@ -33,6 +33,11 @@ public class PartAttacher : MonoBehaviour
         if (isAssembly ^ isAssemblyAttacher == true) return false;
         for (int i = 0; i < jointPoints.Count; i++)
         {
+            if (jointPoints[i] == null || jointPoints[i].suitablePart == null)
+            {
+                Debug.LogError("WRONG PART", gameObject);
+                return false;
+            }
             if (jointPoints[i].suitablePart.ID == data.ID)
             {
                 ToogleJointPoint(i);

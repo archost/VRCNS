@@ -482,6 +482,7 @@ GameObject:
   - component: {fileID: 32078016}
   - component: {fileID: 32078015}
   - component: {fileID: 32078018}
+  - component: {fileID: 32078020}
   - component: {fileID: 32078019}
   m_Layer: 5
   m_Name: WelcomingBoard
@@ -611,6 +612,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
+--- !u!114 &32078020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32078013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 518350d2ca02dc4439a0f907a653537b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionCode: inputDone
 --- !u!1 &37247008
 GameObject:
   m_ObjectHideFlags: 0
@@ -2231,6 +2245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stages:
+  - {fileID: 11400000, guid: 4ac0e061b59da964d9ff927e45a205ed, type: 2}
   - {fileID: 11400000, guid: e0b41bc9a972cc542a0d53f1928ce601, type: 2}
   - {fileID: 11400000, guid: 7dab7cff126bd554891ca77090d9485e, type: 2}
   - {fileID: 11400000, guid: 9a6d77f91f0b782439be2492fc5b5ff8, type: 2}
@@ -8375,7 +8390,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 896373499}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.011, y: 1.62, z: -7.892}
+  m_LocalPosition: {x: -2.9, y: 1.62, z: -7.892}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

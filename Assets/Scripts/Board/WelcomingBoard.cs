@@ -28,6 +28,10 @@ public class WelcomingBoard : MonoBehaviour
     [SerializeField]
     private GameObject[] checkers;
 
+    private ActionHandler actionHandler;
+
+    private bool actionActivated = false;
+
     private int toogledField = -1;
 
     public UnityAction OnFieldSubmit;
@@ -40,6 +44,7 @@ public class WelcomingBoard : MonoBehaviour
             {
                 if (!item.activeSelf) return false;
             }
+            
             return true;
         }
         
@@ -47,6 +52,7 @@ public class WelcomingBoard : MonoBehaviour
 
     private void OnEnable()
     {
+        actionHandler = GetComponent<ActionHandler>();
         keyboard.OnSubmit.AddListener(OnSubmitField);
         keyboard.OnCancel.AddListener(OnCancelField);
     }
@@ -64,7 +70,7 @@ public class WelcomingBoard : MonoBehaviour
         {
             item.SetActive(false);
         }
-        selectors[value].gameObject.SetActive(true);
+        selectors[value].SetActive(true);
         switch (value)
         {
             case 0:
@@ -104,6 +110,14 @@ public class WelcomingBoard : MonoBehaviour
             keyboard.Disable();
             toogledField = -1;            
             Invoke(nameof(HideMessages), 2f);
+            if (IsFieldsValid)
+            {
+                if (!actionActivated)
+                {
+                    actionHandler.ActionTrigger();
+                    actionActivated = true;
+                }
+            }
         }
         else
         {
