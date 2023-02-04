@@ -62,7 +62,10 @@ public class JointPoint : MonoBehaviour
         }
         else
         {
-            currArrow.transform.position = positionOverride.ArrowPosition;
+            Transform temp = currArrow.transform.parent;
+            currArrow.transform.SetParent(transform.parent);
+            currArrow.transform.localPosition = positionOverride.ArrowPosition;
+            currArrow.transform.SetParent(temp);
         }
         currArrow.transform.LookAt(transform.position);
     }
