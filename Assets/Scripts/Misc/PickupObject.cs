@@ -19,7 +19,7 @@ public class PickupObject : MonoBehaviour
         actionHandler = GetComponent<ActionHandler>();
         actionHandler.OnSetTarget += OnSetTarget;
         outline = gameObject.AddComponent<Outline>();
-        outline.OutlineColor = ProjectPreferences.instance.outlineColor;
+        outline.OutlineColor = ProjectPreferences.instance.highlightOutlineColor;
         outline.OutlineWidth = ProjectPreferences.instance.outlineWidth;
         outline.OutlineMode = Outline.Mode.OutlineVisible;
         outline.enabled = false;

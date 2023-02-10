@@ -90,7 +90,7 @@ public class Part : MonoBehaviour
     private void Start()
     {        
         outline.OutlineMode = Outline.Mode.OutlineVisible;
-        outline.OutlineColor = ProjectPreferences.instance.outlineColor;
+        outline.OutlineColor = ProjectPreferences.instance.highlightOutlineColor;
         outline.OutlineWidth = ProjectPreferences.instance.outlineWidth;
 
         if (partData == null)
@@ -116,6 +116,19 @@ public class Part : MonoBehaviour
     private void OnSelectEnter(SelectEnterEventArgs args) => OnSelectEvent(true);
 
     private void OnSelectExit(SelectExitEventArgs args) => OnSelectEvent(false);
+
+    public void WrongPartDisplay()
+    {
+        outline.enabled = true;
+        outline.OutlineColor = ProjectPreferences.instance.wrongOutlineColor;
+        Invoke(nameof(ResetDisplay), 1.5f);
+    }
+
+    private void ResetDisplay()
+    {
+        outline.OutlineColor = ProjectPreferences.instance.highlightOutlineColor;
+        outline.enabled = false;
+    }
 
     private void OnSelectEvent(bool isSelected)
     {

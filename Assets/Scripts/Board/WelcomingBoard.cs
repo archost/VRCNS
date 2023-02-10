@@ -28,6 +28,12 @@ public class WelcomingBoard : MonoBehaviour
     [SerializeField]
     private GameObject[] checkers;
 
+    [SerializeField]
+    private TMP_Dropdown gamemodeDropdown;
+
+    [SerializeField]
+    private TMP_Dropdown assemblyDropdown;
+
     private ActionHandler actionHandler;
 
     private bool actionActivated = false;
@@ -53,6 +59,9 @@ public class WelcomingBoard : MonoBehaviour
     private void OnEnable()
     {
         actionHandler = GetComponent<ActionHandler>();
+        if (gamemodeDropdown == null || assemblyDropdown == null) Debug.LogError("Initialize in WelcomingBoard dropdowns");
+        gamemodeDropdown.onValueChanged.AddListener(OnGamemodeChanged);
+        assemblyDropdown.onValueChanged.AddListener(OnAssemblyChanged);
         keyboard.OnSubmit.AddListener(OnSubmitField);
         keyboard.OnCancel.AddListener(OnCancelField);
     }
@@ -87,10 +96,26 @@ public class WelcomingBoard : MonoBehaviour
         }
     }
 
+    private void OnGamemodeChanged(int key)
+    {
+        ProjectPreferences.instance.gameMode = (GameMode)key;
+    }
+
+    private void OnAssemblyChanged(int key)
+    {
+        ProjectPreferences.instance.assemblyType = (GameAssemblyType)key;
+    }
+
     public void GetFieldsValues(out string name, out string group)
     {
         name = NameField.text;
         group = GroupField.text;
+    }
+
+    public void FinishEditing()
+    {
+        gamemodeDropdown.interactable = false;
+        assemblyDropdown.interactable = false;
     }
 
     private void OnSubmitField(string value)

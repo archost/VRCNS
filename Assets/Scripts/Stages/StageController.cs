@@ -80,7 +80,7 @@ public class StageController : MonoBehaviour
 
     private void ProcessHelperUpdate(CommandHelperUpdate c)
     {
-        //Debug.Log($"{c.PartData.name} - Selected: {c.IsSelected}");
+        if (ProjectPreferences.instance.gameMode != GameMode.Training) return;
         if (c.IsSelected)
             partHelper.SetTarget(c.PartTransform, c.PartData);
         else partHelper.TurnOff();
