@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4044633af4df36b4d8451c8336d6d921, type: 3}
   m_Name: Stage13
   m_EditorClassIdentifier: 
-  ID: 0
-  description: 
+  ID: 13
+  description: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u0432\u0442\u0443\u043B\u043A\u0443
+    \u043F\u044F\u0442\u044B \u0432 \u043D\u0430\u043F\u043E\u0440\u043D\u0443\u044E
+    \u043A\u0440\u044B\u0448\u043A\u0443"
   goalType: 0
-  target: {fileID: 0}
+  target: {fileID: 11400000, guid: efbff878bce7e2e47881896e2c51e62a, type: 2}
   initPartState: 0
   actionCode: 

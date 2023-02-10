@@ -60,7 +60,7 @@ public class Stage : ScriptableObject
                 stage.actionCode = EditorGUILayout.TextField("Action code", stage.actionCode);
             }
             EditorGUI.indentLevel--;
-
+            EditorUtility.SetDirty(target);
         }
     }
 #endif
