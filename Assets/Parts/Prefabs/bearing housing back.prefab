@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  partData: {fileID: 11400000, guid: 1a0a3595e6c692c4c98e953ab1903fb0, type: 2}
+  partData: {fileID: 11400000, guid: 3de4b935011af5e48b673c9e03e831cb, type: 2}
 --- !u!95 &421106401292301897
 Animator:
   serializedVersion: 4
