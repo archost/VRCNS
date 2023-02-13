@@ -70,7 +70,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 405415633531111245}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1063560652329324048
 SphereCollider:
@@ -138,7 +138,6 @@ Transform:
   - {fileID: 995409232571282965}
   - {fileID: 2239855664725966269}
   - {fileID: 3857542170821109514}
-  - {fileID: 5566889202032295658}
   - {fileID: 4635177771648217514}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -890,81 +889,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 44e5d06e34da5604bbbafb2036cf906d,
     type: 3}
   m_PrefabInstance: {fileID: 4502157911892390881}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &5742161903853157352
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 405415633531111245}
-    m_Modifications:
-    - target: {fileID: 212181451941414146, guid: 7041294e85b678f42b8af7c7fb2160c2,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 212181451941414146, guid: 7041294e85b678f42b8af7c7fb2160c2,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212181451941414146, guid: 7041294e85b678f42b8af7c7fb2160c2,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212181451941414146, guid: 7041294e85b678f42b8af7c7fb2160c2,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212181451941414146, guid: 7041294e85b678f42b8af7c7fb2160c2,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212181451941414146, guid: 7041294e85b678f42b8af7c7fb2160c2,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212181451941414146, guid: 7041294e85b678f42b8af7c7fb2160c2,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212181451941414146, guid: 7041294e85b678f42b8af7c7fb2160c2,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212181451941414146, guid: 7041294e85b678f42b8af7c7fb2160c2,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212181451941414146, guid: 7041294e85b678f42b8af7c7fb2160c2,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212181451941414146, guid: 7041294e85b678f42b8af7c7fb2160c2,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 700874086201778104, guid: 7041294e85b678f42b8af7c7fb2160c2,
-        type: 3}
-      propertyPath: m_Name
-      value: Bearing Cover back
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7041294e85b678f42b8af7c7fb2160c2, type: 3}
---- !u!4 &5566889202032295658 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 212181451941414146, guid: 7041294e85b678f42b8af7c7fb2160c2,
-    type: 3}
-  m_PrefabInstance: {fileID: 5742161903853157352}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7553008863614382942
 PrefabInstance:
