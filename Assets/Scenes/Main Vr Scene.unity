@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18385932, g: 0.22905529, b: 0.3034067, a: 1}
+  m_IndirectSpecularColor: {r: 0.18385904, g: 0.22905475, b: 0.30340588, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3285,7 +3285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suitablePart: {fileID: 11400000, guid: 215f9ceb1f8679c4e8bfe1088ee9cd54, type: 2}
-  fixedPosition: {x: 0, y: 1.375, z: 0.195}
+  fixedPosition: {x: -5.567, y: 1.357, z: 0.429}
   fixedRotation: {x: 0, y: 0, z: 0.70710677, w: 0.70710677}
 --- !u!135 &347675588
 SphereCollider:
@@ -3461,7 +3461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suitablePart: {fileID: 11400000, guid: d68b59780dbb9904094a93c32b3aa720, type: 2}
-  fixedPosition: {x: -0.749, y: 1.298, z: 0.096}
+  fixedPosition: {x: -6.012, y: 1.33, z: 0.363}
   fixedRotation: {x: 0, y: 0, z: 0.70710677, w: 0.70710677}
 --- !u!135 &357454834
 SphereCollider:
@@ -4900,7 +4900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suitablePart: {fileID: 11400000, guid: 3d9cfd64b7b7561459836582a4241e54, type: 2}
-  fixedPosition: {x: -1.555, y: 1.417, z: -0.058}
+  fixedPosition: {x: -1.094, y: 1.433, z: 0.431}
   fixedRotation: {x: 0, y: 0, z: 0.70710677, w: 0.70710677}
 --- !u!135 &551791351
 SphereCollider:
@@ -15698,7 +15698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suitablePart: {fileID: 11400000, guid: 1a0a3595e6c692c4c98e953ab1903fb0, type: 2}
-  fixedPosition: {x: -4.6755, y: 1.3545, z: 0}
+  fixedPosition: {x: -3.722, y: 1.324, z: 0.504}
   fixedRotation: {x: 0, y: 0, z: 0.70710677, w: 0.70710677}
 --- !u!135 &1378950540
 SphereCollider:
@@ -20025,7 +20025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suitablePart: {fileID: 11400000, guid: 962f48c0c255ffd48bbbfdb5b114125a, type: 2}
-  fixedPosition: {x: -2.169, y: 1.5, z: 0}
+  fixedPosition: {x: -2.637, y: 1.157, z: 0.422}
   fixedRotation: {x: 0, y: 0, z: 0.70710677, w: 0.70710677}
 --- !u!135 &1808930078
 SphereCollider:
@@ -20602,7 +20602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suitablePart: {fileID: 11400000, guid: 02c4614619925df42a1b8f5da04594a3, type: 2}
-  fixedPosition: {x: -2.568, y: 1.33, z: 0.848}
+  fixedPosition: {x: -2.568, y: 0.91, z: 0.848}
   fixedRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!135 &1853691365
 SphereCollider:
@@ -20663,7 +20663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suitablePart: {fileID: 11400000, guid: e131dcacfd5d94e4793f388be8014f5b, type: 2}
-  fixedPosition: {x: -3.723, y: 1.347, z: 0.361}
+  fixedPosition: {x: -3.723, y: 0.99, z: 0.361}
   fixedRotation: {x: 0, y: 0, z: 0.70710677, w: 0.70710677}
 --- !u!135 &1854637553
 SphereCollider:
@@ -20796,7 +20796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suitablePart: {fileID: 11400000, guid: 1a3f8fd50d8482341977f5ed682b962b, type: 2}
-  fixedPosition: {x: 0.593, y: 1.384, z: 0.166}
+  fixedPosition: {x: -5.109, y: 1.381, z: 0.442}
   fixedRotation: {x: 0, y: 0, z: 0.70710677, w: 0.70710677}
 --- !u!135 &1874378371
 SphereCollider:
@@ -24843,6 +24843,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: big_shelves
+      objectReference: {fileID: 0}
+    - target: {fileID: 1151388028547126963, guid: b64f1e23b8ed5af42863a3679febcf6e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b64f1e23b8ed5af42863a3679febcf6e, type: 3}
