@@ -31,8 +31,8 @@ public class HandRayController : MonoBehaviour
 
     public bool IsLeftHovering => leftRay.TryGetHitInfo(out Vector3 leftPos, out Vector3 leftNormal, out int leftNumber, out bool leftValid);
 
-    public bool IsRightHolding => rightActivate.action.ReadValue<float>() > 0.1f;
+    public bool IsRightHolding => rightCancel.action.ReadValue<float>() == 0f && rightActivate.action.ReadValue<float>() > 0.1f;
 
-    public bool IsLeftHolding => leftActivate.action.ReadValue<float>() > 0.1f;
+    public bool IsLeftHolding => leftCancel.action.ReadValue<float>() == 0f && leftActivate.action.ReadValue<float>() > 0.1f;
 
 }
