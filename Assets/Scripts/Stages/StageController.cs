@@ -14,6 +14,9 @@ public class StageController : MonoBehaviour
     [SerializeField]
     private PartHelper partHelper;
 
+    [SerializeField]
+    private List<GameObject> inits;
+
     private PartFactory partFactory;
 
     private int currentStageIndex = -1;
@@ -75,6 +78,14 @@ public class StageController : MonoBehaviour
                 Debug.Log($"Successfully completed \"{CurrentStage.description}\"!");
                 NextStage();
             }
+        }
+    }
+
+    public void InitScene()
+    {
+        foreach (var item in inits)
+        {
+            item.GetComponent<ISCInit>().Init(this);
         }
     }
 

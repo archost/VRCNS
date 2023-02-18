@@ -36,6 +36,7 @@ public class GrabHandPose : MonoBehaviour
         if (arg.interactorObject is XRDirectInteractor)
         {
             HandData handData = arg.interactorObject.transform.GetComponentInChildren<HandData>();
+            //handData.gameObject.SetActive(false);
             handData.animator.enabled = false;
 
             if (handData.handType == HandData.HandModelType.Right)
@@ -56,6 +57,7 @@ public class GrabHandPose : MonoBehaviour
         if (arg.interactorObject is XRDirectInteractor)
         {
             HandData handData = arg.interactorObject.transform.GetComponentInChildren<HandData>();
+            //handData.gameObject.SetActive(true);
             handData.animator.enabled = true;
 
             SetHandData(handData, startingHandPosition, startingHandRotation, startingFingerRotations);

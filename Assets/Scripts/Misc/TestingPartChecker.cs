@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class TestingPartChecker : MonoBehaviour
+public class TestingPartChecker : MonoBehaviour, ISCInit
+
 {
     private int currentPartID = -1;
 
