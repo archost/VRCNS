@@ -9,7 +9,7 @@ public class Part : MonoBehaviour
 {
     private Outline outline;
     private Rigidbody rb;
-    private AudioSource audioSource;
+    private AudioController audioCon;
     //private Collider col;
     private PartAnimationController animationController;
 
@@ -38,7 +38,7 @@ public class Part : MonoBehaviour
     public void Install()
     {
         UpdateState(PartState.Installed);
-        if (audioSource != null) audioSource.Play();
+        if (audioCon != null) audioCon.PlayClip("intalled");
         partPresenter.Send(new CommandFinished(this.partPresenter), null);
     }
 
@@ -71,7 +71,7 @@ public class Part : MonoBehaviour
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioCon = GetComponent<AudioController>();
         animationController = GetComponent<PartAnimationController>();
         GrabInteractable = GetComponent<XRGrabInteractable>();
         rb = GetComponent<Rigidbody>();
@@ -110,7 +110,8 @@ public class Part : MonoBehaviour
     {
         if (newState != null) UpdateState(newState.Value);
         isTarget = true;
-        outline.enabled = true;
+        if (ProjectPreferences.instance.gameMode == GameMode.Training)
+            outline.enabled = true;
     }
 
     private void OnSelectEnter(SelectEnterEventArgs args) => OnSelectEvent(true);

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class StageDisplay : MonoBehaviour
 {
@@ -11,9 +12,19 @@ public class StageDisplay : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI displayNumText;
 
-    public void Init(Stage stage)
+    [SerializeField]
+    Color failedColor;
+
+    [SerializeField]
+    Image bg;
+
+    public void Init(Stage stage, bool error)
     {
         displayDescText.text = stage.description;
         displayNumText.text = stage.ID.ToString();
+        if (error)
+        {
+            bg.color = failedColor;
+        }
     }
 }

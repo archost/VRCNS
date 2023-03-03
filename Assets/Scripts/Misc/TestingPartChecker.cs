@@ -1,18 +1,24 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class TestingPartChecker : MonoBehaviour, ISCInit
-
 {
     private int currentPartID = -1;
 
+    private UnityAction OnInvalidPart;
+
+    private AudioController ac;
+
     public void Init(StageController sc)
     {
-        if(ProjectPreferences.instance.gameMode != GameMode.Testing 
+        if(!ProjectPreferences.instance.IsTesting
             || ProjectPreferences.instance.assemblyType != GameAssemblyType.Assembly)
         {
             gameObject.SetActive(false);
             return;
         }
+        ac = GetComponent<AudioController>();
+        OnInvalidPart += sc.OnWrongPart;
         sc.OnStageSwitch += SwitchTarget;
     }
 
@@ -29,6 +35,8 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
             {
                 Debug.Log("Incorrect part!");
                 p.WrongPartDisplay();
+                OnInvalidPart?.Invoke();
+                if (ac != null) ac.PlayClip("error");
             }
         }
     }

@@ -68,6 +68,11 @@ public class WelcomingBoard : MonoBehaviour
 
     public void ToogleField(int value)
     {
+        if(toogledField != -1)
+        {
+            OnSubmitField(keyboard.text);
+            keyboard.text = "";
+        }
         toogledField = value == 0 || value == 1 ? value : -1;
         if (keyboard.disabled)
         {

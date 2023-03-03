@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Events;
@@ -50,6 +48,7 @@ public class JointPoint : MonoBehaviour
 
     private void ArrowSetup()
     {
+        if (ProjectPreferences.instance.IsTesting) return;
         if (ArrowPrefab == null) return;
         if (currArrow != null) Destroy(currArrow);
         currArrow = Instantiate(ArrowPrefab);

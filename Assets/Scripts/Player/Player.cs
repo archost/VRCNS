@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(AudioController))]
 public class Player : MonoBehaviour
 {
     private List<string> Items = new List<string>();
@@ -24,13 +24,13 @@ public class Player : MonoBehaviour
 
     public bool IsReady { get; private set; }
 
-    private AudioSource a_s;
+    private AudioController ac;
 
     private void Start()
     {
         IsReady = false;
         //wboard.OnFieldSubmit += CheckReady;
-        a_s = GetComponent<AudioSource>();
+        ac = GetComponent<AudioController>();
     }
 
     [ContextMenu("Equip Everything")]
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     public void AddItem(string item)
     {
         Items.Add(item);
-        a_s.Play();
+        ac.PlayClip("equip");
         CheckReady();
     }
 

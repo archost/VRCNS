@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PipBoy : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class PipBoy : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI taskDesc;
+
+    [SerializeField]
+    private TextMeshProUGUI scoreText;
 
     [SerializeField]
     private StageController stageController;
@@ -25,6 +29,8 @@ public class PipBoy : MonoBehaviour
     private void Awake()
     {
         stageController.OnStageSwitch += OnStageSwitch;
+        stageController.OnScoreChanged += OnStageFailed;
+        scoreText.text = "";
     }
 
     private void OnStageSwitch(Stage stage)
@@ -37,5 +43,10 @@ public class PipBoy : MonoBehaviour
         {
             taskDesc.text = stage.description;
         }
+    }
+
+    private void OnStageFailed(int score)
+    {
+        scoreText.text = $"Баллы: {score}/25";
     }
 }

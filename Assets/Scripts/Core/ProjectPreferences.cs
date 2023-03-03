@@ -19,6 +19,10 @@ public class ProjectPreferences : MonoBehaviour
     [Header("Testing Options")]
     public bool VRTesting = false;
 
+    public bool IsTesting => gameMode == GameMode.Testing;
+
+    public bool IsTraining => gameMode == GameMode.Training;
+
     private void Awake()
     {
         if (instance != null)

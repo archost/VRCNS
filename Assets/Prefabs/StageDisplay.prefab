@@ -305,6 +305,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayDescText: {fileID: 1300491381010957970}
   displayNumText: {fileID: 6644932760393782420}
+  failedColor: {r: 0.6981132, g: 0.31715295, b: 0.08891065, a: 1}
+  bg: {fileID: 4119312594796332757}
 --- !u!1 &6500062248917200170
 GameObject:
   m_ObjectHideFlags: 0

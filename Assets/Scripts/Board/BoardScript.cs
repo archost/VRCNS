@@ -30,19 +30,25 @@ public class BoardScript : MonoBehaviour
     [SerializeField]
     private RectTransform scrollContainer;
 
+    [SerializeField]
+    private TextMeshProUGUI scoreText;
+
     private Stage currStage = null;
 
     private float stageDisplayHeight = 0f;
 
     private float scrollInitHeight = 0f;
 
+    private bool error = false;
+
     private void Awake()
     {
         if (stageDisplayPrefab == null) Debug.LogError("You forgot to update prefab");
 
-        stageController.OnStageSwitch += OnStageSwitch;
+        stageController.OnStageSwitch += OnStageSwitch;       
         stageDisplayHeight = (stageDisplayPrefab.transform as RectTransform).sizeDelta.y;
         scrollInitHeight = scrollContainer.sizeDelta.y;
+        scoreText.text = "";
     }
 
     private void OnDestroy()
@@ -91,7 +97,7 @@ public class BoardScript : MonoBehaviour
         if (currStage != null)
         {
             StageDisplay sd = Instantiate(stageDisplayPrefab, scrollContainer);
-            sd.Init(currStage);
+            sd.Init(currStage, error);
             ResetScrollPosition();
         }
         if (stage == null)
@@ -105,11 +111,19 @@ public class BoardScript : MonoBehaviour
             curStageText.text = stage.description;
             orderText.text = stage.ID.ToString();
             currStage = stage;
-        }        
+        }
+        error = false;
+    }
+
+    private void OnScoreChanged(int score)
+    {
+        scoreText.text = $"Баллы: {score}/25";
+
     }
 
     public void UpdateName()
     {
+        stageController.OnScoreChanged += OnScoreChanged;
         var pl = FindObjectOfType<Player>();
         ProfileInfoText.text = $"Обучающийся:\n{pl.PlayerName}\n\nГруппа:\n{pl.PlayerGroup}";
     }

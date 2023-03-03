@@ -21,6 +21,12 @@ public class StageController : MonoBehaviour
 
     private int currentStageIndex = -1;
 
+    private List<Stage> errorStages;
+
+    private int score = 0;
+
+    private bool errorHappened = false;
+
     private Stage CurrentStage
     {
         get
@@ -33,6 +39,8 @@ public class StageController : MonoBehaviour
     }
 
     public UnityAction<Stage> OnStageSwitch;
+
+    public UnityAction<int> OnScoreChanged;
 
     private void Start()
     {
@@ -83,15 +91,34 @@ public class StageController : MonoBehaviour
 
     public void InitScene()
     {
+        if(ProjectPreferences.instance.IsTesting)
+        {
+            errorHappened = false;
+            errorStages = new List<Stage>();
+            score = 25;
+            OnScoreChanged?.Invoke(score);
+        }
         foreach (var item in inits)
         {
             item.GetComponent<ISCInit>().Init(this);
         }
     }
 
+    public void OnWrongPart()
+    {
+        if (ProjectPreferences.instance.IsTraining) return;
+        if (!errorHappened)
+        {
+            score--;
+            errorHappened = true;
+            errorStages.Add(CurrentStage);
+            OnScoreChanged?.Invoke(score);
+        }
+    }
+
     private void ProcessHelperUpdate(CommandHelperUpdate c)
     {
-        if (ProjectPreferences.instance.gameMode != GameMode.Training) return;
+        if (ProjectPreferences.instance.IsTesting) return;
         if (c.IsSelected)
             partHelper.SetTarget(c.PartTransform, c.PartData);
         else partHelper.TurnOff();
@@ -106,6 +133,7 @@ public class StageController : MonoBehaviour
             {
                 if (CurrentStage.goalType == StageGoalType.PartPlacing)
                 {
+                    errorHappened = false;
                     partFactory.ToogleSuitablePoints(CurrentStage.target);
                     scp.Send(new CommandSetTarget(scp, CurrentStage.target,
                         CurrentStage.initPartState == PartState.Idle ? null : CurrentStage.initPartState), null);
