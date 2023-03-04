@@ -38,7 +38,7 @@ public class Part : MonoBehaviour
     public void Install()
     {
         UpdateState(PartState.Installed);
-        if (audioCon != null) audioCon.PlayClip("intalled");
+        if (audioCon != null) audioCon.PlayClip("installed");
         partPresenter.Send(new CommandFinished(this.partPresenter), null);
     }
 
@@ -133,7 +133,7 @@ public class Part : MonoBehaviour
 
     private void OnSelectEvent(bool isSelected)
     {
-        if (isTarget)
+        if (isTarget && ProjectPreferences.instance.IsTraining)
         {
             outline.enabled = !isSelected;
         }

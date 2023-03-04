@@ -24,6 +24,7 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
 
     private void SwitchTarget(Stage stage)
     {
+        if (stage == null) return;
         currentPartID = stage.target.ID;
     }
 

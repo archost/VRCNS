@@ -671,7 +671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   suitablePart: {fileID: 11400000, guid: 697230e7cd4cfdf4ebe79fffe1260450, type: 2}
   fixedPosition: {x: 0.835, y: 0, z: 0}
-  fixedRotation: {x: 0, y: 0, z: 0, w: 1}
+  fixedRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
 --- !u!1 &3228861371060067704
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,8 +947,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suitablePart: {fileID: 11400000, guid: 43e0508d6de9ed5409648508e51d3f7d, type: 2}
-  fixedPosition: {x: 0.7829, y: 0, z: 0}
-  fixedRotation: {x: 0, y: 0, z: 0, w: 1}
+  fixedPosition: {x: 0.8113, y: 0, z: 0}
+  fixedRotation: {x: 0.70710677, y: 0, z: 0, w: -0.70710677}
 --- !u!1 &4236195266460477871
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,8 +1435,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suitablePart: {fileID: 11400000, guid: 762e15a8d4ab2b2479b8aa864c1c3281, type: 2}
-  fixedPosition: {x: 0.7741, y: 0, z: 0}
-  fixedRotation: {x: 0, y: 0, z: 0.70710677, w: 0.70710677}
+  fixedPosition: {x: 0.794, y: 0, z: 0}
+  fixedRotation: {x: 0.49999997, y: -0.49999997, z: 0.49999997, w: 0.49999997}
 --- !u!1 &8964276089884740014
 GameObject:
   m_ObjectHideFlags: 0

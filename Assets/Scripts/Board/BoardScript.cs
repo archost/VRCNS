@@ -118,7 +118,7 @@ public class BoardScript : MonoBehaviour
     private void OnScoreChanged(int score)
     {
         scoreText.text = $"Баллы: {score}/25";
-
+        error = true;
     }
 
     public void UpdateName()
