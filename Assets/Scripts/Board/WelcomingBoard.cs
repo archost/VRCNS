@@ -74,11 +74,6 @@ public class WelcomingBoard : MonoBehaviour
             keyboard.text = "";
         }
         toogledField = value == 0 || value == 1 ? value : -1;
-        if (keyboard.disabled)
-        {
-            keyboard.Enable();
-        }
-
         checkers[value].SetActive(false);
         foreach (var item in selectors)
         {
@@ -88,7 +83,6 @@ public class WelcomingBoard : MonoBehaviour
         switch (value)
         {
             case 0:
-
                 keyboard.displayText = NameField;
                 keyboard.placeholder = NamePlaceholder;
                 break;
@@ -98,6 +92,14 @@ public class WelcomingBoard : MonoBehaviour
                 break;
             default:
                 break;
+        }
+        if (keyboard.displayText.text != "") 
+        {
+            keyboard.text = keyboard.displayText.text;
+        }
+        if (keyboard.disabled)
+        {
+            keyboard.Enable();
         }
     }
 

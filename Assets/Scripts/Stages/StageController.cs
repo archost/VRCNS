@@ -55,7 +55,7 @@ public class StageController : MonoBehaviour
         partFactory.SpawnParts(mediator);
 
         var actionHandlers = FindObjectsOfType<ActionHandler>();
-        foreach (var item in actionHandlers) 
+        foreach (var item in actionHandlers)
         {
             mediator.AddActionHandler(item.InitPresenter(mediator));
         }
@@ -91,11 +91,11 @@ public class StageController : MonoBehaviour
 
     public void InitScene()
     {
-        if(ProjectPreferences.instance.IsTesting)
+        if (ProjectPreferences.instance.IsTesting)
         {
             errorHappened = false;
             errorStages = new List<Stage>();
-            score = 25;
+            score = ProjectPreferences.instance.maxScore;
             OnScoreChanged?.Invoke(score);
         }
         foreach (var item in inits)
@@ -107,13 +107,11 @@ public class StageController : MonoBehaviour
     public void OnWrongPart()
     {
         if (ProjectPreferences.instance.IsTraining) return;
-        if (!errorHappened)
-        {
-            score--;
-            errorHappened = true;
-            errorStages.Add(CurrentStage);
-            OnScoreChanged?.Invoke(score);
-        }
+        if (!ProjectPreferences.instance.multiErrorAllowed && errorHappened) return;
+        score = Mathf.Clamp(score - 1, 0, 100);
+        errorHappened = true;
+        errorStages.Add(CurrentStage);
+        OnScoreChanged?.Invoke(score);
     }
 
     private void ProcessHelperUpdate(CommandHelperUpdate c)
@@ -142,7 +140,7 @@ public class StageController : MonoBehaviour
                 {
                     scp.Send(new CommandSetTargetAction(scp, CurrentStage.actionCode), null);
                 }
-                
+
             }
             else TimerScript.StopTimer(gameObject);
             OnStageSwitch?.Invoke(CurrentStage);

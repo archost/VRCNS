@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class PipBoy : MonoBehaviour
 {
@@ -37,7 +36,7 @@ public class PipBoy : MonoBehaviour
     {
         if (stage == null)
         {
-            taskDesc.text = "Нет задания";
+            taskDesc.text = "Задачи выполнены";
         }
         else
         {
@@ -47,6 +46,6 @@ public class PipBoy : MonoBehaviour
 
     private void OnStageFailed(int score)
     {
-        scoreText.text = $"Баллы: {score}/25";
+        scoreText.text = $"Баллы: {score}/{ProjectPreferences.instance.maxScore}";
     }
 }

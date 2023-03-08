@@ -102,7 +102,7 @@ public class BoardScript : MonoBehaviour
         }
         if (stage == null)
         {
-            curStageText.text = "Нет задания";
+            curStageText.text = "Задачи выполнены";
             orderText.text = "";
             currStage = stage;
         }
@@ -117,7 +117,7 @@ public class BoardScript : MonoBehaviour
 
     private void OnScoreChanged(int score)
     {
-        scoreText.text = $"Баллы: {score}/25";
+        scoreText.text = $"Баллы: {score}/{ProjectPreferences.instance.maxScore}";
         error = true;
     }
 

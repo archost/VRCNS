@@ -5,6 +5,8 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
 {
     private int currentPartID = -1;
 
+    private Part lastCorrectPart = null;
+
     private UnityAction OnInvalidPart;
 
     private AudioController ac;
@@ -34,10 +36,19 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
         {
             if (p.PartID != currentPartID)
             {
-                Debug.Log("Incorrect part!");
-                p.WrongPartDisplay();
-                OnInvalidPart?.Invoke();
-                if (ac != null) ac.PlayClip("error");
+                /* Баг: можно во время установки одной детали пронести в рабочую
+                 зону неправильные детали, и за это не будет штрафа */
+                if (!lastCorrectPart || !lastCorrectPart.IsFixed)
+                {
+                    Debug.Log("Incorrect part!");
+                    p.WrongPartDisplay();
+                    OnInvalidPart?.Invoke();
+                    if (ac != null) ac.PlayClip("error");
+                }               
+            }
+            else
+            {
+                lastCorrectPart = p;
             }
         }
     }

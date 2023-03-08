@@ -10,7 +10,7 @@ public class Part : MonoBehaviour
     private Outline outline;
     private Rigidbody rb;
     private AudioController audioCon;
-    //private Collider col;
+    private Collider col;
     private PartAnimationController animationController;
 
     public XRGrabInteractable GrabInteractable { get; private set; }
@@ -21,6 +21,8 @@ public class Part : MonoBehaviour
     private bool isTarget = false;
 
     public int PartID { get; private set; }  
+
+    public bool IsFixed => state == PartState.Fixed;
 
     [SerializeField]
     private PartState state;
@@ -74,6 +76,7 @@ public class Part : MonoBehaviour
         audioCon = GetComponent<AudioController>();
         animationController = GetComponent<PartAnimationController>();
         GrabInteractable = GetComponent<XRGrabInteractable>();
+        col = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
         outline = gameObject.AddComponent<Outline>();
         partAttacher = GetComponent<PartAttacher>();
@@ -131,8 +134,18 @@ public class Part : MonoBehaviour
         outline.enabled = false;
     }
 
+    private void ResetCollider()
+    {
+        col.isTrigger = false;
+    }
+
     private void OnSelectEvent(bool isSelected)
     {
+        if (isSelected)
+        {
+            col.isTrigger = true;
+            Invoke(nameof(ResetCollider), 0.3f);
+        }
         if (isTarget && ProjectPreferences.instance.IsTraining)
         {
             outline.enabled = !isSelected;

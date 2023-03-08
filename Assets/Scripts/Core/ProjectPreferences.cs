@@ -14,6 +14,8 @@ public class ProjectPreferences : MonoBehaviour
     [Header("Current Play Settings")]
     public GameMode gameMode;
     public GameAssemblyType assemblyType;
+    public bool multiErrorAllowed;
+    public int maxScore;
 
 
     [Header("Testing Options")]
