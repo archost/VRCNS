@@ -7,8 +7,6 @@ public class JointPoint : MonoBehaviour
 {
     public static GameObject ArrowPrefab = null;
 
-    private bool IsVR;
-
     //!
     public PartData suitablePart;
 
@@ -26,8 +24,6 @@ public class JointPoint : MonoBehaviour
 
     public UnityAction<Part, Vector3, Quaternion, bool> OnPartAttached;
 
-    private bool IsNotHolding => !HandRayController.instance.IsLeftHolding && !HandRayController.instance.IsRightHolding;
-
     private void Awake()
     {
         if (ArrowPrefab == null) ArrowPrefab = Resources.Load<GameObject>("Prefabs/Arrow");
@@ -36,8 +32,6 @@ public class JointPoint : MonoBehaviour
 
     private void Start()
     {
-
-        IsVR = ProjectPreferences.instance.VRTesting;
         positionOverride = GetComponent<ArrowPositionOverride>();
         if (ArrowPrefab == null) Debug.LogError("No arrow prefab found!");
         Collider col = GetComponent<Collider>();
@@ -82,7 +76,7 @@ public class JointPoint : MonoBehaviour
         {
             if (p.PartID == suitablePart.ID)
             {
-                if (!IsVR || (IsNotHolding && IsVR))
+                if (!p.IsHolding)
                 {
                     ForceAttach(p);
                 }

@@ -8,6 +8,8 @@ public static class TimerScript
     private static Coroutine c_timer = null;
     private static bool stopTimer = false;
 
+    private static readonly int backTimerInit = 2700;
+
     public static int CurrentTime => currTime;
 
     public static string CurrentTimeFormat
@@ -39,7 +41,7 @@ public static class TimerScript
             Debug.LogWarning("Trying to start timer while it's running.", initializer);
             StopTimer(initializer);
         }
-        currTime = 0;
+        currTime = ProjectPreferences.instance.gameMode == GameMode.Testing ? backTimerInit : 0;
         stopTimer = false;
         c_timer = initializer.GetComponent<MonoBehaviour>().StartCoroutine(TimerCoroutine());
     }
@@ -58,10 +60,11 @@ public static class TimerScript
 
     private static IEnumerator TimerCoroutine()
     {
+        int dt = ProjectPreferences.instance.gameMode == GameMode.Testing ? 1 : -1;
         while(!stopTimer)
         {
             yield return new WaitForSeconds(1f);
-            currTime++;
+            currTime = Mathf.Clamp(currTime + dt, 0, int.MaxValue);
         }
         yield return null;
     }

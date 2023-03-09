@@ -24,6 +24,8 @@ public class Part : MonoBehaviour
 
     private bool isHolding = false;
 
+    public bool IsHolding => isHolding;
+
     public int PartID { get; private set; }  
 
     public bool IsFixed => state == PartState.Fixed;
