@@ -18,7 +18,11 @@ public class Part : MonoBehaviour
     private PartPresenter partPresenter;
     private PartAttacher partAttacher;
 
+    private Transform playerTransform;
+
     private bool isTarget = false;
+
+    private bool isHolding = false;
 
     public int PartID { get; private set; }  
 
@@ -96,6 +100,8 @@ public class Part : MonoBehaviour
         outline.OutlineColor = ProjectPreferences.instance.highlightOutlineColor;
         outline.OutlineWidth = ProjectPreferences.instance.outlineWidth;
 
+        playerTransform = Camera.main.gameObject.transform;
+
         if (partData == null)
         {
             Debug.LogError("Part has null PartData!", this.gameObject);
@@ -106,6 +112,15 @@ public class Part : MonoBehaviour
         {
             PartID = partData.ID;
 
+        }
+    }
+
+    private void Update()
+    {
+        if (isHolding)
+        {
+            
+            col.isTrigger = Vector3.Distance(playerTransform.position + Vector3.down * 0.7f, transform.position) < 1.2f;
         }
     }
 
@@ -136,7 +151,8 @@ public class Part : MonoBehaviour
 
     private void ResetCollider()
     {
-        col.isTrigger = false;
+        isHolding = true;
+        //col.isTrigger = false;
     }
 
     private void OnSelectEvent(bool isSelected)
@@ -145,6 +161,11 @@ public class Part : MonoBehaviour
         {
             col.isTrigger = true;
             Invoke(nameof(ResetCollider), 0.3f);
+        }
+        else
+        {
+            isHolding = false;
+            col.isTrigger = false;
         }
         if (isTarget && ProjectPreferences.instance.IsTraining)
         {

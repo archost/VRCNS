@@ -2460,8 +2460,8 @@ MonoBehaviour:
   outlineWidth: 5
   gameMode: 0
   assemblyType: 0
-  multiErrorAllowed: 0
-  maxScore: 0
+  multiErrorAllowed: 1
+  maxScore: 25
   VRTesting: 1
 --- !u!114 &233036449
 MonoBehaviour:
@@ -2706,7 +2706,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &252223493
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9143,7 +9143,7 @@ MonoBehaviour:
     m_Reference: {fileID: 1010738217276881514, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
   m_RightHandTurnAction:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Right Hand Turn
       m_Type: 0
@@ -21276,7 +21276,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896394941}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.2, y: -0.9, z: 0}
+  m_LocalPosition: {x: 2.2, y: -0.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
