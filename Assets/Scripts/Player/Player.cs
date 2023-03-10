@@ -40,6 +40,11 @@ public class Player : MonoBehaviour
         {
             AddItem(item);
         }
+        IsReady = true;
+        wboard.GetFieldsValues(out string s1, out string s2);
+        PlayerName = s1;
+        PlayerGroup = s2;
+        OnReady?.Invoke();
     }
 
     public void AddItem(string item)

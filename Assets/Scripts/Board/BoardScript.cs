@@ -45,7 +45,8 @@ public class BoardScript : MonoBehaviour
     {
         if (stageDisplayPrefab == null) Debug.LogError("You forgot to update prefab");
 
-        stageController.OnStageSwitch += OnStageSwitch;       
+        stageController.OnStageSwitch += OnStageSwitch;
+        stageController.OnScoreChanged += OnScoreChanged;
         stageDisplayHeight = (stageDisplayPrefab.transform as RectTransform).sizeDelta.y;
         scrollInitHeight = scrollContainer.sizeDelta.y;
         scoreText.text = "";
@@ -109,7 +110,7 @@ public class BoardScript : MonoBehaviour
         else
         {
             curStageText.text = stage.description;
-            orderText.text = stage.ID.ToString();
+            orderText.text = stage.ID == 0 ? "" : stage.ID.ToString();
             currStage = stage;
         }
         error = false;
@@ -123,7 +124,6 @@ public class BoardScript : MonoBehaviour
 
     public void UpdateName()
     {
-        stageController.OnScoreChanged += OnScoreChanged;
         var pl = FindObjectOfType<Player>();
         ProfileInfoText.text = $"Обучающийся:\n{pl.PlayerName}\n\nГруппа:\n{pl.PlayerGroup}";
     }

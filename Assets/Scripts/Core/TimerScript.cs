@@ -12,6 +12,8 @@ public static class TimerScript
 
     public static int CurrentTime => currTime;
 
+    private static int dt = 0;
+
     public static string CurrentTimeFormat
     {
         get
@@ -41,7 +43,8 @@ public static class TimerScript
             Debug.LogWarning("Trying to start timer while it's running.", initializer);
             StopTimer(initializer);
         }
-        currTime = ProjectPreferences.instance.gameMode == GameMode.Testing ? backTimerInit : 0;
+        currTime = ProjectPreferences.instance.IsTesting ? backTimerInit : 0;
+        dt = ProjectPreferences.instance.IsTraining ? 1 : -1;
         stopTimer = false;
         c_timer = initializer.GetComponent<MonoBehaviour>().StartCoroutine(TimerCoroutine());
     }
@@ -60,7 +63,6 @@ public static class TimerScript
 
     private static IEnumerator TimerCoroutine()
     {
-        int dt = ProjectPreferences.instance.gameMode == GameMode.Testing ? 1 : -1;
         while(!stopTimer)
         {
             yield return new WaitForSeconds(1f);

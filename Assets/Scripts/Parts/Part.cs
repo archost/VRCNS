@@ -28,6 +28,8 @@ public class Part : MonoBehaviour
 
     public int PartID { get; private set; }  
 
+    public bool IgnoreErrors => ignoreErrors;
+
     public bool IsFixed => state == PartState.Fixed;
 
     [SerializeField]
@@ -35,6 +37,9 @@ public class Part : MonoBehaviour
 
     [SerializeField]
     private PartData partData;
+
+    [SerializeField]
+    private bool ignoreErrors;
 
     public void Attach()
     {        

@@ -342,6 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 3
   partData: {fileID: 11400000, guid: 29fda4f73986c514bb5272aa3076f326, type: 2}
+  ignoreErrors: 1
 --- !u!95 &2228889591643806089
 Animator:
   serializedVersion: 4

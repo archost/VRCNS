@@ -17,4 +17,9 @@ public class Door : MonoBehaviour
     {
         animator.SetBool("IsOpen", true);
     }
+
+    public void Close()
+    {
+        animator.SetBool("IsOpen", false);
+    }
 }

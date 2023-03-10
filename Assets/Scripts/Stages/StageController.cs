@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(PartFactory))]
+[RequireComponent(typeof(PartFactory), typeof(ScenarioController))]
 public class StageController : MonoBehaviour
 {
     private Mediator mediator;
     private StageControllerPresenter scp;
+
+    private ScenarioController scCon;
 
     public List<Stage> stages;
 
@@ -27,6 +30,8 @@ public class StageController : MonoBehaviour
 
     private bool errorHappened = false;
 
+    private Scenario scenario;
+
     private Stage CurrentStage
     {
         get
@@ -45,14 +50,13 @@ public class StageController : MonoBehaviour
     private void Start()
     {
         partFactory = GetComponent<PartFactory>();
+        scCon = GetComponent<ScenarioController>();
 
         mediator = new Mediator();
         scp = new StageControllerPresenter(mediator);
         mediator.StageControllerPresenter = scp;
         scp.OnPartFinished += ProcessFinished;
-        scp.OnPartHelperUpdate += ProcessHelperUpdate;
-
-        partFactory.SpawnParts(mediator);
+        scp.OnPartHelperUpdate += ProcessHelperUpdate;       
 
         var actionHandlers = FindObjectsOfType<ActionHandler>();
         foreach (var item in actionHandlers)
@@ -89,8 +93,14 @@ public class StageController : MonoBehaviour
         }
     }
 
+    [ContextMenu("InitScene")]
     public void InitScene()
     {
+        scenario = scCon.GetScenario();
+        stages.AddRange(scenario.stagesList);
+
+        partFactory.SpawnParts(mediator, scenario.spawnList);
+
         if (ProjectPreferences.instance.IsTesting)
         {
             errorHappened = false;
@@ -102,6 +112,11 @@ public class StageController : MonoBehaviour
         {
             item.GetComponent<ISCInit>().Init(this);
         }
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void OnWrongPart()

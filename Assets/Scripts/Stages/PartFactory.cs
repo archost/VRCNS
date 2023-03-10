@@ -27,8 +27,10 @@ public class PartFactory : MonoBehaviour
         }
     }
 
-    public void SpawnParts(Mediator mediator)
+    public void SpawnParts(Mediator mediator, List<SpawnInfo> spawns)
     {
+        spawnInfos.Clear();
+        spawnInfos = spawns;
         foreach (var s in spawnInfos)
         {
             Part p = Instantiate(s.partPrefab);
@@ -40,12 +42,13 @@ public class PartFactory : MonoBehaviour
         Debug.Log($"Spawn complete! ({spawnInfos.Count} instances)");
     }
 
-    
 
-    [System.Serializable]
-    private struct SpawnInfo
-    {
-        public Part partPrefab;
-        public JointPoint point;
-    }
+
+}
+
+[System.Serializable]
+public struct SpawnInfo
+{
+    public Part partPrefab;
+    public JointPoint point;
 }

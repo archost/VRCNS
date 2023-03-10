@@ -21,7 +21,7 @@ public class StageDisplay : MonoBehaviour
     public void Init(Stage stage, bool error)
     {
         displayDescText.text = stage.description;
-        displayNumText.text = stage.ID.ToString();
+        displayNumText.text = stage.ID == 0 ? "" : stage.ID.ToString();
         if (error)
         {
             bg.color = failedColor;

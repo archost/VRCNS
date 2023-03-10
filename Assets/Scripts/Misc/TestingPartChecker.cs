@@ -36,6 +36,7 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
         {
             if (p.PartID != currentPartID)
             {
+                if (p.IgnoreErrors) return;
                 /* Баг: можно во время установки одной детали пронести в рабочую
                  зону неправильные детали, и за это не будет штрафа */
                 if (!lastCorrectPart || !lastCorrectPart.IsFixed)
