@@ -41,6 +41,8 @@ public class BoardScript : MonoBehaviour
 
     private bool error = false;
 
+    private int currentScore;
+
     private void Awake()
     {
         if (stageDisplayPrefab == null) Debug.LogError("You forgot to update prefab");
@@ -50,6 +52,12 @@ public class BoardScript : MonoBehaviour
         stageDisplayHeight = (stageDisplayPrefab.transform as RectTransform).sizeDelta.y;
         scrollInitHeight = scrollContainer.sizeDelta.y;
         scoreText.text = "";
+       
+    }
+
+    private void Start()
+    {
+        currentScore = ProjectPreferences.instance.maxScore;
     }
 
     private void OnDestroy()
@@ -119,7 +127,11 @@ public class BoardScript : MonoBehaviour
     private void OnScoreChanged(int score)
     {
         scoreText.text = $"Баллы: {score}/{ProjectPreferences.instance.maxScore}";
-        error = true;
+        if (currentScore!= score)
+        {
+            currentScore = score;
+            error = true;
+        }
     }
 
     public void UpdateName()

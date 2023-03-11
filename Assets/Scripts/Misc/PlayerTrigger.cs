@@ -16,7 +16,7 @@ public class PlayerTrigger : MonoBehaviour
         handler = GetComponent<ActionHandler>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.TryGetComponent<Player>(out var p))
         {

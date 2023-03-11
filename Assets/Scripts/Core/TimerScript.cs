@@ -8,7 +8,7 @@ public static class TimerScript
     private static Coroutine c_timer = null;
     private static bool stopTimer = false;
 
-    private static readonly int backTimerInit = 2700;
+    private static readonly int backTimerInit = 1200;
 
     public static int CurrentTime => currTime;
 
