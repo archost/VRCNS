@@ -11178,33 +11178,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cc38455f97b41d4fa924cac5d8132ed, type: 3}
---- !u!1 &999516565 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0cc38455f97b41d4fa924cac5d8132ed,
-    type: 3}
-  m_PrefabInstance: {fileID: 999516564}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &999516567 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8164078558771037576, guid: 0cc38455f97b41d4fa924cac5d8132ed,
     type: 3}
   m_PrefabInstance: {fileID: 999516564}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &999516568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999516565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 374179f78921e744b98381557b3d7ec2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jointPoints:
-  - {fileID: 0}
-  isAssemblyAttacher: 0
 --- !u!64 &999516569
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -26337,33 +26316,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cc38455f97b41d4fa924cac5d8132ed, type: 3}
---- !u!1 &2085258928 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0cc38455f97b41d4fa924cac5d8132ed,
-    type: 3}
-  m_PrefabInstance: {fileID: 2085258927}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2085258929 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8164078558771037576, guid: 0cc38455f97b41d4fa924cac5d8132ed,
     type: 3}
   m_PrefabInstance: {fileID: 2085258927}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2085258930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085258928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 374179f78921e744b98381557b3d7ec2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jointPoints:
-  - {fileID: 0}
-  isAssemblyAttacher: 0
 --- !u!64 &2085258931
 MeshCollider:
   m_ObjectHideFlags: 0

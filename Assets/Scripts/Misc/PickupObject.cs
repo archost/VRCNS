@@ -14,7 +14,7 @@ public class PickupObject : MonoBehaviour
 
     private ActionHandler actionHandler;
 
-    private void OnEnable()
+    private void Start()
     {
         actionHandler = GetComponent<ActionHandler>();
         actionHandler.OnSetTarget += OnSetTarget;

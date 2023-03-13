@@ -44,6 +44,7 @@ public class Part : MonoBehaviour
     public void Attach()
     {        
         UpdateState(PartState.Fixed);
+        col.isTrigger = true;
         if (animationController != null) animationController.ToogleAnimator();
         else Install();
     }
@@ -51,6 +52,7 @@ public class Part : MonoBehaviour
     public void Install()
     {
         UpdateState(PartState.Installed);
+        col.isTrigger = false;
         if (audioCon != null) audioCon.PlayClip("installed");
         partPresenter.Send(new CommandFinished(this.partPresenter), null);
     }
