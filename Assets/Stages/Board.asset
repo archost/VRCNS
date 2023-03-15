@@ -19,3 +19,4 @@ MonoBehaviour:
   target: {fileID: 0}
   initPartState: 0
   actionCode: inputDone
+  assistantClip: {fileID: 0}

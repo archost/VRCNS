@@ -18,3 +18,4 @@ MonoBehaviour:
   target: {fileID: 0}
   initPartState: 0
   actionCode: glasses
+  assistantClip: {fileID: 0}

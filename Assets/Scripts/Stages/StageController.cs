@@ -18,6 +18,9 @@ public class StageController : MonoBehaviour
     private PartHelper partHelper;
 
     [SerializeField]
+    private Assistant assistant;
+
+    [SerializeField]
     private List<GameObject> inits;
 
     private PartFactory partFactory;
@@ -155,7 +158,7 @@ public class StageController : MonoBehaviour
                 {
                     scp.Send(new CommandSetTargetAction(scp, CurrentStage.actionCode), null);
                 }
-
+                if (CurrentStage.assistantClip != null) assistant.PlayClip(CurrentStage.assistantClip);
             }
             else TimerScript.StopTimer(gameObject);
             OnStageSwitch?.Invoke(CurrentStage);

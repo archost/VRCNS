@@ -15,4 +15,8 @@ MonoBehaviour:
   ID: 3
   description: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u0432\u0430\u043B
     \u0432 \u043A\u0440\u044B\u0448\u043A\u0443 \u0432\u0441\u0430\u0441\u044B\u0432\u0430\u043D\u0438\u044F"
+  goalType: 0
   target: {fileID: 11400000, guid: 2e606187a995f5446b46325d630cea7e, type: 2}
+  initPartState: 0
+  actionCode: 
+  assistantClip: {fileID: 0}

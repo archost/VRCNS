@@ -19,6 +19,8 @@ public class Stage : ScriptableObject
 
     public string actionCode = string.Empty;
 
+    public AudioClip assistantClip = null;
+
 #if UNITY_EDITOR
     [CustomEditor(typeof(Stage))]
     public class StageEditor : Editor
@@ -34,6 +36,12 @@ public class Stage : ScriptableObject
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Stage ID", GUILayout.MaxWidth(75));
             stage.ID = EditorGUILayout.IntField(stage.ID, GUILayout.MaxWidth(40));
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Assistant voice line", GUILayout.MaxWidth(120));
+            stage.assistantClip = EditorGUILayout.ObjectField(stage.assistantClip, typeof(AudioClip), false) as AudioClip;
+            //stage.ID = EditorGUILayout.IntField(stage.ID, GUILayout.MaxWidth(40));
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.Space();

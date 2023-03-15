@@ -198,6 +198,8 @@ MonoBehaviour:
   - {fileID: 6731196172078883309}
   - {fileID: 2048740154050960906}
   - {fileID: 1004029947516896636}
+  - {fileID: 2097426753074555094}
+  - {fileID: 8410812890492306185}
   isAssemblyAttacher: 1
 --- !u!114 &4171050094324869352
 MonoBehaviour:
@@ -411,7 +413,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203227962064239464}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.3
@@ -1481,7 +1483,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7913957384662401386}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.3

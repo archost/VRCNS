@@ -19,3 +19,4 @@ MonoBehaviour:
   target: {fileID: 11400000, guid: 82addfa9fa8ef814bbadb30db10a0c1b, type: 2}
   initPartState: 0
   actionCode: 
+  assistantClip: {fileID: 0}
