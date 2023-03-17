@@ -7,7 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class NextBot : MonoBehaviour
 {
-    private Transform player;
+    private Transform player = null;
 
     [SerializeField]
     private float flyingSpeed;
@@ -22,6 +22,7 @@ public class NextBot : MonoBehaviour
 
     private void Update()
     {
+        return;
         if (player != null)
         {
             Quaternion relativeTo = Quaternion.LookRotation((player.position + Vector3.down * 0.7f) - transform.position);
