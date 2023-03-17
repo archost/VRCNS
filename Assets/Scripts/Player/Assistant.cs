@@ -19,11 +19,14 @@ public class Assistant : MonoBehaviour
     private float flyingSpeed;
 
     [SerializeField]
+    private float deadzone;
+
+    [SerializeField]
     private List<Transform> fixedPositions;
 
     private int posIndex = -1;
 
-    private bool isMoving = false;
+    private bool isMovingBlocked = false;
 
     private AudioClip currentClip = null;
 
@@ -57,30 +60,29 @@ public class Assistant : MonoBehaviour
 
     private void Update()
     {
-        if (!isMoving)
+        if (!isMovingBlocked)
         {
             Quaternion relativeTo = Quaternion.LookRotation((plTransform.position + Vector3.down * 0.7f) - transform.position);
             Quaternion current = transform.localRotation;
             transform.localRotation = Quaternion.Slerp(current, relativeTo, Time.deltaTime);
-        }
-        if (isFreeFlying) 
-        {
-            Vector3 dist = transform.position - plTransform.position;
-            float distance = dist.magnitude;
-            if (distance > preferredDistance)
+
+            if (isFreeFlying)
             {
-                dist = dist.normalized;
-                dist.y = 0f;
-                transform.position = transform.position - 2f * Time.deltaTime * dist;
-                //transform.Translate(dist.normalized * Time.deltaTime);
+                Vector3 dist = transform.position - plTransform.position;
+                float distance = dist.magnitude;
+                if (distance > preferredDistance + deadzone)
+                {
+                    StopAllCoroutines();
+                    StartCoroutine(MoveToTarget(plTransform, preferredDistance));
+                }
             }
-        }        
+        }
+               
     }
 
-    IEnumerator MoveToTarget(Transform target)
+    IEnumerator MoveToTarget(Transform target, float prefDistance = 0.1f)
     {
-        isMoving = true;
-        if (currentClip != null) yield return new WaitForSeconds(currentClip.length);
+        isMovingBlocked = true;        
         Vector3 dist = target.position - transform.position;
         float distance = dist.magnitude;
         Quaternion oldRotation = transform.localRotation;
@@ -92,8 +94,9 @@ public class Assistant : MonoBehaviour
             transform.localRotation = Quaternion.Lerp(oldRotation, lookat, t / rotationTime);
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
-        } 
-        while(distance > 0.1f) 
+        }
+        if (audioSource.isPlaying) yield return new WaitForSeconds(currentClip.length);
+        while (distance > prefDistance) 
         {
             dist = dist.normalized;
             dist.y = 0f;
@@ -103,6 +106,6 @@ public class Assistant : MonoBehaviour
             distance = dist.magnitude;
             yield return new WaitForEndOfFrame();
         }
-        isMoving = false;
+        isMovingBlocked = false;
     }
 }

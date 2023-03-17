@@ -95,7 +95,7 @@ public class WelcomingBoard : MonoBehaviour
         }
         if (keyboard.displayText.text != "") 
         {
-            if (keyboard.displayText.text.Contains("_")) keyboard.displayText.text = "";
+            if (keyboard.displayText.text.Contains("_")) keyboard.displayText.text = keyboard.displayText.text[..^1];
             keyboard.text = keyboard.displayText.text;
         }
         if (keyboard.disabled)

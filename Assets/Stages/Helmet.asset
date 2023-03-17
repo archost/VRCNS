@@ -18,4 +18,4 @@ MonoBehaviour:
   target: {fileID: 0}
   initPartState: 0
   actionCode: helmet
-  assistantClip: {fileID: 0}
+  assistantClip: {fileID: 8300000, guid: f50173f8bb1420342b5b1d16da4ac281, type: 3}

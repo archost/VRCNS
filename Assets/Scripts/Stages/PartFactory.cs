@@ -20,7 +20,7 @@ public class PartFactory : MonoBehaviour
     {
         for (int i = 0; i < partAttachers.Count; i++)
         {
-            if (partAttachers[i].TryToogleJointPointByPart(true, data))
+            if (partAttachers[i].TryToogleJointPointByPart(ProjectPreferences.instance.assemblyType == GameAssemblyType.Assembly, data))
             {
                 Debug.Log($"Enabled JointPoint in {partAttachers[i].name}");
             }
