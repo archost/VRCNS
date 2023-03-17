@@ -20,10 +20,13 @@ public class ProjectPreferences : MonoBehaviour
 
     [Header("Testing Options")]
     public bool VRTesting = false;
+    public bool AssistantVoice = true;
 
     public bool IsTesting => gameMode == GameMode.Testing;
 
     public bool IsTraining => gameMode == GameMode.Training;
+
+    public bool IsAssembly => assemblyType == GameAssemblyType.Assembly;
 
     private void Awake()
     {

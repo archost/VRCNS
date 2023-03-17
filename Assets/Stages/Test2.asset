@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 2
   description: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043A\u043E\u043B\u0435\u0441\u043E"
+  goalType: 0
   target: {fileID: 11400000, guid: 23b741f97fd40db49be96f277a6fb0fc, type: 2}
+  initPartState: 0
+  actionCode: 
+  assistantClip: {fileID: 0}

@@ -103,6 +103,7 @@ public class StageController : MonoBehaviour
         stages.AddRange(scenario.stagesList);
 
         partFactory.SpawnParts(mediator, scenario.spawnList);
+        if (!ProjectPreferences.instance.IsAssembly) partFactory.ProceedQueue();
 
         if (ProjectPreferences.instance.IsTesting)
         {
@@ -151,8 +152,7 @@ public class StageController : MonoBehaviour
                 {
                     errorHappened = false;
                     partFactory.ToogleSuitablePoints(CurrentStage.target);
-                    scp.Send(new CommandSetTarget(scp, CurrentStage.target,
-                        CurrentStage.initPartState == PartState.Idle ? null : CurrentStage.initPartState), null);
+                    scp.Send(new CommandSetTarget(scp, CurrentStage.target, CurrentStage.initPartState), null);
                 }
                 else if (CurrentStage.goalType == StageGoalType.Action)
                 {

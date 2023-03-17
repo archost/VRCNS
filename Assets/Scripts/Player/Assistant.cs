@@ -37,7 +37,8 @@ public class Assistant : MonoBehaviour
     }
 
     public void PlayClip(AudioClip clip)
-    {        
+    {
+        if (!ProjectPreferences.instance.AssistantVoice) return;
         if (audioSource.isPlaying) 
         {
             audioSource.Stop();

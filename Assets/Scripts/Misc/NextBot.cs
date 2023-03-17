@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEngine.GraphicsBuffer;
 
 public class NextBot : MonoBehaviour
 {
@@ -22,15 +21,15 @@ public class NextBot : MonoBehaviour
 
     private void Update()
     {
-        return;
         if (player != null)
         {
-            Quaternion relativeTo = Quaternion.LookRotation((player.position + Vector3.down * 0.7f) - transform.position);
-            Quaternion current = transform.localRotation;
-            transform.localRotation = Quaternion.Slerp(current, relativeTo, Time.deltaTime);
+            Vector3 relativeTo = Quaternion.LookRotation((player.position + Vector3.down * 0.7f) - transform.position).eulerAngles;
+            relativeTo.x = 0; relativeTo.z = 0;
+            Vector3 current = transform.localRotation.eulerAngles;
+            transform.localEulerAngles = Vector3.Slerp(current, relativeTo, Time.deltaTime);
             Vector3 dist = player.position - transform.position;
             float distance = dist.magnitude;
-            while (distance > 0.1f)
+            if (distance > 0.1f)
             {
                 dist = dist.normalized;
                 dist.y = 0f;
@@ -39,9 +38,9 @@ public class NextBot : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.TryGetComponent<Player>(out var p))
+        if (other.gameObject.TryGetComponent<Player>(out var p))
         {
             collideAction?.Invoke();
         }

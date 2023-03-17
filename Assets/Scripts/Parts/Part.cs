@@ -42,7 +42,20 @@ public class Part : MonoBehaviour
     private bool ignoreErrors;
 
     public void Attach()
-    {        
+    {
+        if (!ProjectPreferences.instance.IsAssembly && !isTarget)
+        {
+            UpdateState(PartState.Installed);
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                GameObject child = transform.GetChild(i).gameObject;
+                if (!child.TryGetComponent<JointPoint>(out _))
+                {
+                    child.SetActive(true);
+                }
+            }
+            return;
+        }
         UpdateState(PartState.Fixed);
         col.isTrigger = true;
         foreach (var item in GetComponentsInChildren<Collider>())
@@ -92,6 +105,21 @@ public class Part : MonoBehaviour
         return partPresenter;
     }
 
+    private void OnEnable()
+    {
+        if (partData == null)
+        {
+            Debug.LogError("Part has null PartData!", this.gameObject);
+            PartID = 0;
+
+        }
+        else
+        {
+            PartID = partData.ID;
+
+        }
+    }
+
     private void Awake()
     {
         audioCon = GetComponent<AudioController>();
@@ -119,17 +147,7 @@ public class Part : MonoBehaviour
 
         playerTransform = Camera.main.gameObject.transform;
 
-        if (partData == null)
-        {
-            Debug.LogError("Part has null PartData!", this.gameObject);
-            PartID = 0;
-            
-        }
-        else
-        {
-            PartID = partData.ID;
-
-        }
+        
     }
 
     private void Update()
