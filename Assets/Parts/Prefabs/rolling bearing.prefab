@@ -96,6 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   partData: {fileID: 11400000, guid: d68b59780dbb9904094a93c32b3aa720, type: 2}
+  ignoreErrors: 0
 --- !u!95 &5096989951896322458
 Animator:
   serializedVersion: 4
