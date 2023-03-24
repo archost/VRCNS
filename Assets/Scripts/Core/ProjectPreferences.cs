@@ -28,13 +28,24 @@ public class ProjectPreferences : MonoBehaviour
 
     public bool IsAssembly => assemblyType == GameAssemblyType.Assembly;
 
+    public (string name, string group) SavedData = ("", "");
+
     private void Awake()
     {
-        if (instance != null)
+        /*if (instance != null)
         {
+            Debug.Log("deleting...");
             Destroy(instance.gameObject);
+        }*/
+        if (instance == null) 
+        {
+            instance = this;
         }
-        instance = this;
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        
         DontDestroyOnLoad(gameObject);
     }
 }

@@ -64,6 +64,16 @@ public class WelcomingBoard : MonoBehaviour
         assemblyDropdown.onValueChanged.AddListener(OnAssemblyChanged);
         keyboard.OnSubmit.AddListener(OnSubmitField);
         keyboard.OnCancel.AddListener(OnCancelField);
+        Invoke(nameof(RestoreData), 0.5f);
+    }
+
+    private void RestoreData()
+    {
+        if (ProjectPreferences.instance.SavedData.name == "") return;
+        ToogleField(0);
+        OnSubmitField(ProjectPreferences.instance.SavedData.name);
+        ToogleField(1);
+        OnSubmitField(ProjectPreferences.instance.SavedData.group);
     }
 
     public void ToogleField(int value)
@@ -133,6 +143,7 @@ public class WelcomingBoard : MonoBehaviour
         if (isValid) 
         {
             keyboard.ShowSuccessMessage("Сохранено!");
+            keyboard.displayText.text = value;
             foreach (var item in selectors)
             {
                 item.SetActive(false);

@@ -21,6 +21,9 @@ public class StageController : MonoBehaviour
     private Assistant assistant;
 
     [SerializeField]
+    private ResultBoard ResultBoard;
+
+    [SerializeField]
     private List<GameObject> inits;
 
     private PartFactory partFactory;
@@ -34,6 +37,8 @@ public class StageController : MonoBehaviour
     private bool errorHappened = false;
 
     private Scenario scenario;
+
+    public int Score => score;
 
     private Stage CurrentStage
     {
@@ -160,13 +165,18 @@ public class StageController : MonoBehaviour
                 }
                 if (CurrentStage.assistantClip != null) assistant.PlayClip(CurrentStage.assistantClip);
             }
-            else TimerScript.StopTimer(gameObject);
+            else
+            {
+                TimerScript.StopTimer(gameObject);
+                Invoke(nameof(ProcessEnd), 2f);
+            }
             OnStageSwitch?.Invoke(CurrentStage);
         }
     }
 
-    public void PrevStage()
+    private void ProcessEnd()
     {
-        // work in progress
+        FindObjectOfType<Player>().transform.position = ResultBoard.TeleportTransform.position;
+        ResultBoard.InitWindow(this);
     }
 }

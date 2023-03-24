@@ -22,6 +22,15 @@ public static class TimerScript
         }
     }
 
+    public static string BackwardsTimeFormat
+    {
+        get
+        {
+            int backtime = backTimerInit - currTime;
+            return $"{backtime / 600}{(backtime / 60) % 10}:{(backtime % 60) / 10}{(backtime % 60) % 10}";
+        }
+    }
+
     public static string CurrentTimeVerticalFormat
     {
         get 
