@@ -89,6 +89,7 @@ public class ResultBoard : MonoBehaviour
 
     public void HardReset()
     {
+        ProjectPreferences.instance.SavedData = ("", "");
         SceneManager.LoadScene(0);
     }
 

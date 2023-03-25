@@ -62,7 +62,7 @@ namespace VRKeys {
 			keyboard = GetComponent<Keyboard> ();
 
 			if (PlayerPrefs.HasKey (prefsKey)) {
-				JsonUtility.FromJsonOverwrite (PlayerPrefs.GetString (prefsKey), settings);
+				//JsonUtility.FromJsonOverwrite (PlayerPrefs.GetString (prefsKey), settings);
 			}
 
 			keyboard.keyboardWrapper.transform.localPosition = settings.position;

@@ -153,8 +153,7 @@ public class Part : MonoBehaviour
     private void Update()
     {
         if (isHolding)
-        {
-            
+        {            
             col.isTrigger = Vector3.Distance(playerTransform.position + Vector3.down * 0.7f, transform.position) < 1.2f;
         }
     }

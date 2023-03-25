@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(PartFactory), typeof(ScenarioController))]
 public class StageController : MonoBehaviour
@@ -176,7 +177,15 @@ public class StageController : MonoBehaviour
 
     private void ProcessEnd()
     {
-        FindObjectOfType<Player>().transform.position = ResultBoard.TeleportTransform.position;
+        TeleportRequest tr = new()
+        {
+            destinationPosition = ResultBoard.TeleportTransform.position,
+            destinationRotation = Quaternion.identity,
+            requestTime = 0f,
+            matchOrientation = MatchOrientation.WorldSpaceUp
+        };
+        
+        FindObjectOfType<TeleportationProvider>().QueueTeleportRequest(tr);
         ResultBoard.InitWindow(this);
     }
 }

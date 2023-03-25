@@ -69,7 +69,11 @@ public class WelcomingBoard : MonoBehaviour
 
     private void RestoreData()
     {
-        if (ProjectPreferences.instance.SavedData.name == "") return;
+        if (ProjectPreferences.instance.SavedData.name == "")
+        {
+            ToogleField(0);
+            return;
+        }
         ToogleField(0);
         OnSubmitField(ProjectPreferences.instance.SavedData.name);
         ToogleField(1);
@@ -139,7 +143,7 @@ public class WelcomingBoard : MonoBehaviour
     private void OnSubmitField(string value)
     {
         bool isValid = toogledField == 0 ? NameFieldValidation(value) : toogledField == 1 && GroupFieldValidation(value);
-
+        Debug.Log(value);
         if (isValid) 
         {
             keyboard.ShowSuccessMessage("Сохранено!");
