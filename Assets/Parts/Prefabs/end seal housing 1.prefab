@@ -142,7 +142,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6112868374302623339}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.1124, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -229,7 +229,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7494157464084742365}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -477,7 +477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6271041091693827558
 Transform:
   m_ObjectHideFlags: 0
@@ -720,6 +720,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: push bushing
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cc4bf7c2a3b599f4abec8c34690c9bd9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc4bf7c2a3b599f4abec8c34690c9bd9, type: 3}
@@ -1519,17 +1524,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cc7a0bc7949688949b84824903d958cf,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc7a0bc7949688949b84824903d958cf,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc7a0bc7949688949b84824903d958cf,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc7a0bc7949688949b84824903d958cf,
         type: 3}
@@ -1649,7 +1654,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e20666bec1ae2eb4c80e03cda2a660f8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0463
+      value: 0.0852
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e20666bec1ae2eb4c80e03cda2a660f8,
         type: 3}
@@ -1664,22 +1669,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e20666bec1ae2eb4c80e03cda2a660f8,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 0.8660254
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e20666bec1ae2eb4c80e03cda2a660f8,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e20666bec1ae2eb4c80e03cda2a660f8,
-        type: 3}
-      propertyPath: m_LocalRotation.y
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e20666bec1ae2eb4c80e03cda2a660f8,
         type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e20666bec1ae2eb4c80e03cda2a660f8,
+        type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.8660254
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e20666bec1ae2eb4c80e03cda2a660f8,
         type: 3}
@@ -1694,7 +1699,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e20666bec1ae2eb4c80e03cda2a660f8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e20666bec1ae2eb4c80e03cda2a660f8,
         type: 3}
@@ -2750,6 +2755,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: stuffing case
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aec0c5ab9512fae408fe2fdb2fb4caad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aec0c5ab9512fae408fe2fdb2fb4caad, type: 3}
