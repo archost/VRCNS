@@ -73,6 +73,8 @@ public class StageController : MonoBehaviour
             mediator.AddActionHandler(item.InitPresenter(mediator));
         }
 
+        InitScene();
+
         if (stages.Count != 0)
         {
             NextStage();
@@ -126,7 +128,7 @@ public class StageController : MonoBehaviour
 
     public void RestartScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void OnWrongPart()

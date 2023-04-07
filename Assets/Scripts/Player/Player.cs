@@ -15,9 +15,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private UnityEvent OnReady;
 
-    [SerializeField]
-    private WelcomingBoard wboard;
-
     public string PlayerName { get; private set; }
 
     public string PlayerGroup { get; private set; }
@@ -41,9 +38,9 @@ public class Player : MonoBehaviour
             AddItem(item);
         }
         IsReady = true;
-        wboard.GetFieldsValues(out string s1, out string s2);
-        PlayerName = s1;
-        PlayerGroup = s2;
+        //wboard.GetFieldsValues(out string s1, out string s2);
+        //PlayerName = s1;
+        //PlayerGroup = s2;
         OnReady?.Invoke();
     }
 
@@ -69,12 +66,13 @@ public class Player : MonoBehaviour
     private void CheckReady()
     {
         if (IsReady) return;
-        if (IsFullyEquipped() && wboard.IsFieldsValid)
+        //if (IsFullyEquipped() && wboard.IsFieldsValid)
+        if (IsFullyEquipped())
         {
             IsReady = true;
-            wboard.GetFieldsValues(out string s1, out string s2);
-            PlayerName = s1;
-            PlayerGroup = s2;
+            //wboard.GetFieldsValues(out string s1, out string s2);
+            //PlayerName = s1;
+            //PlayerGroup = s2;
             OnReady?.Invoke();
         }
     }

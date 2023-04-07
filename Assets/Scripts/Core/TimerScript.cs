@@ -12,6 +12,8 @@ public static class TimerScript
 
     public static int CurrentTime => currTime;
 
+    public static int BackCurrentTime => backTimerInit - currTime;
+
     private static int dt = 0;
 
     public static string CurrentTimeFormat

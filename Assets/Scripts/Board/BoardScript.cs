@@ -136,7 +136,7 @@ public class BoardScript : MonoBehaviour
 
     public void UpdateName()
     {
-        var pl = FindObjectOfType<Player>();
-        ProfileInfoText.text = $"Обучающийся:\n{pl.PlayerName}\n\nГруппа:\n{pl.PlayerGroup}";
+        PlayerData data = PlayerDataController.instance.CurrentPlayerData;
+        ProfileInfoText.text = $"Обучающийся:\n{data.PlayerName}\n\nГруппа:\n{data.Group}";
     }
 }
