@@ -75,6 +75,11 @@ public class StageController : MonoBehaviour
 
         InitScene();
 
+        Invoke(nameof(Ploxo), 1f);
+    }
+
+    private void Ploxo()
+    {
         if (stages.Count != 0)
         {
             NextStage();

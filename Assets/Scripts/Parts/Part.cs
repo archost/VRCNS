@@ -24,6 +24,8 @@ public class Part : MonoBehaviour
 
     private bool isHolding = false;
 
+    private bool isSelected = false;
+
     public bool IsHolding => isHolding;
 
     public int PartID { get; private set; }  
@@ -185,14 +187,16 @@ public class Part : MonoBehaviour
 
     private void ResetCollider()
     {
+        if (!isSelected) return;
         isHolding = true;
         //col.isTrigger = false;
     }
 
     private void OnSelectEvent(bool isSelected)
     {
+        this.isSelected = isSelected;
         if (isSelected)
-        {
+        {          
             col.isTrigger = true;
             Invoke(nameof(ResetCollider), 0.3f);
         }

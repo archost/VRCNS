@@ -73,7 +73,7 @@ public class ResultBoard : MonoBehaviour
 
     public void SoftReset()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     public void HardReset()
