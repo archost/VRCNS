@@ -19,4 +19,4 @@ MonoBehaviour:
   target: {fileID: 0}
   initPartState: 0
   actionCode: meetArea
-  assistantClip: {fileID: 8300000, guid: 1b6caa828e378cd4386d03654e6901bc, type: 3}
+  assistantClip: {fileID: 8300000, guid: ec9f512e9df3292409e41089b6ea5ee2, type: 3}

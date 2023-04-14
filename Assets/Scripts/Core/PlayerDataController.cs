@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerDataController : MonoBehaviour
 {
     public static PlayerDataController instance = null!;
+
+    public bool IsSoftReset { get; private set; }
 
     public PlayerData playerData;
 
@@ -21,6 +24,7 @@ public class PlayerDataController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        IsSoftReset = false;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -31,6 +35,11 @@ public class PlayerDataController : MonoBehaviour
             Scenario = (short)scenario,
             GameMode = (short)mode
         };
+    }
+
+    public void SetReset(bool isSoft)
+    {
+        IsSoftReset = isSoft;
     }
 
     public void ResetSecondParameters()

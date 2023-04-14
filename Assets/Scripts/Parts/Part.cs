@@ -7,6 +7,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(Rigidbody), typeof(PartAttacher))]
 public class Part : MonoBehaviour
 {
+    public static int floorCollideCounter = 0;
+
     private Outline outline;
     private Rigidbody rb;
     private AudioController audioCon;
@@ -119,6 +121,15 @@ public class Part : MonoBehaviour
         {
             PartID = partData.ID;
 
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            floorCollideCounter++;
+            Debug.Log($"Current floor collides: {floorCollideCounter}");
         }
     }
 

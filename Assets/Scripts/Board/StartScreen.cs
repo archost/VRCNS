@@ -47,6 +47,15 @@ public class StartScreen : MonoBehaviour
         nameFieldRect = nameField.GetComponent<RectTransform>();
         groupFieldRect = groupField.GetComponent<RectTransform>();
         messageRect = invalidMessage.GetComponent<RectTransform>();
+
+        if (PlayerDataController.instance.IsSoftReset)
+        {
+            PlayerData pd = PlayerDataController.instance.CurrentPlayerData;
+            nameField.SetTextWithoutNotify(pd.PlayerName);
+            groupField.SetTextWithoutNotify(pd.Group);
+            gamemodeDropdown.SetValueWithoutNotify(pd.GameMode);
+            scenarioDropdown.SetValueWithoutNotify(pd.Scenario);
+        }
     }
 
     public void ClearMessage(string s)
@@ -129,6 +138,4 @@ public class StartScreen : MonoBehaviour
         ProjectPreferences.instance.gameMode = validMode;
         SceneManager.LoadScene(1);
     }
-
-
 }

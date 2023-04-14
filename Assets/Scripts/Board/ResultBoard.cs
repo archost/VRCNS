@@ -73,11 +73,13 @@ public class ResultBoard : MonoBehaviour
 
     public void SoftReset()
     {
+        PlayerDataController.instance.SetReset(true);
         SceneManager.LoadScene(0);
     }
 
     public void HardReset()
     {
+        PlayerDataController.instance.SetReset(false);
         SceneManager.LoadScene(0);
     }
 
