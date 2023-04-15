@@ -14,15 +14,16 @@ public class PlayerDataController : MonoBehaviour
     public PlayerData playerData;
 
     public PlayerData CurrentPlayerData
-    { 
-        get 
-        { 
-            return playerData; 
-        } 
+    {
+        get
+        {
+            return playerData;
+        }
     }
 
     private void Awake()
     {
+        if (instance != null) Destroy(gameObject); 
         instance = this;
         IsSoftReset = false;
         DontDestroyOnLoad(gameObject);
@@ -57,7 +58,7 @@ public class PlayerDataController : MonoBehaviour
         playerData.TestLength = TimeSpan.FromSeconds(seconds);
     }
 
-    public void SetScore(int score) 
+    public void SetScore(int score)
     {
         playerData.Score = (short)score;
     }
