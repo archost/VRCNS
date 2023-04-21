@@ -33,6 +33,18 @@ public class AudioController : MonoBehaviour
         Debug.LogError($"Clip \"{key}\" was not found!");
     }
 
+    public void TryPlayClip(string key)
+    {
+        foreach (var item in clipElements)
+        {
+            if (item.key == key)
+            {
+                source.PlayOneShot(item.clip);
+                return;
+            }
+        }
+    }
+
     [System.Serializable]
     private struct AudioClipElement
     {

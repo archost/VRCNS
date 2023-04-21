@@ -25,6 +25,9 @@ public class StageController : MonoBehaviour
     private ResultBoard ResultBoard;
 
     [SerializeField]
+    private AudioClip finishClip;
+
+    [SerializeField]
     private List<GameObject> inits;
 
     private PartFactory partFactory;
@@ -176,7 +179,8 @@ public class StageController : MonoBehaviour
             else
             {
                 TimerScript.StopTimer(gameObject);
-                Invoke(nameof(ProcessEnd), 2f);
+                assistant.PlayClip(finishClip);
+                Invoke(nameof(ProcessEnd), finishClip.length);
             }
             OnStageSwitch?.Invoke(CurrentStage);
         }

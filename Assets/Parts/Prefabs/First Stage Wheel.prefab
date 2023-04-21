@@ -219,6 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   partData: {fileID: 11400000, guid: 23b741f97fd40db49be96f277a6fb0fc, type: 2}
+  ignoreErrors: 0
 --- !u!95 &8226240608045236143
 Animator:
   serializedVersion: 4
@@ -307,7 +308,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -362,6 +363,8 @@ MonoBehaviour:
   clipElements:
   - key: installed
     clip: {fileID: 8300000, guid: de00399a1ded30c4e90292ff29182668, type: 3}
+  - key: fall
+    clip: {fileID: 8300000, guid: 69f0633d3363b174f85ba4668d309ec1, type: 3}
 --- !u!114 &2731907014106099981
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.XR.Interaction.Toolkit;
 
-[RequireComponent(typeof(Rigidbody), typeof(PartAttacher))]
+[RequireComponent(typeof(Rigidbody), typeof(PartAttacher), typeof(AudioController))]
 public class Part : MonoBehaviour
 {
     public static int floorCollideCounter = 0;
@@ -78,7 +78,7 @@ public class Part : MonoBehaviour
         {
             item.isTrigger = false;
         }
-        if (audioCon != null) audioCon.PlayClip("installed");
+        audioCon.TryPlayClip("installed");
         partPresenter.Send(new CommandFinished(this.partPresenter), null);
     }
 
@@ -129,6 +129,7 @@ public class Part : MonoBehaviour
         if (collision.gameObject.CompareTag("Floor"))
         {
             floorCollideCounter++;
+            audioCon.PlayClip("fall");
             Debug.Log($"Current floor collides: {floorCollideCounter}");
         }
     }
