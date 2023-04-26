@@ -21,6 +21,8 @@ public class Stage : ScriptableObject
 
     public AudioClip assistantClip = null;
 
+    public GameAssemblyType assemblyType = 0;
+
 #if UNITY_EDITOR
     [CustomEditor(typeof(Stage))]
     public class StageEditor : Editor
@@ -62,6 +64,8 @@ public class Stage : ScriptableObject
                 stage.target = EditorGUILayout.ObjectField("Target Part", stage.target, typeof(PartData), false) as PartData;
 
                 stage.initPartState = (PartState)EditorGUILayout.EnumPopup("Init Part State", stage.initPartState);
+
+                stage.assemblyType = (GameAssemblyType)EditorGUILayout.EnumPopup("Assembly Type", stage.assemblyType);
             }
             else if (stage.goalType == StageGoalType.Action)
             {

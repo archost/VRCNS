@@ -63,6 +63,11 @@ public class Player : MonoBehaviour
         return true;
     }
 
+    public void PlayMistake()
+    {
+        ac.PlayClip("mistake");
+    }
+
     private void CheckReady()
     {
         if (IsReady) return;

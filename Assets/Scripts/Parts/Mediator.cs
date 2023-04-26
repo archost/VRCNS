@@ -22,7 +22,7 @@ public class Mediator
 
     public void Send(Command command, Collegue target)
     {
-        if (command is CommandFinished || command is CommandHelperUpdate)
+        if (command is CommandFinished || command is CommandHelperUpdate || command is CommandProcessMistake)
         {
             StageControllerPresenter.Notify(command);
         }

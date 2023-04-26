@@ -19,3 +19,4 @@ MonoBehaviour:
   initPartState: 0
   actionCode: helmet
   assistantClip: {fileID: 8300000, guid: ff6fbbe0307d3304aa6496a7195a7739, type: 3}
+  assemblyType: 0

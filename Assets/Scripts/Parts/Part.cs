@@ -28,6 +28,8 @@ public class Part : MonoBehaviour
 
     private bool isSelected = false;
 
+    private bool isAssembly = false;
+
     public bool IsHolding => isHolding;
 
     public int PartID { get; private set; }  
@@ -47,7 +49,7 @@ public class Part : MonoBehaviour
 
     public void Attach()
     {
-        if (!ProjectPreferences.instance.IsAssembly && !isTarget)
+        if (!isAssembly && !isTarget)
         {
             UpdateState(PartState.Installed);
             for (int i = 0; i < transform.childCount; i++)
@@ -130,6 +132,7 @@ public class Part : MonoBehaviour
         {
             floorCollideCounter++;
             audioCon.PlayClip("fall");
+            partPresenter.Send(new CommandProcessMistake(this.partPresenter), null);
             Debug.Log($"Current floor collides: {floorCollideCounter}");
         }
     }
@@ -172,10 +175,15 @@ public class Part : MonoBehaviour
         }
     }
 
-    private void ProcessSetTarget(PartState? newState)
+    private void ProcessSetTarget(GameAssemblyType assemblyType, PartState? newState)
     {
         if (newState != null) UpdateState(newState.Value);
         isTarget = true;
+        isAssembly = assemblyType == GameAssemblyType.Assembly;
+        if (!isAssembly)
+        {
+            // SimpleInteractable
+        }
         if (ProjectPreferences.instance.gameMode == GameMode.Training)
             outline.enabled = true;
     }

@@ -18,11 +18,11 @@ public class PartFactory : MonoBehaviour
         partAttachers = FindObjectsOfType<PartAttacher>().ToList();
     }
 
-    public void ToogleSuitablePoints(PartData data)
+    public void ToogleSuitablePoints(GameAssemblyType assemblyType, PartData data)
     {
         for (int i = 0; i < partAttachers.Count; i++)
         {
-            if (partAttachers[i].TryToogleJointPointByPart(ProjectPreferences.instance.IsAssembly, data))
+            if (partAttachers[i].TryToogleJointPointByPart(assemblyType == GameAssemblyType.Assembly, data))
             {
                 Debug.Log($"Enabled JointPoint in {partAttachers[i].name}");
             }
@@ -34,17 +34,17 @@ public class PartFactory : MonoBehaviour
         if (partsQueue.Count == 0) return;
         foreach (var part in partsQueue)
         {
-            bool isOK = false;
+            bool succeed = false;
             foreach (var attacher in partAttachers)
             {
                 var jp = attacher.GetJointPointByPartID(true, part.PartID);
                 if (jp != null)
                 {
                     jp.ForceAttach(part, true);
-                    isOK = true;
+                    succeed = true;
                 }
             }
-            if (!isOK)
+            if (!succeed)
             {
                 Debug.LogWarning("Attacher was not found for this Part", part.gameObject);
             }

@@ -9,8 +9,6 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
 
     private UnityAction OnInvalidPart;
 
-    private AudioController ac;
-
     public void Init(StageController sc)
     {
         if(!ProjectPreferences.instance.IsTesting
@@ -19,8 +17,7 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
             gameObject.SetActive(false);
             return;
         }
-        ac = GetComponent<AudioController>();
-        OnInvalidPart += sc.OnWrongPart;
+        OnInvalidPart += sc.OnMistake;
         sc.OnStageSwitch += SwitchTarget;
     }
 
@@ -44,7 +41,6 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
                     Debug.Log("Incorrect part!");
                     p.WrongPartDisplay();
                     OnInvalidPart?.Invoke();
-                    if (ac != null) ac.PlayClip("error");
                 }               
             }
             else

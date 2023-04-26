@@ -9,6 +9,8 @@ public class StageControllerPresenter : Collegue
 
     public UnityAction<CommandHelperUpdate> OnPartHelperUpdate;
 
+    public UnityAction<CommandProcessMistake> OnProcessMistake;
+
     public StageControllerPresenter(Mediator mediator) : base(mediator) { }
 
     public override void Send(Command command, Collegue target)
@@ -25,6 +27,10 @@ public class StageControllerPresenter : Collegue
         else if (command is CommandHelperUpdate)
         {
             OnPartHelperUpdate?.Invoke(command as CommandHelperUpdate);
+        }
+        else if (command is CommandProcessMistake)
+        {
+            OnProcessMistake?.Invoke(command as CommandProcessMistake);
         }
     }
 }

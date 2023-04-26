@@ -13,6 +13,8 @@ public class StageController : MonoBehaviour
 
     private ScenarioController scCon;
 
+    private Player player;
+
     public List<Stage> stages;
 
     [SerializeField]
@@ -63,12 +65,14 @@ public class StageController : MonoBehaviour
     {
         partFactory = GetComponent<PartFactory>();
         scCon = GetComponent<ScenarioController>();
+        player = FindObjectOfType<Player>();
 
         mediator = new Mediator();
         scp = new StageControllerPresenter(mediator);
         mediator.StageControllerPresenter = scp;
         scp.OnPartFinished += ProcessFinished;
-        scp.OnPartHelperUpdate += ProcessHelperUpdate;       
+        scp.OnPartHelperUpdate += ProcessHelperUpdate;
+        scp.OnProcessMistake += OnMistake;
 
         var actionHandlers = FindObjectsOfType<ActionHandler>();
         foreach (var item in actionHandlers)
@@ -78,10 +82,10 @@ public class StageController : MonoBehaviour
 
         InitScene();
 
-        Invoke(nameof(Ploxo), 1f);
+        Invoke(nameof(StartScenario), 1f);
     }
 
-    private void Ploxo()
+    private void StartScenario()
     {
         if (stages.Count != 0)
         {
@@ -139,15 +143,18 @@ public class StageController : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    public void OnWrongPart()
+    public void OnMistake()
     {
         if (ProjectPreferences.instance.IsTraining) return;
         if (!ProjectPreferences.instance.multiErrorAllowed && errorHappened) return;
         score = Mathf.Clamp(score - 1, 0, 100);
         errorHappened = true;
         errorStages.Add(CurrentStage);
+        player.PlayMistake();
         OnScoreChanged?.Invoke(score);
     }
+
+    public void OnMistake(CommandProcessMistake c) => OnMistake();
 
     private void ProcessHelperUpdate(CommandHelperUpdate c)
     {
@@ -167,8 +174,8 @@ public class StageController : MonoBehaviour
                 if (CurrentStage.goalType == StageGoalType.PartPlacing)
                 {
                     errorHappened = false;
-                    partFactory.ToogleSuitablePoints(CurrentStage.target);
-                    scp.Send(new CommandSetTarget(scp, CurrentStage.target, CurrentStage.initPartState), null);
+                    partFactory.ToogleSuitablePoints(CurrentStage.assemblyType, CurrentStage.target);
+                    scp.Send(new CommandSetTarget(scp, CurrentStage.target, CurrentStage.assemblyType, CurrentStage.initPartState), null);
                 }
                 else if (CurrentStage.goalType == StageGoalType.Action)
                 {
