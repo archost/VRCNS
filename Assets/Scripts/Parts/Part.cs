@@ -14,6 +14,7 @@ public class Part : MonoBehaviour
     private AudioController audioCon;
     private Collider col;
     private PartAnimationController animationController;
+    private XRSimpleInteractable sInteractable;
 
     public XRGrabInteractable GrabInteractable { get; private set; }
 
@@ -182,7 +183,8 @@ public class Part : MonoBehaviour
         isAssembly = assemblyType == GameAssemblyType.Assembly;
         if (!isAssembly)
         {
-            // SimpleInteractable
+            sInteractable = gameObject.AddComponent<XRSimpleInteractable>();
+            sInteractable.interactionLayers = InteractionLayerMask.NameToLayer("Ray Interaction");
         }
         if (ProjectPreferences.instance.gameMode == GameMode.Training)
             outline.enabled = true;

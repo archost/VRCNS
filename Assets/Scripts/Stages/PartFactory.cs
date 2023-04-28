@@ -13,6 +13,8 @@ public class PartFactory : MonoBehaviour
 
     public List<Part> partsQueue = new List<Part>();
 
+    public bool IsDone { get; private set; }
+
     private void OnEnable()
     {
         partAttachers = FindObjectsOfType<PartAttacher>().ToList();
@@ -52,10 +54,13 @@ public class PartFactory : MonoBehaviour
         partsQueue.Clear();
     }
 
-    public void SpawnParts(Mediator mediator, List<SpawnInfo> spawns)
+    public IEnumerator SpawnParts(Mediator mediator, List<SpawnInfo> spawns)
     {
+        IsDone = false;
+        var init = new Initialization();
         spawnInfos.Clear();
         spawnInfos = spawns;
+        int k = 0;
         foreach (var s in spawnInfos)
         {
             Part p = Instantiate(s.partPrefab);
@@ -67,12 +72,13 @@ public class PartFactory : MonoBehaviour
                 partsQueue.Add(p);
             }
             else s.point.ForceAttach(p, false);
+            k++;
+            init.Progress = (float)k / spawns.Count;
+            yield return new WaitForEndOfFrame();
         }
+        IsDone = true;
         Debug.Log($"Spawn complete! ({spawnInfos.Count} instances)");
     }
-
-
-
 }
 
 [System.Serializable]

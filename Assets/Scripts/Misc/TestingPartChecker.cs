@@ -11,8 +11,7 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
 
     public void Init(StageController sc)
     {
-        if(!ProjectPreferences.instance.IsTesting
-            || ProjectPreferences.instance.assemblyType != GameAssemblyType.Assembly)
+        if(!ProjectPreferences.instance.IsTesting)
         {
             gameObject.SetActive(false);
             return;
@@ -24,6 +23,7 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
     private void SwitchTarget(Stage stage)
     {
         if (stage == null || stage.goalType == StageGoalType.Action) return;
+        gameObject.SetActive(stage.assemblyType == GameAssemblyType.Assembly);
         currentPartID = stage.target.ID;
     }
 

@@ -23,7 +23,11 @@ public class PlayerDataController : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null) Destroy(gameObject); 
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
         IsSoftReset = false;
         DontDestroyOnLoad(gameObject);

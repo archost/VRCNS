@@ -136,6 +136,7 @@ public class StartScreen : MonoBehaviour
         PlayerDataController.instance.SetFirstParameters(validName, validGroup, validMode, validScenario);
         ProjectPreferences.instance.assemblyType = validScenario;
         ProjectPreferences.instance.gameMode = validMode;
-        SceneManager.LoadScene(1);
+
+        SceneLoader.LoadScene(1);
     }
 }

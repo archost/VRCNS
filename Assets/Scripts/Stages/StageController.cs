@@ -80,17 +80,10 @@ public class StageController : MonoBehaviour
             mediator.AddActionHandler(item.InitPresenter(mediator));
         }
 
-        InitScene();
+        scenario = scCon.GetScenario();
+        stages.AddRange(scenario.stagesList);
 
-        Invoke(nameof(StartScenario), 1f);
-    }
-
-    private void StartScenario()
-    {
-        if (stages.Count != 0)
-        {
-            NextStage();
-        }
+        StartCoroutine(InitScene());
     }
 
     private void ProcessFinished(CommandFinished command)
@@ -116,14 +109,14 @@ public class StageController : MonoBehaviour
         }
     }
 
-    [ContextMenu("InitScene")]
-    public void InitScene()
-    {
-        scenario = scCon.GetScenario();
-        stages.AddRange(scenario.stagesList);
 
-        partFactory.SpawnParts(mediator, scenario.spawnList);
-        if (!ProjectPreferences.instance.IsAssembly) partFactory.ProceedQueue();
+    private IEnumerator InitScene()
+    {
+        StartCoroutine(partFactory.SpawnParts(mediator, scenario.spawnList));
+        while (!partFactory.IsDone)
+        {
+            yield return null;
+        }
 
         if (ProjectPreferences.instance.IsTesting)
         {
@@ -135,6 +128,13 @@ public class StageController : MonoBehaviour
         foreach (var item in inits)
         {
             item.GetComponent<ISCInit>().Init(this);
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        if (stages.Count != 0)
+        {
+            NextStage();
         }
     }
 
@@ -202,7 +202,7 @@ public class StageController : MonoBehaviour
             requestTime = 0f,
             matchOrientation = MatchOrientation.WorldSpaceUp
         };
-        
+
         FindObjectOfType<TeleportationProvider>().QueueTeleportRequest(tr);
         ResultBoard.InitWindow(this);
     }

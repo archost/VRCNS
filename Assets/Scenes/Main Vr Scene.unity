@@ -2813,7 +2813,7 @@ MonoBehaviour:
   highlightOutlineColor: {r: 0, g: 1, b: 0.023376703, a: 1}
   wrongOutlineColor: {r: 1, g: 0, b: 0, a: 1}
   outlineWidth: 5
-  gameMode: 1
+  gameMode: 0
   assemblyType: 0
   multiErrorAllowed: 1
   maxScore: 25
@@ -3528,86 +3528,15 @@ MonoBehaviour:
         type: 3}
       point: {fileID: 1745758593}
   disassemblyScenario:
-    stagesList: []
+    stagesList:
+    - {fileID: 11400000, guid: 91813ff72c263954bb5240e6ab4a82fa, type: 2}
     spawnList:
-    - partPrefab: {fileID: 7550201358083845642, guid: 503f49a128a240140921ee9d5ad42db5,
-        type: 3}
-      point: {fileID: 1728106154}
-    - partPrefab: {fileID: 5288483982331037492, guid: ec3c9b3a22c195745a86e3e6bfe88d8e,
-        type: 3}
-      point: {fileID: 1769660313}
-    - partPrefab: {fileID: 5444025321640510002, guid: 50754089d1090be47b3ff67a48fdd247,
-        type: 3}
-      point: {fileID: 1330473010}
-    - partPrefab: {fileID: 7321173738122906536, guid: 41616edea6eaae74ba85c404efb5865d,
-        type: 3}
-      point: {fileID: 1548845917}
-    - partPrefab: {fileID: 7824924091484312439, guid: 4dd1b9b98ebb8994f9b77aa03e598f74,
-        type: 3}
-      point: {fileID: 1130000482}
-    - partPrefab: {fileID: 8666541803612842621, guid: f1f94c917f7092b4c9bc699819eec213,
-        type: 3}
-      point: {fileID: 1836731194}
-    - partPrefab: {fileID: 6024903838483637742, guid: f4e3ecb70d099d94fb82f5a315ebd444,
-        type: 3}
-      point: {fileID: 769071417}
-    - partPrefab: {fileID: 7715479834829532347, guid: a55b62e2675fd344d99de8914da8387a,
-        type: 3}
-      point: {fileID: 1509647463}
-    - partPrefab: {fileID: 5304229812639887839, guid: 5c3881488aa9b3549abe012981c5e446,
-        type: 3}
-      point: {fileID: 1853691364}
-    - partPrefab: {fileID: 2825480208643159382, guid: df287ff77e8b67844aec04114a1dc9eb,
-        type: 3}
-      point: {fileID: 2014156427}
-    - partPrefab: {fileID: 2353849778164790721, guid: 79e91a183c2a976419a39e90507ae7b4,
-        type: 3}
-      point: {fileID: 1248578971}
-    - partPrefab: {fileID: 4438776119477739586, guid: 3d2a737804f3a6d4a9892233c6253f6b,
-        type: 3}
-      point: {fileID: 1854637552}
-    - partPrefab: {fileID: 7868766845872217720, guid: 18b3fba3ca6449b41865eba908de6118,
-        type: 3}
-      point: {fileID: 1765576571}
-    - partPrefab: {fileID: 935258865847104603, guid: 1195c83caceca3946bbde8e273b26a63,
-        type: 3}
-      point: {fileID: 889715981}
-    - partPrefab: {fileID: 2400945297286904661, guid: 2264ae27bfda14a438472d5cd48b21ba,
-        type: 3}
-      point: {fileID: 1378950539}
-    - partPrefab: {fileID: 4627138570933973343, guid: 84c8d102ed775744bbc1a8fe4a3f058e,
-        type: 3}
-      point: {fileID: 1874378370}
-    - partPrefab: {fileID: 2210298339063311586, guid: 691ad38923d6a9046a07270a4e17c5fa,
-        type: 3}
-      point: {fileID: 347675587}
-    - partPrefab: {fileID: 1911005341145547445, guid: 68d78b3fe2d119040abf8486a5cdffa5,
-        type: 3}
-      point: {fileID: 357454833}
-    - partPrefab: {fileID: 4627138570933973343, guid: 84c8d102ed775744bbc1a8fe4a3f058e,
-        type: 3}
-      point: {fileID: 551791350}
-    - partPrefab: {fileID: 1013486835131280312, guid: ea87640c075339b43a78b802a07e15e3,
-        type: 3}
-      point: {fileID: 1808930077}
-    - partPrefab: {fileID: 948891360909170265, guid: 4e62bb32ee40a28428f7672a2a3f5632,
-        type: 3}
-      point: {fileID: 227053200}
     - partPrefab: {fileID: 4555227450929806893, guid: 8423e560a653bdf418b2b21f693d3509,
         type: 3}
       point: {fileID: 543897627}
-    - partPrefab: {fileID: 8226240608045236128, guid: b1e90c237d7ed954a8806f62e0bd7d38,
+    - partPrefab: {fileID: 948891360909170265, guid: 4e62bb32ee40a28428f7672a2a3f5632,
         type: 3}
-      point: {fileID: 1212746204}
-    - partPrefab: {fileID: 8043679669344051240, guid: 6a74c326e407fa245ab27155a7815746,
-        type: 3}
-      point: {fileID: 2058045334}
-    - partPrefab: {fileID: 7414688359564908008, guid: ce3ee4a284e708442b80d1aca6e14b30,
-        type: 3}
-      point: {fileID: 1745758593}
-    - partPrefab: {fileID: 7550201358083845642, guid: 503f49a128a240140921ee9d5ad42db5,
-        type: 3}
-      point: {fileID: 1728106154}
+      point: {fileID: 227053200}
 --- !u!1001 &240519089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4233,7 +4162,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &269954084
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27820,7 +27749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1791996270
 RectTransform:
   m_ObjectHideFlags: 0
