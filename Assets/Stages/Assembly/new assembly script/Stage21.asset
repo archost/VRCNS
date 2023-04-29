@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Stage21
   m_EditorClassIdentifier: 
   ID: 21
-  description: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043A\u0440\u044B\u0448\u043A\u0443
-    \u043F\u043E\u0434\u0448\u0438\u043F\u043D\u0438\u043A\u0430 \u0441\u043E \u0441\u0442\u043E\u0440\u043E\u043D\u044B
-    \u0432\u0441\u0430\u0441\u044B\u0432\u0430\u043D\u0438\u044F \u0441 \u0432\u0435\u0440\u0445\u043D\u0438\u043C
-    \u0432\u043A\u043B\u0430\u0434\u044B\u0448\u0435\u043C"
+  description: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043C\u0430\u0441\u043B\u043E\u043E\u0442\u0440\u0430\u0436\u0430\u0442\u0435\u043B\u044C
+    \u0441\u043E \u0441\u0442\u043E\u0440\u043E\u043D\u044B \u0432\u0441\u0430\u0441\u044B\u0432\u0430\u043D\u0438\u044F"
   goalType: 0
-  target: {fileID: 11400000, guid: 215f9ceb1f8679c4e8bfe1088ee9cd54, type: 2}
+  target: {fileID: 11400000, guid: d5605eef9776f6c44b5ee4994478c0ae, type: 2}
   initPartState: 0
   actionCode: 
-  assistantClip: {fileID: 8300000, guid: 08a45245046200d419c594e58343507b, type: 3}
+  assistantClip: {fileID: 8300000, guid: 14191ba53dd7da5479421a61a87cb533, type: 3}
+  assemblyType: 0
