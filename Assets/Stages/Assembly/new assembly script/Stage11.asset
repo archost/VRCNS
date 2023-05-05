@@ -20,3 +20,4 @@ MonoBehaviour:
   initPartState: 0
   actionCode: 
   assistantClip: {fileID: 8300000, guid: a7edfb340a497ea41a636815b81e7281, type: 3}
+  assemblyType: 0

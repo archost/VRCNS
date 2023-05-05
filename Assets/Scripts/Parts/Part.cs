@@ -133,8 +133,11 @@ public class Part : MonoBehaviour
         {
             floorCollideCounter++;
             audioCon.PlayClip("fall");
-            partPresenter.Send(new CommandProcessMistake(this.partPresenter), null);
-            Debug.Log($"Current floor collides: {floorCollideCounter}");
+            if (collision.relativeVelocity.y < 2f)
+                Debug.Log("This fall doesn't count");
+            else
+                partPresenter.Send(new CommandProcessMistake(this.partPresenter), null);
+            //Debug.Log($"Current floor collides: {floorCollideCounter}");
         }
     }
 
