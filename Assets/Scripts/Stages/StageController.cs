@@ -112,6 +112,10 @@ public class StageController : MonoBehaviour
 
     private IEnumerator InitScene()
     {
+        foreach (var item in inits)
+        {
+            item.GetComponent<ISCInit>().Init(this);
+        }
         StartCoroutine(partFactory.SpawnParts(mediator, scenario.spawnList));
         while (!partFactory.IsDone)
         {
@@ -124,10 +128,6 @@ public class StageController : MonoBehaviour
             errorStages = new List<Stage>();
             score = ProjectPreferences.instance.maxScore;
             OnScoreChanged?.Invoke(score);
-        }
-        foreach (var item in inits)
-        {
-            item.GetComponent<ISCInit>().Init(this);
         }
 
         yield return new WaitForSeconds(1f);

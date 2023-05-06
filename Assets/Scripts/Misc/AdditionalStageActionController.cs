@@ -30,6 +30,7 @@ public class AdditionalStageActionController : MonoBehaviour
 
     private void StageCheck(Stage stage)
     {
+        if (stage == null) return;
         if (stageIDs.Contains(stage.ID))
         {
             var act = actions.Find(x => x.stage.ID == stage.ID);

@@ -79,6 +79,11 @@ public class PartAttacher : MonoBehaviour
         }
         else
         {
+            if (!ProjectPreferences.instance.IsAssembly)
+            {
+                part.DisassemblyInstall();
+                return;
+            }
             part.transform.SetParent(transform);
             part.transform.localPosition = offset;
             part.transform.localEulerAngles = rotation.eulerAngles;

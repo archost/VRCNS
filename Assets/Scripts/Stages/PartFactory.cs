@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.TextCore.LowLevel;
 
 public class PartFactory : MonoBehaviour
 {
@@ -60,24 +62,43 @@ public class PartFactory : MonoBehaviour
         var init = new Initialization();
         spawnInfos.Clear();
         spawnInfos = spawns;
+        int totalProgress = spawns.Count;
         int k = 0;
         foreach (var s in spawnInfos)
         {
             Part p = Instantiate(s.partPrefab);
-            var presenter = p.InitPartPresenter(mediator);
-            mediator.AddPart(presenter);
-            partAttachers.Add(p.GetComponent<PartAttacher>());
-            if (s.point == null)
-            {
-                partsQueue.Add(p);
-            }
-            else s.point.ForceAttach(p, false);
+            RegisterPart(s, p, mediator, true);
             k++;
-            init.Progress = (float)k / spawns.Count;
+            
+            var childParts = p.gameObject.GetComponentsInChildren<Part>(true);
+            if (childParts.Length > 0)
+            {
+                totalProgress += childParts.Length;
+                foreach (var child in childParts)
+                {
+                    RegisterPart(s, child, mediator, false);
+                    k++;
+                    init.Progress = (float)k / totalProgress;
+                    yield return new WaitForEndOfFrame();
+                }
+            }         
+            init.Progress = (float)k / totalProgress;
             yield return new WaitForEndOfFrame();
         }
         IsDone = true;
-        Debug.Log($"Spawn complete! ({spawnInfos.Count} instances)");
+        Debug.Log($"Spawn complete! ({totalProgress} instances)");
+    }
+
+    private void RegisterPart(SpawnInfo s, Part p, Mediator mediator, bool t)
+    {
+        var presenter = p.InitPartPresenter(mediator);
+        mediator.AddPart(presenter);
+        partAttachers.Add(p.GetComponent<PartAttacher>());
+        if (s.point == null)
+        {
+            partsQueue.Add(p);
+        }
+        else s.point.ForceAttach(p, t);
     }
 }
 

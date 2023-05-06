@@ -33,7 +33,7 @@ public class Part : MonoBehaviour
 
     public bool IsHolding => isHolding;
 
-    public int PartID { get; private set; }  
+    public int PartID { get; private set; }
 
     public bool IgnoreErrors => ignoreErrors;
 
@@ -50,6 +50,7 @@ public class Part : MonoBehaviour
 
     public void Attach()
     {
+        /*
         if (!isAssembly && !isTarget)
         {
             UpdateState(PartState.Installed);
@@ -63,6 +64,7 @@ public class Part : MonoBehaviour
             }
             return;
         }
+        */
         UpdateState(PartState.Fixed);
         col.isTrigger = true;
         foreach (var item in GetComponentsInChildren<Collider>())
@@ -71,6 +73,26 @@ public class Part : MonoBehaviour
         }
         if (animationController != null) animationController.ToogleAnimator();
         else Install();
+    }
+
+    public void Detach(SelectEnterEventArgs e)
+    {
+        sInteractable.enabled = false;
+        // animation
+        UpdateState(PartState.Idle);
+        GrabInteractable.enabled = true;
+    }
+
+    public void DisassemblyInstall()
+    {
+        if (isAssembly) return;
+        UpdateState(PartState.Installed);
+        col.isTrigger = false;
+        foreach (var item in GetComponentsInChildren<Collider>())
+        {
+            item.isTrigger = false;
+        }
+        if (GrabInteractable != null) GrabInteractable.enabled = false;
     }
 
     public void Install()
@@ -112,21 +134,6 @@ public class Part : MonoBehaviour
         return partPresenter;
     }
 
-    private void OnEnable()
-    {
-        if (partData == null)
-        {
-            Debug.LogError("Part has null PartData!", this.gameObject);
-            PartID = 0;
-
-        }
-        else
-        {
-            PartID = partData.ID;
-
-        }
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
@@ -141,8 +148,20 @@ public class Part : MonoBehaviour
         }
     }
 
-    private void Awake()
+    private void OnEnable()
     {
+        if (partData == null)
+        {
+            Debug.LogError("Part has null PartData!", this.gameObject);
+            PartID = 0;
+
+        }
+        else
+        {
+            PartID = partData.ID;
+
+        }
+
         audioCon = GetComponent<AudioController>();
         animationController = GetComponent<PartAnimationController>();
         GrabInteractable = GetComponent<XRGrabInteractable>();
@@ -157,24 +176,24 @@ public class Part : MonoBehaviour
         {
             GrabInteractable.firstSelectEntered.AddListener(OnSelectEnter);
             GrabInteractable.lastSelectExited.AddListener(OnSelectExit);
-        }        
+        }
     }
 
     private void Start()
-    {        
+    {
         outline.OutlineMode = Outline.Mode.OutlineVisible;
         outline.OutlineColor = ProjectPreferences.instance.highlightOutlineColor;
         outline.OutlineWidth = ProjectPreferences.instance.outlineWidth;
 
         playerTransform = Camera.main.gameObject.transform;
 
-        
+
     }
 
     private void Update()
     {
         if (isHolding)
-        {            
+        {
             col.isTrigger = Vector3.Distance(playerTransform.position + Vector3.down * 0.7f, transform.position) < 1.2f;
         }
     }
@@ -186,8 +205,9 @@ public class Part : MonoBehaviour
         isAssembly = assemblyType == GameAssemblyType.Assembly;
         if (!isAssembly)
         {
-            sInteractable = gameObject.AddComponent<XRSimpleInteractable>();
-            sInteractable.interactionLayers = InteractionLayerMask.NameToLayer("Ray Interaction");
+            sInteractable = gameObject.GetComponent<XRSimpleInteractable>();
+            sInteractable.enabled = true;
+            sInteractable.selectEntered.AddListener(Detach);
         }
         if (ProjectPreferences.instance.gameMode == GameMode.Training)
             outline.enabled = true;
@@ -221,7 +241,7 @@ public class Part : MonoBehaviour
     {
         this.isSelected = isSelected;
         if (isSelected)
-        {          
+        {
             col.isTrigger = true;
             Invoke(nameof(ResetCollider), 0.3f);
         }
