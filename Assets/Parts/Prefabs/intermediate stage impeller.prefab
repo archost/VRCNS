@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 2071033639686810202}
   - component: {fileID: 3675664662416599585}
   - component: {fileID: 2309268766939935407}
-  - component: {fileID: 5462973494713321278}
   - component: {fileID: 1156176564424257939}
   - component: {fileID: 7612325974959175049}
   m_Layer: 0
@@ -275,20 +274,6 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
---- !u!114 &5462973494713321278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4507324388517554874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 736d616964adb8040a27ce9df18803a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rightHandPose: {fileID: 0}
-  leftHandPose: {fileID: 0}
 --- !u!82 &1156176564424257939
 AudioSource:
   m_ObjectHideFlags: 0
