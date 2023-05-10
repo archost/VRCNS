@@ -67,7 +67,7 @@ public class PartFactory : MonoBehaviour
         foreach (var s in spawnInfos)
         {
             Part p = Instantiate(s.partPrefab);
-            RegisterPart(s, p, mediator, true);
+            RegisterPart(s, p, mediator, false);
             k++;
             
             var childParts = p.gameObject.GetComponentsInChildren<Part>(true);

@@ -10,7 +10,7 @@ public class PartAnimationController : MonoBehaviour
 {
     private Animator animator;
 
-    private void Start()
+    private void OnEnable()
     {
         animator = GetComponent<Animator>();
         animator.enabled = false;
