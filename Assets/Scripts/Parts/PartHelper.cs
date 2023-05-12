@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Video;
 
 public class PartHelper : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class PartHelper : MonoBehaviour
 
     [SerializeField]
     private float heightOffset = 1.5f;
+
+    [SerializeField]
+    private float distanceOffset = 0.5f;
+
+    [SerializeField]
+    private VideoPlayer vplayer;
 
     private Transform pl;
 
@@ -29,13 +36,20 @@ public class PartHelper : MonoBehaviour
         currentTarget = target;
         partName.text = data.PartName;
         partDesc.text = data.Description;
+        if (data.videoClip != null) 
+        {
+            vplayer.clip = data.videoClip;
+            vplayer.gameObject.SetActive(true);
+        }
         transform.position = currentTarget.position + Vector3.up * heightOffset;
         transform.LookAt(pl);
+        transform.Translate(distanceOffset * (-transform.forward));
     }
 
     public void TurnOff()
     {
         currentTarget = null;
+        vplayer.gameObject.SetActive(false);
         gameObject.SetActive(false);
     }
 
@@ -45,6 +59,7 @@ public class PartHelper : MonoBehaviour
         {
             transform.position = currentTarget.position + Vector3.up * heightOffset;
             transform.LookAt(pl);
+            transform.Translate(distanceOffset * (-transform.forward));
         }
     }
 }

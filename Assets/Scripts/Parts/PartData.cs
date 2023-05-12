@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 [CreateAssetMenu(fileName = "NewPart", menuName = "Part")]
 public class PartData : ScriptableObject
@@ -10,4 +11,6 @@ public class PartData : ScriptableObject
     public string PartName;
 
     public string Description;
+
+    public VideoClip videoClip;
 }

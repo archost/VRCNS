@@ -56,7 +56,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2702419172300243315}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: b18fce3de15fcf5428b8b296c616c324, type: 3}
+  m_VideoClip: {fileID: 0}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -304,6 +304,8 @@ MonoBehaviour:
   partName: {fileID: 7768860881694181879}
   partDesc: {fileID: 7768860883347302599}
   heightOffset: 0.7
+  distanceOffset: 0.5
+  vplayer: {fileID: 1576305448427298590}
 --- !u!1 &7768860882414385608
 GameObject:
   m_ObjectHideFlags: 0

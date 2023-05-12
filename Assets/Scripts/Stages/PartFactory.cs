@@ -69,8 +69,8 @@ public class PartFactory : MonoBehaviour
             Part p = Instantiate(s.partPrefab);
             RegisterPart(s, p, mediator, false);
             k++;
-            
-            var childParts = p.gameObject.GetComponentsInChildren<Part>(true);
+            /*
+            var childParts = p.gameObject.GetComponentsInChildren<Part>();
             if (childParts.Length > 0)
             {
                 totalProgress += childParts.Length;
@@ -81,7 +81,8 @@ public class PartFactory : MonoBehaviour
                     init.Progress = (float)k / totalProgress;
                     yield return new WaitForEndOfFrame();
                 }
-            }         
+            }
+            */
             init.Progress = (float)k / totalProgress;
             yield return new WaitForEndOfFrame();
         }
