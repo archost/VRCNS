@@ -25,7 +25,7 @@ public class PartHelper : MonoBehaviour
 
     private Transform currentTarget = null;
 
-    private void Start()
+    private void Awake()
     {
         pl = Camera.main.transform;
     }
@@ -41,9 +41,7 @@ public class PartHelper : MonoBehaviour
             vplayer.clip = data.videoClip;
             vplayer.gameObject.SetActive(true);
         }
-        transform.position = currentTarget.position + Vector3.up * heightOffset;
-        transform.LookAt(pl);
-        transform.Translate(distanceOffset * (-transform.forward));
+        Move();
     }
 
     public void TurnOff()
@@ -57,9 +55,14 @@ public class PartHelper : MonoBehaviour
     {
         if (currentTarget != null) 
         {
-            transform.position = currentTarget.position + Vector3.up * heightOffset;
-            transform.LookAt(pl);
-            transform.Translate(distanceOffset * (-transform.forward));
+            Move();
         }
+    }
+
+    private void Move()
+    {
+        Vector3 d = (pl.position - currentTarget.position).normalized;
+        transform.position = currentTarget.position + Vector3.up * heightOffset - distanceOffset * d;
+        transform.LookAt(pl);
     }
 }
