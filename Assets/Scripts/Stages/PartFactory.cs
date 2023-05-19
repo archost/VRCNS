@@ -1,23 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.TextCore.LowLevel;
+using VREventArgs;
 
 public class PartFactory : MonoBehaviour
 {
     [SerializeField]
     private List<SpawnInfo> spawnInfos = new List<SpawnInfo>();
 
-    public List<PartAttacher> partAttachers;
+    [SerializeField]
+    private List<PartAttacher> partAttachers;
 
-    public List<Part> partsQueue = new List<Part>();
+    private List<Part> parts = new List<Part>();
 
     public bool IsDone { get; private set; }
 
-    private void OnEnable()
+    private void Awake()
     {
         partAttachers = FindObjectsOfType<PartAttacher>().ToList();
     }
@@ -33,30 +32,20 @@ public class PartFactory : MonoBehaviour
         }
     }
 
-    public void ProceedQueue()
+    public void SetPartAsTarget(TargetSetEventArgs e)
     {
-        if (partsQueue.Count == 0) return;
-        foreach (var part in partsQueue)
+        var args = e as PartSetAsTargetEventArgs;
+        var pd = args.TargetData.ID;
+        foreach (var part in parts)
         {
-            bool succeed = false;
-            foreach (var attacher in partAttachers)
+            if (part.PartID == pd)
             {
-                var jp = attacher.GetJointPointByPartID(true, part.PartID);
-                if (jp != null)
-                {
-                    jp.ForceAttach(part, true);
-                    succeed = true;
-                }
-            }
-            if (!succeed)
-            {
-                Debug.LogWarning("Attacher was not found for this Part", part.gameObject);
+                part.SetAsTarget(e);
             }
         }
-        partsQueue.Clear();
     }
 
-    public IEnumerator SpawnParts(Mediator mediator, List<SpawnInfo> spawns)
+    public IEnumerator SpawnParts(List<SpawnInfo> spawns)
     {
         IsDone = false;
         var init = new Initialization();
@@ -67,7 +56,7 @@ public class PartFactory : MonoBehaviour
         foreach (var s in spawnInfos)
         {
             Part p = Instantiate(s.partPrefab);
-            RegisterPart(s, p, mediator, false);
+            RegisterPart(s, p, false);
             k++;
             /*
             var childParts = p.gameObject.GetComponentsInChildren<Part>();
@@ -90,16 +79,11 @@ public class PartFactory : MonoBehaviour
         Debug.Log($"Spawn complete! ({totalProgress} instances)");
     }
 
-    private void RegisterPart(SpawnInfo s, Part p, Mediator mediator, bool t)
+    private void RegisterPart(SpawnInfo s, Part p, bool t)
     {
-        var presenter = p.InitPartPresenter(mediator);
-        mediator.AddPart(presenter);
+        parts.Add(p);
         partAttachers.Add(p.GetComponent<PartAttacher>());
-        if (s.point == null)
-        {
-            partsQueue.Add(p);
-        }
-        else s.point.ForceAttach(p, t);
+        s.point.ForceAttach(p, t);
     }
 }
 
