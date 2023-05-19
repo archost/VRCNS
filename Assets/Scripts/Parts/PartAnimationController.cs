@@ -10,14 +10,16 @@ public class PartAnimationController : MonoBehaviour
 {
     private Animator animator;
 
-    private void OnEnable()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
         animator.enabled = false;
+        enabled = false;
     }
 
     public void ToogleAnimator()
     {
+        enabled = true;
         animator.enabled = true;
     }
 

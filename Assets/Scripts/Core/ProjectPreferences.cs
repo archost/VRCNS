@@ -21,6 +21,7 @@ public class ProjectPreferences : MonoBehaviour
     [Header("Testing Options")]
     public bool VRTesting = false;
     public bool AssistantVoice = true;
+    public bool ShowFPS = true;
 
     public bool IsTesting => gameMode == GameMode.Testing;
 

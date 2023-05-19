@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class PipBoy : MonoBehaviour
+public class PipBoy : MonoBehaviour, ISCInit
 {
     [SerializeField]
     private TextMeshProUGUI timerText;
@@ -15,7 +15,7 @@ public class PipBoy : MonoBehaviour
     private TextMeshProUGUI scoreText;
 
     [SerializeField]
-    private StageController stageController;
+    private TextMeshProUGUI FPSText;
 
     private void Update()
     {
@@ -25,10 +25,15 @@ public class PipBoy : MonoBehaviour
         }
     }
 
-    private void Awake()
+    public void Init(StageController sc)
     {
-        stageController.OnStageSwitch += OnStageSwitch;
-        stageController.OnScoreChanged += OnStageFailed;
+        if (ProjectPreferences.instance.ShowFPS)
+        {
+            StartCoroutine(RefreshFPS());
+        }
+        else FPSText.gameObject.SetActive(false);
+        sc.OnStageSwitch += OnStageSwitch;
+        sc.OnScoreChanged += OnStageFailed;
         scoreText.text = "";
     }
 
@@ -41,6 +46,31 @@ public class PipBoy : MonoBehaviour
         else
         {
             taskDesc.text = stage.description;
+        }
+    }
+
+    private IEnumerator RefreshFPS()
+    {
+        int frameCounter = 0;
+        float timeCounter = 0.0f;
+        float lastFramerate = 0.0f;
+        float refreshTime = 0.5f;
+
+        while (true) 
+        {
+            if (timeCounter < refreshTime)
+            {
+                timeCounter += Time.deltaTime;
+                frameCounter++;
+            }
+            else
+            {
+                lastFramerate = frameCounter / timeCounter;
+                FPSText.text = "FPS: " + (int)lastFramerate;
+                frameCounter = 0;
+                timeCounter = 0.0f;
+            }
+            yield return new WaitForEndOfFrame();
         }
     }
 
