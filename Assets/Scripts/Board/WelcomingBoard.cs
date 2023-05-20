@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using VRKeys;
 using TMPro;
-using UnityEngine.Events;
 
 public class WelcomingBoard : MonoBehaviour
 {

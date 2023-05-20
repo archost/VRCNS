@@ -8,18 +8,15 @@ public class ForbiddenArea : MonoBehaviour, ISCInit
     [SerializeField]
     private Stage toBeActivatedOn;
 
-    private delegate void MistakeHandler();
-    private MistakeHandler mistakeHandler;
-
     public void Init(StageController sc)
     {
         if (ProjectPreferences.instance.IsTraining) return;
         sc.OnStageSwitch += OnStageSwitch;
-        mistakeHandler += sc.OnMistake;
     }
 
     private void OnStageSwitch(Stage s)
     {
+        if(s == null) return;
         gameObject.SetActive(s.ID == toBeActivatedOn.ID);
     }
 
@@ -27,7 +24,7 @@ public class ForbiddenArea : MonoBehaviour, ISCInit
     {
         if (other.gameObject.TryGetComponent<Player>(out var p))
         {
-            mistakeHandler?.Invoke();
+            StageController.OnMadeMistake(new(this));
         }
     }
 }

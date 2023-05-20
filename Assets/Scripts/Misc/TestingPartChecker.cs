@@ -7,8 +7,6 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
 
     private Part lastCorrectPart = null;
 
-    private UnityAction OnInvalidPart;
-
     public void Init(StageController sc)
     {
         if(!ProjectPreferences.instance.IsTesting)
@@ -16,7 +14,6 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
             gameObject.SetActive(false);
             return;
         }
-        OnInvalidPart += sc.OnMistake;
         sc.OnStageSwitch += SwitchTarget;
     }
 
@@ -40,7 +37,7 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
                 {
                     Debug.Log("Incorrect part!");
                     p.WrongPartDisplay();
-                    OnInvalidPart?.Invoke();
+                    StageController.OnMadeMistake(new(this));
                 }               
             }
             else

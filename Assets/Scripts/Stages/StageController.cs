@@ -4,12 +4,18 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit;
+using VREventArgs;
 
 [RequireComponent(typeof(PartFactory), typeof(ScenarioController))]
 public class StageController : MonoBehaviour
 {
-    private Mediator mediator;
-    private StageControllerPresenter scp;
+    public static UnityAction<PartInstalledEventArgs> OnPartInstalled;
+
+    public static UnityAction<ActionTakenEventArgs> OnActionTaken;
+
+    public static UnityAction<MistakeEventArgs> OnMadeMistake;
+
+    public static UnityAction<PartSelectedEventArgs> OnPartSelected;
 
     private ScenarioController scCon;
 
@@ -44,6 +50,8 @@ public class StageController : MonoBehaviour
 
     private Scenario scenario;
 
+    private ActionHandler[] actionHandlers;
+
     public int Score => score;
 
     private Stage CurrentStage
@@ -67,18 +75,12 @@ public class StageController : MonoBehaviour
         scCon = GetComponent<ScenarioController>();
         player = FindObjectOfType<Player>();
 
-        mediator = new Mediator();
-        scp = new StageControllerPresenter(mediator);
-        mediator.StageControllerPresenter = scp;
-        scp.OnPartFinished += ProcessFinished;
-        scp.OnPartHelperUpdate += ProcessHelperUpdate;
-        scp.OnProcessMistake += OnMistake;
+        OnPartInstalled += PartInstalled;
+        OnMadeMistake += Mistake;
+        OnPartSelected += PartSelected;
+        OnActionTaken += ActionTaken;
 
-        var actionHandlers = FindObjectsOfType<ActionHandler>();
-        foreach (var item in actionHandlers)
-        {
-            mediator.AddActionHandler(item.InitPresenter(mediator));
-        }
+        actionHandlers = FindObjectsOfType<ActionHandler>();
 
         scenario = scCon.GetScenario();
         stages.AddRange(scenario.stagesList);
@@ -86,29 +88,26 @@ public class StageController : MonoBehaviour
         StartCoroutine(InitScene());
     }
 
-    private void ProcessFinished(CommandFinished command)
+    private void PartInstalled(PartInstalledEventArgs e)
     {
-        if (command.Sender is PartPresenter)
+        if (e.Sender is not Part) return;
+        var part = e.Sender as Part;
+        if (part.PartID == CurrentStage.target.ID)
         {
-            var pp = command.Sender as PartPresenter;
-            if (pp.PartData.ID == CurrentStage.target.ID)
-            {
-                partHelper.TurnOff();
-                Debug.Log($"Successfully completed \"{CurrentStage.description}\"!");
-                NextStage();
-            }
-        }
-        else if (command.Sender is ActionHandlerPresenter)
-        {
-            var c = command as CommandActionFinished;
-            if (c.ActionCode == CurrentStage.actionCode)
-            {
-                Debug.Log($"Successfully completed \"{CurrentStage.description}\"!");
-                NextStage();
-            }
+            partHelper.TurnOff();
+            Debug.Log($"(new) Successfully completed \"{CurrentStage.description}\"!");
+            NextStage();
         }
     }
 
+    private void ActionTaken(ActionTakenEventArgs e)
+    {
+        if (e.ActionCode == CurrentStage.actionCode)
+        {
+            Debug.Log($"(new) Successfully completed \"{CurrentStage.description}\"!");
+            NextStage();
+        }
+    }
 
     private IEnumerator InitScene()
     {
@@ -116,7 +115,7 @@ public class StageController : MonoBehaviour
         {
             item.GetComponent<ISCInit>().Init(this);
         }
-        StartCoroutine(partFactory.SpawnParts(mediator, scenario.spawnList));
+        StartCoroutine(partFactory.SpawnParts(scenario.spawnList));
         while (!partFactory.IsDone)
         {
             yield return null;
@@ -138,6 +137,18 @@ public class StageController : MonoBehaviour
         }
     }
 
+    private void Mistake(MistakeEventArgs e)
+    {
+        if (ProjectPreferences.instance.IsTraining) return;
+        if (!ProjectPreferences.instance.multiErrorAllowed && errorHappened) return;
+        Debug.Log($"Made a mistake! (new score - {score - 1})!");
+        score = Mathf.Clamp(score - 1, 0, 100);
+        errorHappened = true;
+        errorStages.Add(CurrentStage);
+        player.PlayMistake();
+        OnScoreChanged?.Invoke(score);
+    }
+
     public void RestartScene()
     {
         SceneManager.LoadScene(1);
@@ -154,14 +165,17 @@ public class StageController : MonoBehaviour
         OnScoreChanged?.Invoke(score);
     }
 
-    public void OnMistake(CommandProcessMistake c) => OnMistake();
-
-    private void ProcessHelperUpdate(CommandHelperUpdate c)
+    private void PartSelected(PartSelectedEventArgs e)
     {
         if (ProjectPreferences.instance.IsTesting) return;
-        if (c.IsSelected)
-            partHelper.SetTarget(c.PartTransform, c.PartData);
-        else partHelper.TurnOff();
+        if (e.IsSelected) 
+        {
+            partHelper.SetTarget(e.PartTransform, e.PartData);
+        }
+        else
+        {
+            partHelper.TurnOff();
+        }
     }
 
     public void NextStage()
@@ -175,11 +189,12 @@ public class StageController : MonoBehaviour
                 {
                     errorHappened = false;
                     partFactory.ToogleSuitablePoints(CurrentStage.assemblyType, CurrentStage.target);
-                    scp.Send(new CommandSetTarget(scp, CurrentStage.target, CurrentStage.assemblyType, CurrentStage.initPartState), null);
+                    partFactory.SetPartAsTarget(new PartSetAsTargetEventArgs(this, 
+                        CurrentStage.target, CurrentStage.assemblyType, CurrentStage.initPartState));
                 }
                 else if (CurrentStage.goalType == StageGoalType.Action)
                 {
-                    scp.Send(new CommandSetTargetAction(scp, CurrentStage.actionCode), null);
+                    SetActionAsTarget(new ActionSetAsTargetEventArgs(this, CurrentStage.actionCode));
                 }
                 if (CurrentStage.assistantClip != null) assistant.PlayClip(CurrentStage.assistantClip);
             }
@@ -189,7 +204,7 @@ public class StageController : MonoBehaviour
                 assistant.PlayClip(finishClip);
                 Invoke(nameof(ProcessEnd), finishClip.length);
             }
-            OnStageSwitch?.Invoke(CurrentStage);
+            OnStageSwitch.Invoke(CurrentStage);
         }
     }
 
@@ -205,5 +220,16 @@ public class StageController : MonoBehaviour
 
         FindObjectOfType<TeleportationProvider>().QueueTeleportRequest(tr);
         ResultBoard.InitWindow(this);
+    }
+
+    private void SetActionAsTarget(ActionSetAsTargetEventArgs e)
+    {
+        foreach (var handler in actionHandlers)
+        {
+            if (handler.actionCode == e.ActionCode)
+            {
+                handler.SetAsTarget(e);
+            }
+        }
     }
 }

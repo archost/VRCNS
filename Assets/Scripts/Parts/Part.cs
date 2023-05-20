@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.XR.Interaction.Toolkit;
+using VREventArgs;
 
 [RequireComponent(typeof(Rigidbody), typeof(PartAttacher), typeof(AudioController))]
-public class Part : MonoBehaviour
+public class Part : MonoBehaviour, ITargetable
 {
     public static int floorCollideCounter = 0;
 
@@ -18,7 +19,7 @@ public class Part : MonoBehaviour
 
     public XRGrabInteractable GrabInteractable { get; private set; }
 
-    private PartPresenter partPresenter;
+    //private PartPresenter partPresenter;
     private PartAttacher partAttacher;
 
     private Transform playerTransform;
@@ -104,7 +105,7 @@ public class Part : MonoBehaviour
             item.isTrigger = false;
         }
         audioCon.TryPlayClip("installed");
-        partPresenter.Send(new CommandFinished(this.partPresenter), null);
+        StageController.OnPartInstalled.Invoke(new (this));
     }
 
     public void AnimationFinished()
@@ -126,14 +127,6 @@ public class Part : MonoBehaviour
         OnSelectEvent(false);
     }
 
-    public PartPresenter InitPartPresenter(Mediator mediator)
-    {
-        partPresenter = new PartPresenter(mediator, partData);
-        partPresenter.OnJointPointToogle += partAttacher.ToogleJointPoint;
-        partPresenter.OnSetTarget += ProcessSetTarget;
-        return partPresenter;
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
@@ -141,9 +134,11 @@ public class Part : MonoBehaviour
             floorCollideCounter++;
             audioCon.PlayClip("fall");
             if (collision.relativeVelocity.y < 2f)
-                Debug.Log("This fall doesn't count");
+                Debug.Log("This fall doesn't count", this.gameObject);
             else
-                partPresenter.Send(new CommandProcessMistake(this.partPresenter), null);
+            {
+                StageController.OnMadeMistake.Invoke(new (this));
+            }
             //Debug.Log($"Current floor collides: {floorCollideCounter}");
         }
     }
@@ -213,6 +208,22 @@ public class Part : MonoBehaviour
             outline.enabled = true;
     }
 
+    public void SetAsTarget(TargetSetEventArgs e)
+    {
+        var args = e as PartSetAsTargetEventArgs;
+        if (args.NewState != null) UpdateState(args.NewState.Value);
+        isTarget = true;
+        isAssembly = args.AssemblyType == GameAssemblyType.Assembly;
+        if (!isAssembly)
+        {
+            sInteractable = gameObject.GetComponent<XRSimpleInteractable>();
+            sInteractable.enabled = true;
+            sInteractable.selectEntered.AddListener(Detach);
+        }
+        if (ProjectPreferences.instance.gameMode == GameMode.Training)
+            outline.enabled = true;
+    }
+
     private void OnSelectEnter(SelectEnterEventArgs args) => OnSelectEvent(true);
 
     private void OnSelectExit(SelectExitEventArgs args) => OnSelectEvent(false);
@@ -254,7 +265,7 @@ public class Part : MonoBehaviour
         {
             outline.enabled = !isSelected;
         }
-        partPresenter.Send(new CommandHelperUpdate(partPresenter, transform, partData, isSelected), null);
+        StageController.OnPartSelected.Invoke(new(this, transform, partData, isSelected));
     }
 
     private void UpdateState(PartState newState)
