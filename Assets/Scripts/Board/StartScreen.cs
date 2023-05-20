@@ -104,6 +104,7 @@ public class StartScreen : MonoBehaviour
             invalidMessage.transform.position = groupFieldRightPos;
             invalidMessage.GetComponentInChildren<TextMeshProUGUI>().text = "Неправильно введена группа";
         }
+
     }
 
     public void SetGameMode()
@@ -128,6 +129,7 @@ public class StartScreen : MonoBehaviour
 
     public void NextStage()
     {
+
         foreach (var item in fieldsValid)
         {
             if (!item) return;

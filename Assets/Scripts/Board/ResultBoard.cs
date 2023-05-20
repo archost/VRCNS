@@ -89,7 +89,7 @@ public class ResultBoard : MonoBehaviour
     }
 
     private void SaveResults()
-    {
-
+    {        
+        DB_main.instance.CallDB();
     }
 }
