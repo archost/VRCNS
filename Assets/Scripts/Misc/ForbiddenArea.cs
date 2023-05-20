@@ -16,6 +16,7 @@ public class ForbiddenArea : MonoBehaviour, ISCInit
 
     private void OnStageSwitch(Stage s)
     {
+        if(s == null) return;
         gameObject.SetActive(s.ID == toBeActivatedOn.ID);
     }
 
