@@ -75,4 +75,23 @@ namespace VREventArgs
             ActionCode = actionCode;
         }
     }
+
+    public class PartAttachRequestEventArgs : EventArgs
+    {
+        public Part Part { get; private set; }
+
+        public Vector3 FixedPosition { get; private set; }
+
+        public Quaternion FixedRotation { get; private set; }
+
+        public bool ToBeInstalled { get; private set; }
+
+        public PartAttachRequestEventArgs(object sender, Part part, Vector3 pos, Quaternion rot, bool toInstall) : base(sender)
+        {
+            Part = part;
+            FixedPosition = pos;
+            FixedRotation = rot;
+            ToBeInstalled = toInstall;
+        }
+    }
 }

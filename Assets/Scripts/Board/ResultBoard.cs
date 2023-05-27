@@ -43,8 +43,6 @@ public class ResultBoard : MonoBehaviour
         public bool result;
     }
 
-    //private TestingResults results;
-
     public void InitWindow(StageController sc)
     {
         PlayerData data = PlayerDataController.instance.CurrentPlayerData;       
@@ -89,7 +87,12 @@ public class ResultBoard : MonoBehaviour
     }
 
     private void SaveResults()
-    {        
+    {
+        if (DB_main.instance == null)
+        {
+            Debug.LogError(nameof(DB_main) + " is null!");
+            return;
+        }
         DB_main.instance.CallDB();
     }
 }

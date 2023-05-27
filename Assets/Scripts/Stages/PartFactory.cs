@@ -56,22 +56,26 @@ public class PartFactory : MonoBehaviour
         foreach (var s in spawnInfos)
         {
             Part p = Instantiate(s.partPrefab);
-            RegisterPart(s, p, false);
+            RegisterPart(s, p, true, false);
+            var state = s.spawnState;
+            if (state == PartState.Installed) p.Install(silent: true);
             k++;
-            /*
+            
             var childParts = p.gameObject.GetComponentsInChildren<Part>();
-            if (childParts.Length > 0)
+            if (childParts.Length > 1)
             {
-                totalProgress += childParts.Length;
+                totalProgress += childParts.Length - 1;
+                if (state == PartState.Installed) foreach (var child in childParts) child.Install(silent: true);
                 foreach (var child in childParts)
                 {
-                    RegisterPart(s, child, mediator, false);
+                    if (child == p) continue;
+                    RegisterPart(s, child, false);
                     k++;
                     init.Progress = (float)k / totalProgress;
                     yield return new WaitForEndOfFrame();
                 }
             }
-            */
+            
             init.Progress = (float)k / totalProgress;
             yield return new WaitForEndOfFrame();
         }
@@ -79,11 +83,12 @@ public class PartFactory : MonoBehaviour
         Debug.Log($"Spawn complete! ({totalProgress} instances)");
     }
 
-    private void RegisterPart(SpawnInfo s, Part p, bool t)
+    private void RegisterPart(SpawnInfo spawnInfo, Part part, bool changePartPosition = false, bool toBeInstalled = false)
     {
-        parts.Add(p);
-        partAttachers.Add(p.GetComponent<PartAttacher>());
-        s.point.ForceAttach(p, t);
+        parts.Add(part);
+        partAttachers.Add(part.GetComponent<PartAttacher>());
+        if (changePartPosition)
+            spawnInfo.point.ForceAttach(part, toBeInstalled);
     }
 }
 
@@ -92,4 +97,5 @@ public struct SpawnInfo
 {
     public Part partPrefab;
     public JointPoint point;
+    public PartState spawnState;
 }

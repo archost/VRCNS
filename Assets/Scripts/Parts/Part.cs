@@ -50,21 +50,6 @@ public class Part : MonoBehaviour, ITargetable
 
     public void Attach()
     {
-        /*
-        if (!isAssembly && !isTarget)
-        {
-            UpdateState(PartState.Installed);
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                GameObject child = transform.GetChild(i).gameObject;
-                if (!child.TryGetComponent<JointPoint>(out _))
-                {
-                    child.SetActive(true);
-                }
-            }
-            return;
-        }
-        */
         UpdateState(PartState.Fixed);
         foreach (var item in GetComponentsInChildren<Collider>())
         {
@@ -74,30 +59,20 @@ public class Part : MonoBehaviour, ITargetable
         else Install();
     }
 
-    public void Detach(SelectEnterEventArgs e)
+    [ContextMenu("Detach request")]
+    public void DetachRequest() => DetachRequest(new SelectEnterEventArgs());
+    
+    public void DetachRequest(SelectEnterEventArgs e)
     {
         sInteractable.enabled = false;
         // animation
         UpdateState(PartState.Idle);
     }
 
-    public void DisassemblyInstall()
-    {
-        if (isAssembly) return;
-        UpdateState(PartState.Installed);
-        foreach (var item in GetComponentsInChildren<Collider>())
-        {
-            item.isTrigger = false;
-        }
-    }
-
-    private void Install()
+    public void Install(bool silent = false)
     {
         UpdateState(PartState.Installed);
-        foreach (var item in GetComponentsInChildren<Collider>())
-        {
-            item.isTrigger = false;
-        }
+        if (silent) return;
         audioCon.TryPlayClip("installed");
         StageController.OnPartInstalled.Invoke(new (this));
     }
@@ -112,13 +87,13 @@ public class Part : MonoBehaviour, ITargetable
     [ContextMenu("Test1")]
     public void Test1()
     {
-        OnSelectEvent(true);
+        Selected(true);
     }
 
     [ContextMenu("Test2")]
     public void Test2()
     {
-        OnSelectEvent(false);
+        Selected(false);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -197,15 +172,15 @@ public class Part : MonoBehaviour, ITargetable
         {
             sInteractable = gameObject.GetComponent<XRSimpleInteractable>();
             sInteractable.enabled = true;
-            sInteractable.selectEntered.AddListener(Detach);
+            sInteractable.selectEntered.AddListener(DetachRequest);
         }
         if (ProjectPreferences.instance.gameMode == GameMode.Training)
             outline.enabled = true;
     }
 
-    private void OnSelectEnter(SelectEnterEventArgs args) => OnSelectEvent(true);
+    private void OnSelectEnter(SelectEnterEventArgs args) => Selected(true);
 
-    private void OnSelectExit(SelectExitEventArgs args) => OnSelectEvent(false);
+    private void OnSelectExit(SelectExitEventArgs args) => Selected(false);
 
     public void WrongPartDisplay()
     {
@@ -226,7 +201,7 @@ public class Part : MonoBehaviour, ITargetable
         isHolding = true;
     }
 
-    private void OnSelectEvent(bool isSelected)
+    private void Selected(bool isSelected)
     {
         this.isSelected = isSelected;
         if (isSelected)

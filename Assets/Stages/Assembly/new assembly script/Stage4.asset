@@ -17,7 +17,6 @@ MonoBehaviour:
     \u043F\u0435\u0440\u0432\u043E\u0439 \u0441\u0442\u0443\u043F\u0435\u043D\u0438"
   goalType: 0
   target: {fileID: 11400000, guid: 43e0508d6de9ed5409648508e51d3f7d, type: 2}
-  initPartState: 0
   actionCode: 
   assistantClip: {fileID: 8300000, guid: ea82e82ab9684fa45b0229bee7186450, type: 3}
   assemblyType: 0

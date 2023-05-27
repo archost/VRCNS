@@ -1,6 +1,7 @@
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Events;
+using VREventArgs;
 
 [RequireComponent(typeof(Collider))]
 public class JointPoint : MonoBehaviour
@@ -22,7 +23,7 @@ public class JointPoint : MonoBehaviour
 
     private ArrowPositionOverride positionOverride;
 
-    public UnityAction<Part, Vector3, Quaternion, bool> OnPartAttached;
+    public UnityAction<PartAttachRequestEventArgs> OnPartAttachRequest;
 
     private void Awake()
     {
@@ -36,7 +37,7 @@ public class JointPoint : MonoBehaviour
         if (ArrowPrefab == null) Debug.LogError("No arrow prefab found!");
         Collider col = GetComponent<Collider>();
         if (col.isTrigger == false) Debug.LogError("Collider is not trigger!", gameObject);
-        arrowOffset = col.bounds.size.MaxComponent() / 2;        
+        arrowOffset = col.bounds.size.MaxComponent() / 2;
         ArrowSetup();
     }
 
@@ -65,7 +66,7 @@ public class JointPoint : MonoBehaviour
 
     public void ForceAttach(Part p, bool toFix = true)
     {
-        OnPartAttached?.Invoke(p, fixedPosition, fixedRotation, toFix);
+        OnPartAttachRequest?.Invoke(new(this, p, fixedPosition, fixedRotation, toFix));
         gameObject.SetActive(false);
         if (currArrow != null) Destroy(currArrow);
     }

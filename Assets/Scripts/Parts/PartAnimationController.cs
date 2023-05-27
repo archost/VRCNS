@@ -23,26 +23,9 @@ public class PartAnimationController : MonoBehaviour
         animator.enabled = true;
     }
 
-    // public InputActionProperty rightActivate;
-    // public InputActionProperty leftActivate;
-
     private void Update()
     {
         if (!animator.isActiveAndEnabled) return;
-
-        /*
-        bool isRightHovering = HandRayController.instance.IsRightHovering;
-        bool isLeftHovering = HandRayController.instance.IsLeftHovering;
-        
-            if ((isRightHovering && rightActivate.action.ReadValue<float>() > 0.1f) || (isLeftHovering && leftActivate.action.ReadValue<float>() > 0.1f))
-            {
-                animator.speed = 1;
-            }
-            else
-            {
-                animator.speed = 0;
-            }
-        */
 
         if (animator.GetBool("Play") == true)
         {

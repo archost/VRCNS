@@ -127,6 +127,12 @@ public class StartScreen : MonoBehaviour
         return group != "";
     }
 
+    [ContextMenu("Test DB")]
+    private void TestDB()
+    {
+        DB_main.instance.CallDB();
+    }
+
     public void NextStage()
     {
 

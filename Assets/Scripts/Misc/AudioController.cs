@@ -10,7 +10,7 @@ public class AudioController : MonoBehaviour
     [SerializeField]
     private List<AudioClipElement> clipElements;
 
-    private void Start()
+    private void Awake()
     {
         source = GetComponent<AudioSource>();
     }

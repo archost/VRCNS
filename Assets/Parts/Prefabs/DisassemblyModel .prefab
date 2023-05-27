@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c523359d898d0041abd78185e838c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 3
+  state: 2
   partData: {fileID: 11400000, guid: 29fda4f73986c514bb5272aa3076f326, type: 2}
   ignoreErrors: 1
 --- !u!95 &5556193710215530880

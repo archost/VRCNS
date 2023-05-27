@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using VREventArgs;
 
 public class PartAttacher : MonoBehaviour
 {
@@ -65,37 +66,29 @@ public class PartAttacher : MonoBehaviour
         return null;
     }
 
-    public void AttachPart(Part part, Vector3 offset, Quaternion rotation, bool toBeFixed)
+    public void PartAttachRequest(PartAttachRequestEventArgs e)
     {
-        if (toBeFixed)
+        if (e.ToBeInstalled)
         {
-            //Debug.Log($"Part attaching {part.PartID}");
-            //if (part.GrabInteractable != null) part.GrabInteractable.enabled = false;
-            part.transform.SetParent(transform);
-            part.transform.localPosition = offset;
-            part.transform.localEulerAngles = rotation.eulerAngles;
-            part.Attach();
-            OnPartAttached?.Invoke(part);
+            e.Part.transform.SetParent(transform);
+            e.Part.transform.localPosition = e.FixedPosition;
+            e.Part.transform.localEulerAngles = e.FixedRotation.eulerAngles;
+            e.Part.Attach();
+            OnPartAttached?.Invoke(e.Part);
         }
         else
         {
-            if (!ProjectPreferences.instance.IsAssembly)
-            {
-                part.DisassemblyInstall();
-                return;
-            }
-            part.transform.SetParent(transform);
-            part.transform.localPosition = offset;
-            part.transform.localEulerAngles = rotation.eulerAngles;
+            e.Part.transform.SetParent(transform);
+            e.Part.transform.localPosition = e.FixedPosition;
+            e.Part.transform.localEulerAngles = e.FixedRotation.eulerAngles;
         }
-
     }
 
     private void OnEnable()
     {
         foreach (var p in jointPoints)
         {
-            p.OnPartAttached += AttachPart;
+            p.OnPartAttachRequest += PartAttachRequest;
             p.gameObject.SetActive(false);
         }
     }
