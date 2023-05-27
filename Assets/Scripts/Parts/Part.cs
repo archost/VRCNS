@@ -17,9 +17,8 @@ public class Part : MonoBehaviour, ITargetable
     private PartAnimationController animationController;
     private XRSimpleInteractable sInteractable;
 
-    public XRGrabInteractable GrabInteractable { get; private set; }
+    private XRGrabInteractable grabInteractable;
 
-    //private PartPresenter partPresenter;
     private PartAttacher partAttacher;
 
     private Transform playerTransform;
@@ -67,7 +66,6 @@ public class Part : MonoBehaviour, ITargetable
         }
         */
         UpdateState(PartState.Fixed);
-        col.isTrigger = true;
         foreach (var item in GetComponentsInChildren<Collider>())
         {
             item.isTrigger = true;
@@ -81,25 +79,21 @@ public class Part : MonoBehaviour, ITargetable
         sInteractable.enabled = false;
         // animation
         UpdateState(PartState.Idle);
-        GrabInteractable.enabled = true;
     }
 
     public void DisassemblyInstall()
     {
         if (isAssembly) return;
         UpdateState(PartState.Installed);
-        col.isTrigger = false;
         foreach (var item in GetComponentsInChildren<Collider>())
         {
             item.isTrigger = false;
         }
-        if (GrabInteractable != null) GrabInteractable.enabled = false;
     }
 
-    public void Install()
+    private void Install()
     {
         UpdateState(PartState.Installed);
-        col.isTrigger = false;
         foreach (var item in GetComponentsInChildren<Collider>())
         {
             item.isTrigger = false;
@@ -139,7 +133,6 @@ public class Part : MonoBehaviour, ITargetable
             {
                 StageController.OnMadeMistake.Invoke(new (this));
             }
-            //Debug.Log($"Current floor collides: {floorCollideCounter}");
         }
     }
 
@@ -159,18 +152,20 @@ public class Part : MonoBehaviour, ITargetable
 
         audioCon = GetComponent<AudioController>();
         animationController = GetComponent<PartAnimationController>();
-        GrabInteractable = GetComponent<XRGrabInteractable>();
+        grabInteractable = GetComponent<XRGrabInteractable>();
         col = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
         outline = gameObject.AddComponent<Outline>();
         partAttacher = GetComponent<PartAttacher>();
 
+        outline.enabled = false;
+
         UpdateState(state);
 
-        if (GrabInteractable != null)
+        if (grabInteractable != null)
         {
-            GrabInteractable.firstSelectEntered.AddListener(OnSelectEnter);
-            GrabInteractable.lastSelectExited.AddListener(OnSelectExit);
+            grabInteractable.firstSelectEntered.AddListener(OnSelectEnter);
+            grabInteractable.lastSelectExited.AddListener(OnSelectExit);
         }
     }
 
@@ -193,25 +188,9 @@ public class Part : MonoBehaviour, ITargetable
         }
     }
 
-    private void ProcessSetTarget(GameAssemblyType assemblyType, PartState? newState)
-    {
-        if (newState != null) UpdateState(newState.Value);
-        isTarget = true;
-        isAssembly = assemblyType == GameAssemblyType.Assembly;
-        if (!isAssembly)
-        {
-            sInteractable = gameObject.GetComponent<XRSimpleInteractable>();
-            sInteractable.enabled = true;
-            sInteractable.selectEntered.AddListener(Detach);
-        }
-        if (ProjectPreferences.instance.gameMode == GameMode.Training)
-            outline.enabled = true;
-    }
-
     public void SetAsTarget(TargetSetEventArgs e)
     {
         var args = e as PartSetAsTargetEventArgs;
-        if (args.NewState != null) UpdateState(args.NewState.Value);
         isTarget = true;
         isAssembly = args.AssemblyType == GameAssemblyType.Assembly;
         if (!isAssembly)
@@ -245,7 +224,6 @@ public class Part : MonoBehaviour, ITargetable
     {
         if (!isSelected) return;
         isHolding = true;
-        //col.isTrigger = false;
     }
 
     private void OnSelectEvent(bool isSelected)
@@ -275,22 +253,21 @@ public class Part : MonoBehaviour, ITargetable
         {
             case PartState.Idle:
                 rb.isKinematic = false;
-                outline.enabled = false;
-                break;
-            case PartState.Holding:
-                rb.isKinematic = false;
-                outline.enabled = false;
+                col.isTrigger = false;
+                if (grabInteractable != null) grabInteractable.enabled = true;
                 break;
             case PartState.Fixed:
                 rb.isKinematic = true;
-                outline.enabled = false;
+                col.isTrigger = true;
+                if (grabInteractable != null) grabInteractable.enabled = false;
                 break;
             case PartState.Installed:
                 rb.isKinematic = true;
-                outline.enabled = false;
+                col.isTrigger = false;
+                if (grabInteractable != null) grabInteractable.enabled = false;
                 break;
             default:
-                Debug.LogError("Wrong newState type");
+                Debug.LogError("Wrong newState type", this.gameObject);
                 return;
         }
     }
@@ -299,7 +276,6 @@ public class Part : MonoBehaviour, ITargetable
 public enum PartState
 {
     Idle,
-    Holding,
     Fixed,
     Installed
 }

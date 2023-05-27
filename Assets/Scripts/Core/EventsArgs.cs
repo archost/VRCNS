@@ -57,15 +57,12 @@ namespace VREventArgs
     {
         public PartData TargetData { get; private set; }
 
-        public PartState? NewState { get; private set; }
-
         public GameAssemblyType AssemblyType { get; private set; }
 
-        public PartSetAsTargetEventArgs(object sender, PartData targetData, GameAssemblyType assemblyType, PartState? newState = null) : base(sender)
+        public PartSetAsTargetEventArgs(object sender, PartData targetData, GameAssemblyType assemblyType) : base(sender)
         {
             TargetData = targetData;
             AssemblyType = assemblyType;
-            NewState = newState;
         }
     }
 

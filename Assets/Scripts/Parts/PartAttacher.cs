@@ -70,7 +70,7 @@ public class PartAttacher : MonoBehaviour
         if (toBeFixed)
         {
             //Debug.Log($"Part attaching {part.PartID}");
-            if (part.GrabInteractable != null) part.GrabInteractable.enabled = false;
+            //if (part.GrabInteractable != null) part.GrabInteractable.enabled = false;
             part.transform.SetParent(transform);
             part.transform.localPosition = offset;
             part.transform.localEulerAngles = rotation.eulerAngles;

@@ -15,8 +15,6 @@ public class Stage : ScriptableObject
 
     public PartData target;
 
-    public PartState initPartState = PartState.Idle;
-
     public string actionCode = string.Empty;
 
     public AudioClip assistantClip = null;
@@ -62,8 +60,6 @@ public class Stage : ScriptableObject
             if (stage.goalType == StageGoalType.PartPlacing)
             {
                 stage.target = EditorGUILayout.ObjectField("Target Part", stage.target, typeof(PartData), false) as PartData;
-
-                stage.initPartState = (PartState)EditorGUILayout.EnumPopup("Init Part State", stage.initPartState);
 
                 stage.assemblyType = (GameAssemblyType)EditorGUILayout.EnumPopup("Assembly Type", stage.assemblyType);
             }

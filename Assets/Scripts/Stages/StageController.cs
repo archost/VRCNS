@@ -190,7 +190,7 @@ public class StageController : MonoBehaviour
                     errorHappened = false;
                     partFactory.ToogleSuitablePoints(CurrentStage.assemblyType, CurrentStage.target);
                     partFactory.SetPartAsTarget(new PartSetAsTargetEventArgs(this, 
-                        CurrentStage.target, CurrentStage.assemblyType, CurrentStage.initPartState));
+                        CurrentStage.target, CurrentStage.assemblyType));
                 }
                 else if (CurrentStage.goalType == StageGoalType.Action)
                 {
