@@ -10,32 +10,60 @@ public class PartAnimationController : MonoBehaviour
 {
     private Animator animator;
 
-    private void Awake()
+    private AnimationClip asmClip;
+
+    private AnimationClip disasmClip;
+
+    public void Init(PartData data)
     {
         animator = GetComponent<Animator>();
+        asmClip = data.assemblyClip;
+        disasmClip = data.disassemblyClip;
         animator.enabled = false;
-        enabled = false;
     }
 
-    public void ToogleAnimator()
+    public void PlayAnimation(PartAnimationType animType)
     {
-        enabled = true;
+        if (!animator.isActiveAndEnabled) EnableAnimator();
+        switch (animType)
+        {
+            case PartAnimationType.None:
+                return;
+            case PartAnimationType.Assembly:
+                if (asmClip == null)
+                {
+                    Debug.LogError("No Assembly clip on this Part!", gameObject);
+                    break;
+                }
+                animator.Play(asmClip.name);
+                break;
+            case PartAnimationType.Disassembly:
+                if (disasmClip == null)
+                {
+                    Debug.LogError("No Disassembly clip on this Part!", gameObject);
+                    break;
+                }
+                animator.Play(disasmClip.name);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void EnableAnimator()
+    {
         animator.enabled = true;
     }
 
-    private void Update()
+    public void DisableAnimator()
     {
-        if (!animator.isActiveAndEnabled) return;
+        animator.enabled = false;
+    }
 
-        if (animator.GetBool("Play") == true)
-        {
-            //костыль 10/10
-            animator.speed = 1;
-            
-        }
-        else
-        {
-            animator.speed = 0;
-        }
+    public enum PartAnimationType
+    {
+        None,
+        Assembly,
+        Disassembly
     }
 }

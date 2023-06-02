@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,7 +56,7 @@ public class Part : MonoBehaviour, ITargetable
         {
             item.isTrigger = true;
         }
-        if (animationController != null) animationController.ToogleAnimator();
+        if (animationController != null && isAssembly) animationController.PlayAnimation(PartAnimationController.PartAnimationType.Assembly);
         else Install();
     }
 
@@ -65,23 +66,33 @@ public class Part : MonoBehaviour, ITargetable
     public void DetachRequest(SelectEnterEventArgs e)
     {
         sInteractable.enabled = false;
-        // animation
-        UpdateState(PartState.Idle);
+        UpdateState(PartState.Fixed);
+        if (animationController != null) animationController.PlayAnimation(PartAnimationController.PartAnimationType.Disassembly);
+        else Detach();
+    }
+
+    private void Detach()
+    {
+        UpdateState(PartState.Await);
     }
 
     public void Install(bool silent = false)
     {
         UpdateState(PartState.Installed);
         if (silent) return;
+        outline.enabled = false;
+        isTarget = false;
         audioCon.TryPlayClip("installed");
         StageController.OnPartInstalled.Invoke(new (this));
     }
 
     public void AnimationFinished()
-    {
-        isTarget = false;
-        outline.enabled = false;
-        Install();
+    {     
+        animationController.DisableAnimator();
+        if (isAssembly)
+            Install();
+        else
+            Detach();
     }
 
     [ContextMenu("Test1")]
@@ -127,6 +138,7 @@ public class Part : MonoBehaviour, ITargetable
 
         audioCon = GetComponent<AudioController>();
         animationController = GetComponent<PartAnimationController>();
+        animationController.Init(partData);
         grabInteractable = GetComponent<XRGrabInteractable>();
         col = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
@@ -173,6 +185,11 @@ public class Part : MonoBehaviour, ITargetable
             sInteractable = gameObject.GetComponent<XRSimpleInteractable>();
             sInteractable.enabled = true;
             sInteractable.selectEntered.AddListener(DetachRequest);
+        }
+        else
+        {
+            if (state != PartState.Idle)
+                UpdateState(PartState.Idle);
         }
         if (ProjectPreferences.instance.gameMode == GameMode.Training)
             outline.enabled = true;
@@ -241,6 +258,11 @@ public class Part : MonoBehaviour, ITargetable
                 col.isTrigger = false;
                 if (grabInteractable != null) grabInteractable.enabled = false;
                 break;
+            case PartState.Await:
+                rb.isKinematic = true;
+                col.isTrigger = false;
+                if (grabInteractable != null) grabInteractable.enabled = true;
+                break;
             default:
                 Debug.LogError("Wrong newState type", this.gameObject);
                 return;
@@ -252,5 +274,6 @@ public enum PartState
 {
     Idle,
     Fixed,
-    Installed
+    Installed,
+    Await
 }

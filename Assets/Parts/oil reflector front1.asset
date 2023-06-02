@@ -25,4 +25,6 @@ MonoBehaviour:
     \u0432\u043D\u0443\u0442\u0440\u044C \u043F\u043E\u0434\u0448\u0438\u043F\u043D\u0438\u043A\u0430.
     \u041F\u0440\u0435\u0434\u043E\u0442\u0432\u0440\u0430\u0449\u0430\u0435\u0442
     \u043E\u0431\u0432\u043E\u0434\u043D\u0435\u043D\u0438\u0435 \u043C\u0430\u0441\u043B\u0430. "
+  assemblyClip: {fileID: 7400000, guid: 7e95824f5a8cd59419321a59af0b6f3e, type: 2}
+  disassemblyClip: {fileID: 0}
   videoClip: {fileID: 32900000, guid: c0cd1fb44cf429a46b57436a330d0ba6, type: 3}

@@ -5741,6 +5741,7 @@ MonoBehaviour:
   disassemblyScenario:
     stagesList:
     - {fileID: 11400000, guid: 91813ff72c263954bb5240e6ab4a82fa, type: 2}
+    - {fileID: 11400000, guid: 3ac669fa3f0b78d44b0f6ef4334c7502, type: 2}
     spawnList:
     - partPrefab: {fileID: 7836932683389333028, guid: 202aa5750eabbc445acfe90f8112714d,
         type: 3}

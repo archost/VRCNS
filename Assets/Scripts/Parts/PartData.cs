@@ -12,5 +12,9 @@ public class PartData : ScriptableObject
 
     public string Description;
 
+    public AnimationClip assemblyClip;
+
+    public AnimationClip disassemblyClip;
+
     public VideoClip videoClip;
 }
