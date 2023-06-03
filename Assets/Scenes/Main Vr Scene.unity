@@ -4251,7 +4251,7 @@ MonoBehaviour:
   wrongOutlineColor: {r: 1, g: 0, b: 0, a: 1}
   outlineWidth: 5
   gameMode: 0
-  assemblyType: 1
+  assemblyType: 0
   multiErrorAllowed: 1
   maxScore: 25
   VRTesting: 1

@@ -62,7 +62,7 @@ public class Part : MonoBehaviour, ITargetable
 
     [ContextMenu("Detach request")]
     public void DetachRequest() => DetachRequest(new SelectEnterEventArgs());
-    
+
     public void DetachRequest(SelectEnterEventArgs e)
     {
         sInteractable.enabled = false;
@@ -83,11 +83,11 @@ public class Part : MonoBehaviour, ITargetable
         outline.enabled = false;
         isTarget = false;
         audioCon.TryPlayClip("installed");
-        StageController.OnPartInstalled.Invoke(new (this));
+        StageController.OnPartInstalled.Invoke(new(this));
     }
 
     public void AnimationFinished()
-    {     
+    {
         animationController.DisableAnimator();
         if (isAssembly)
             Install();
@@ -117,7 +117,7 @@ public class Part : MonoBehaviour, ITargetable
                 Debug.Log("This fall doesn't count", this.gameObject);
             else
             {
-                StageController.OnMadeMistake.Invoke(new (this));
+                StageController.OnMadeMistake.Invoke(new(this));
             }
         }
     }
@@ -220,6 +220,9 @@ public class Part : MonoBehaviour, ITargetable
 
     private void Selected(bool isSelected)
     {
+        if (!isSelected && state == PartState.Await)
+            UpdateState(PartState.Idle);
+        
         this.isSelected = isSelected;
         if (isSelected)
         {
