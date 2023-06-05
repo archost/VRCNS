@@ -22,14 +22,12 @@ public class PartAnimationController : MonoBehaviour
         animator.enabled = false;
     }
 
-    public void PlayAnimation(PartAnimationType animType)
+    public void PlayAnimation(GameAssemblyType animType)
     {
         if (!animator.isActiveAndEnabled) EnableAnimator();
         switch (animType)
         {
-            case PartAnimationType.None:
-                return;
-            case PartAnimationType.Assembly:
+            case GameAssemblyType.Assembly:
                 if (asmClip == null)
                 {
                     Debug.LogError("No Assembly clip on this Part!", gameObject);
@@ -37,7 +35,7 @@ public class PartAnimationController : MonoBehaviour
                 }
                 animator.Play(asmClip.name);
                 break;
-            case PartAnimationType.Disassembly:
+            case GameAssemblyType.Disassembly:
                 if (disasmClip == null)
                 {
                     Debug.LogError("No Disassembly clip on this Part!", gameObject);
@@ -58,12 +56,5 @@ public class PartAnimationController : MonoBehaviour
     public void DisableAnimator()
     {
         animator.enabled = false;
-    }
-
-    public enum PartAnimationType
-    {
-        None,
-        Assembly,
-        Disassembly
     }
 }

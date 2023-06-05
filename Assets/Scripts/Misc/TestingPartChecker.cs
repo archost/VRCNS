@@ -9,12 +9,11 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
 
     public void Init(StageController sc)
     {
-        if(!ProjectPreferences.instance.IsTesting)
+        if (ProjectPreferences.instance.IsTesting)
         {
+            sc.OnStageSwitch += SwitchTarget;
             gameObject.SetActive(false);
-            return;
-        }
-        sc.OnStageSwitch += SwitchTarget;
+        }      
     }
 
     private void SwitchTarget(Stage stage)
@@ -30,7 +29,7 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
         {
             if (p.PartID != currentPartID)
             {
-                if (p.IgnoreErrors) return;
+                if (p.IsInstalled) return;
                 /* Баг: можно во время установки одной детали пронести в рабочую
                  зону неправильные детали, и за это не будет штрафа */
                 if (!lastCorrectPart || !lastCorrectPart.IsFixed)

@@ -21,6 +21,8 @@ public class Stage : ScriptableObject
 
     public GameAssemblyType assemblyType = 0;
 
+    public Question question = null;
+
 #if UNITY_EDITOR
     [CustomEditor(typeof(Stage))]
     public class StageEditor : Editor
@@ -62,6 +64,12 @@ public class Stage : ScriptableObject
                 stage.target = EditorGUILayout.ObjectField("Target Part", stage.target, typeof(PartData), false) as PartData;
 
                 stage.assemblyType = (GameAssemblyType)EditorGUILayout.EnumPopup("Assembly Type", stage.assemblyType);
+                if (stage.assemblyType == GameAssemblyType.Disassembly)
+                {
+                    EditorGUI.indentLevel++;
+                    stage.question = EditorGUILayout.ObjectField("Test question", stage.question, typeof(Question), false) as Question;
+                    EditorGUI.indentLevel--;
+                }
             }
             else if (stage.goalType == StageGoalType.Action)
             {

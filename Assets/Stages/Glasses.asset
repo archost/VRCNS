@@ -16,6 +16,7 @@ MonoBehaviour:
   description: "\u041D\u0430\u0434\u0435\u0442\u044C \u043E\u0447\u043A\u0438"
   goalType: 1
   target: {fileID: 0}
-  initPartState: 0
   actionCode: glasses
   assistantClip: {fileID: 0}
+  assemblyType: 0
+  question: {fileID: 0}

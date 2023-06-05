@@ -63,9 +63,9 @@ public class Player : MonoBehaviour
         return true;
     }
 
-    public void PlayMistake()
+    public void PlaySound(string clip)
     {
-        ac.PlayClip("mistake");
+        ac.TryPlayClip(clip);
     }
 
     private void CheckReady()

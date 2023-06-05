@@ -17,6 +17,8 @@ public class StageController : MonoBehaviour
 
     public static UnityAction<PartSelectedEventArgs> OnPartSelected;
 
+    public static UnityAction<PartClickedEventArgs> OnPartClicked;
+
     private ScenarioController scCon;
 
     private Player player;
@@ -28,6 +30,9 @@ public class StageController : MonoBehaviour
 
     [SerializeField]
     private Assistant assistant;
+
+    [SerializeField]
+    private Questionnaire questionnaire;
 
     [SerializeField]
     private ResultBoard ResultBoard;
@@ -79,6 +84,7 @@ public class StageController : MonoBehaviour
         OnMadeMistake += Mistake;
         OnPartSelected += PartSelected;
         OnActionTaken += ActionTaken;
+        OnPartClicked += PartClicked;
 
         actionHandlers = FindObjectsOfType<ActionHandler>();
 
@@ -86,6 +92,19 @@ public class StageController : MonoBehaviour
         stages.AddRange(scenario.stagesList);
 
         StartCoroutine(InitScene());
+    }
+
+    private void PartClicked(PartClickedEventArgs e)
+    {
+        if (CurrentStage.question == null)
+            e.Part.DetachAnimationPlay();
+        else
+        {
+            questionnaire.SetPosition(e.Part.transform.position);
+            questionnaire.SetQuestion(CurrentStage.question);
+            questionnaire.OnQuestionAnswered += e.Part.DetachAnimationPlay;
+            player.PlaySound("notification");
+        }
     }
 
     private void PartInstalled(PartInstalledEventArgs e)
@@ -145,24 +164,13 @@ public class StageController : MonoBehaviour
         score = Mathf.Clamp(score - 1, 0, 100);
         errorHappened = true;
         errorStages.Add(CurrentStage);
-        player.PlayMistake();
+        player.PlaySound("mistake");
         OnScoreChanged?.Invoke(score);
     }
 
     public void RestartScene()
     {
         SceneManager.LoadScene(1);
-    }
-
-    public void OnMistake()
-    {
-        if (ProjectPreferences.instance.IsTraining) return;
-        if (!ProjectPreferences.instance.multiErrorAllowed && errorHappened) return;
-        score = Mathf.Clamp(score - 1, 0, 100);
-        errorHappened = true;
-        errorStages.Add(CurrentStage);
-        player.PlayMistake();
-        OnScoreChanged?.Invoke(score);
     }
 
     private void PartSelected(PartSelectedEventArgs e)

@@ -94,4 +94,14 @@ namespace VREventArgs
             ToBeInstalled = toInstall;
         }
     }
+
+    public class PartClickedEventArgs : EventArgs
+    {
+        public Part Part { get; private set; }
+
+        public PartClickedEventArgs(object sender, Part invoker) : base(sender)
+        {
+            Part = invoker;
+        }
+    }
 }

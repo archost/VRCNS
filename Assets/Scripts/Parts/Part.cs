@@ -36,18 +36,15 @@ public class Part : MonoBehaviour, ITargetable
 
     public int PartID { get; private set; }
 
-    public bool IgnoreErrors => ignoreErrors;
-
     public bool IsFixed => state == PartState.Fixed;
+
+    public bool IsInstalled => state == PartState.Installed;
 
     [SerializeField]
     private PartState state;
 
     [SerializeField]
     private PartData partData;
-
-    [SerializeField]
-    private bool ignoreErrors;
 
     public void Attach()
     {
@@ -56,7 +53,7 @@ public class Part : MonoBehaviour, ITargetable
         {
             item.isTrigger = true;
         }
-        if (animationController != null && isAssembly) animationController.PlayAnimation(PartAnimationController.PartAnimationType.Assembly);
+        if (animationController != null && isAssembly) animationController.PlayAnimation(GameAssemblyType.Assembly);
         else Install();
     }
 
@@ -67,7 +64,12 @@ public class Part : MonoBehaviour, ITargetable
     {
         sInteractable.enabled = false;
         UpdateState(PartState.Fixed);
-        if (animationController != null) animationController.PlayAnimation(PartAnimationController.PartAnimationType.Disassembly);
+        StageController.OnPartClicked.Invoke(new(this, this));
+    }
+
+    public void DetachAnimationPlay()
+    {
+        if (animationController != null) animationController.PlayAnimation(GameAssemblyType.Disassembly);
         else Detach();
     }
 
