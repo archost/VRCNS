@@ -56050,7 +56050,7 @@ MonoBehaviour:
   - {fileID: 2069750845}
   - {fileID: 1709762293}
   - {fileID: 527477894}
-  multiErrorAllowed: 1
+  multiErrorAllowed: 0
   height: 1.5
   mistakeColor: {r: 0.6415094, g: 0.015129937, b: 0.015129937, a: 1}
   correctColor: {r: 0.042066943, g: 0.5660378, b: 0.013349946, a: 1}

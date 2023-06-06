@@ -96,7 +96,7 @@ public class StageController : MonoBehaviour
 
     private void PartClicked(PartClickedEventArgs e)
     {
-        if (CurrentStage.question == null)
+        if (CurrentStage.question == null || ProjectPreferences.instance.IsTraining)
             e.Part.DetachAnimationPlay();
         else
         {
