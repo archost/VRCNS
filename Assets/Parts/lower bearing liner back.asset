@@ -24,5 +24,5 @@ MonoBehaviour:
     \u0432\u0435\u043B\u0438\u0447\u0438\u043D\u0443 \xAB\u0440\u0430\u0437\u0431\u0435\u0433\u0430\xBB
     \u0440\u043E\u0442\u043E\u0440\u0430.  "
   assemblyClip: {fileID: 7400000, guid: 2648f1434346a6d468fcb0d3c15bb2ce, type: 2}
-  disassemblyClip: {fileID: 0}
+  disassemblyClip: {fileID: 7400000, guid: 787662eed2cf47248a69612c6473f5fc, type: 2}
   videoClip: {fileID: 0}

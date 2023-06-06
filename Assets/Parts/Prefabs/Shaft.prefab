@@ -179,7 +179,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   partData: {fileID: 11400000, guid: 2e606187a995f5446b46325d630cea7e, type: 2}
-  ignoreErrors: 0
 --- !u!114 &948891360909170271
 MonoBehaviour:
   m_ObjectHideFlags: 0
