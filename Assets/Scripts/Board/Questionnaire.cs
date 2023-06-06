@@ -86,7 +86,6 @@ public class Questionnaire : MonoBehaviour
                 if (button.image.color == Color.white) button.image.color = button.colors.normalColor;
             }
             optionsButton[index].image.color = correctColor;
-            OnQuestionAnswered?.Invoke();
         }
         else 
         {
@@ -106,6 +105,7 @@ public class Questionnaire : MonoBehaviour
                 optionsButton[currentQuestion.correctOption].image.color = correctColor;
             }
         }
+        OnQuestionAnswered?.Invoke();
         Invoke(nameof(Hide), 3f);
     }
 

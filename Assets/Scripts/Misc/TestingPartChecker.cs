@@ -11,9 +11,10 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
     {
         if (ProjectPreferences.instance.IsTesting)
         {
-            sc.OnStageSwitch += SwitchTarget;
+            sc.OnStageSwitch += SwitchTarget;            
+        }
+        else
             gameObject.SetActive(false);
-        }      
     }
 
     private void SwitchTarget(Stage stage)
