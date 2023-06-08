@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 7
   description: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043A\u0440\u044B\u0448\u043A\u0443
-    \u043D\u0430\u043F\u043E\u0440\u043D\u0443\u044E \u043D\u0430 \u0440\u043E\u0442\u043E\u0440"
+    \u043D\u0430\u043F\u043E\u0440\u043D\u0443\u044E"
   goalType: 0
   target: {fileID: 11400000, guid: 21dd25da31dae6e47a6752ef4a6a174b, type: 2}
   actionCode: 
   assistantClip: {fileID: 8300000, guid: 7650aca10d641d844b7721e2dd560449, type: 3}
   assemblyType: 0
+  question: {fileID: 0}
