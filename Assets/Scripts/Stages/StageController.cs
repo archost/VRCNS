@@ -47,7 +47,7 @@ public class StageController : MonoBehaviour
 
     private int currentStageIndex = -1;
 
-    private List<Stage> errorStages;
+    private List<MistakeEventArgs> mistakesList;
 
     private int score = 0;
 
@@ -96,7 +96,7 @@ public class StageController : MonoBehaviour
 
     private void PartClicked(PartClickedEventArgs e)
     {
-        if (CurrentStage.question == null || ProjectPreferences.instance.IsTraining)
+        if (CurrentStage.question == null)
             e.Part.DetachAnimationPlay();
         else
         {
@@ -143,7 +143,7 @@ public class StageController : MonoBehaviour
         if (ProjectPreferences.instance.IsTesting)
         {
             errorHappened = false;
-            errorStages = new List<Stage>();
+            mistakesList = new();
             score = ProjectPreferences.instance.maxScore;
             OnScoreChanged?.Invoke(score);
         }
@@ -160,10 +160,11 @@ public class StageController : MonoBehaviour
     {
         if (ProjectPreferences.instance.IsTraining) return;
         if (!ProjectPreferences.instance.multiErrorAllowed && errorHappened) return;
-        Debug.Log($"Made a mistake! (new score - {score - 1})!");
+        e.Stage = CurrentStage;
         score = Mathf.Clamp(score - 1, 0, 100);
+        Debug.Log($"{e.Display()} (Баллы - {score})!");
         errorHappened = true;
-        errorStages.Add(CurrentStage);
+        mistakesList.Add(e);
         player.PlaySound("mistake");
         OnScoreChanged?.Invoke(score);
     }
@@ -227,6 +228,10 @@ public class StageController : MonoBehaviour
         };
 
         FindObjectOfType<TeleportationProvider>().QueueTeleportRequest(tr);
+        foreach (var m in mistakesList)
+        {
+            Debug.Log($"Ошибка на \"{m.Stage.description}\": {m.Display()}");
+        }
         ResultBoard.InitWindow(this);
     }
 

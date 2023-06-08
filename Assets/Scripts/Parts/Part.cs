@@ -36,6 +36,8 @@ public class Part : MonoBehaviour, ITargetable
 
     public int PartID { get; private set; }
 
+    public PartData PartData => partData;
+
     public bool IsFixed => state == PartState.Fixed;
 
     public bool IsInstalled => state == PartState.Installed;
@@ -119,7 +121,7 @@ public class Part : MonoBehaviour, ITargetable
                 Debug.Log("This fall doesn't count", this.gameObject);
             else
             {
-                StageController.OnMadeMistake.Invoke(new(this));
+                StageController.OnMadeMistake.Invoke(new PartFellEventArgs(this, partData.PartName));
             }
         }
     }

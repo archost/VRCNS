@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using VREventArgs;
 
 public class TestingPartChecker : MonoBehaviour, ISCInit
 {
@@ -37,7 +38,7 @@ public class TestingPartChecker : MonoBehaviour, ISCInit
                 {
                     Debug.Log("Incorrect part!");
                     p.WrongPartDisplay();
-                    StageController.OnMadeMistake(new(this));
+                    StageController.OnMadeMistake(new IncorrectPartSequenceEventArgs(this, p.PartData.PartName));
                 }               
             }
             else

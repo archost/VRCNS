@@ -5899,10 +5899,6 @@ MonoBehaviour:
         type: 3}
       point: {fileID: 543897627}
       spawnState: 2
-    - partPrefab: {fileID: 8666541803612842621, guid: f1f94c917f7092b4c9bc699819eec213,
-        type: 3}
-      point: {fileID: 1836731194}
-      spawnState: 0
 --- !u!114 &233036451
 MonoBehaviour:
   m_ObjectHideFlags: 0

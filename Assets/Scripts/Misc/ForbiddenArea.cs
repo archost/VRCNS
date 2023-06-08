@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
+using VREventArgs;
 
 public class ForbiddenArea : MonoBehaviour, ISCInit
 {
@@ -24,7 +24,7 @@ public class ForbiddenArea : MonoBehaviour, ISCInit
     {
         if (other.gameObject.TryGetComponent<Player>(out var p))
         {
-            StageController.OnMadeMistake(new(this));
+            StageController.OnMadeMistake(new ForbiddenAreaEventArgs(this));
         }
     }
 }

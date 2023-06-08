@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Text;
 using UnityEngine.Events;
+using VREventArgs;
 
 public class Questionnaire : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class Questionnaire : MonoBehaviour
     private void Awake()
     {
         pl = Camera.main.transform;
+
+        multiErrorAllowed = ProjectPreferences.instance.IsTraining;
 
         optionsText = new TextMeshProUGUI[optionsButton.Length];
         for (int i = 0; i < optionsButton.Length; i++)
@@ -89,7 +92,7 @@ public class Questionnaire : MonoBehaviour
         }
         else 
         {
-            StageController.OnMadeMistake.Invoke(new(this));            
+            StageController.OnMadeMistake.Invoke(new QuestionnaireEventArgs(this, currentQuestion, index));            
             if (multiErrorAllowed)
             {
                 optionsButton[index].interactable = false;

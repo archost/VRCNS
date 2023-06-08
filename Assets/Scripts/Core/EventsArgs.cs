@@ -19,7 +19,75 @@ namespace VREventArgs
 
     public class MistakeEventArgs : EventArgs
     {
-        public MistakeEventArgs(object sender) : base(sender) { }
+        public Stage Stage { get; set; }
+
+        public virtual string Display()
+        {
+            return "Some mistake on stage " + Stage.ID;
+        }
+
+        public MistakeEventArgs(object sender) : base(sender) 
+        { 
+        }
+    }
+
+    public class PartFellEventArgs : MistakeEventArgs
+    {
+        public string PartName { get; private set; }
+
+        public override string Display()
+        {
+            return "Деталь " + PartName + " упала.";
+        }
+
+        public PartFellEventArgs(object sender, string partName) : base(sender)
+        {
+            PartName = partName;
+        }
+    }
+
+    public class IncorrectPartSequenceEventArgs : MistakeEventArgs
+    {
+        public override string Display()
+        {
+            return "На этапе \"" + Stage.description + "\" была поднесена деталь " + PartName + ".";
+        }
+
+        public string PartName { get; private set; }
+
+        public IncorrectPartSequenceEventArgs(object sender, string partName) : base(sender)
+        {
+            PartName = partName;
+        }
+    }
+
+    public class ForbiddenAreaEventArgs : MistakeEventArgs
+    {
+        public override string Display()
+        {
+            return "Прохождение к рабочей секции не по дорожке.";
+        }
+
+        public ForbiddenAreaEventArgs(object sender) : base(sender) { }
+    }
+
+    public class QuestionnaireEventArgs : MistakeEventArgs
+    {
+        public Question Question { get; private set; }
+
+        public int ChoosedOption { get; private set; }
+
+        public override string Display()
+        {
+            return $"На вопрос \"{Question.questionDescription}\" дан неверный ответ - {Question.options[ChoosedOption]}. " +
+                $"(Правильный ответ - {Question.options[Question.correctOption]})";
+        }
+
+        public QuestionnaireEventArgs(object sender, Question question, int choosedOption) : base(sender)
+        {
+            Question = question;
+            ChoosedOption = choosedOption;
+        }
     }
 
     public class PartSelectedEventArgs : EventArgs
