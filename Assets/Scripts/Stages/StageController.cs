@@ -177,7 +177,7 @@ public class StageController : MonoBehaviour
     private void PartSelected(PartSelectedEventArgs e)
     {
         if (ProjectPreferences.instance.IsTesting) return;
-        if (e.IsSelected) 
+        if (e.IsSelected)
         {
             partHelper.SetTarget(e.PartTransform, e.PartData);
         }
@@ -198,7 +198,7 @@ public class StageController : MonoBehaviour
                 {
                     errorHappened = false;
                     partFactory.ToogleSuitablePoints(CurrentStage.assemblyType, CurrentStage.target);
-                    partFactory.SetPartAsTarget(new PartSetAsTargetEventArgs(this, 
+                    partFactory.SetPartAsTarget(new PartSetAsTargetEventArgs(this,
                         CurrentStage.target, CurrentStage.assemblyType));
                 }
                 else if (CurrentStage.goalType == StageGoalType.Action)
@@ -228,10 +228,9 @@ public class StageController : MonoBehaviour
         };
 
         FindObjectOfType<TeleportationProvider>().QueueTeleportRequest(tr);
-        foreach (var m in mistakesList)
-        {
-            Debug.Log($"Ошибка на \"{m.Stage.description}\": {m.Display()}");
-        }
+        if (mistakesList != null)
+            foreach (var m in mistakesList)
+                Debug.Log($"Ошибка на \"{m.Stage.description}\": {m.Display()}");
         ResultBoard.InitWindow(this);
     }
 

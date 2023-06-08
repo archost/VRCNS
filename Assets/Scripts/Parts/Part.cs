@@ -64,6 +64,7 @@ public class Part : MonoBehaviour, ITargetable
 
     public void DetachRequest(SelectEnterEventArgs e)
     {
+        if (!isTarget) return;
         sInteractable.enabled = false;
         UpdateState(PartState.Fixed);
         StageController.OnPartClicked.Invoke(new(this, this));
@@ -146,7 +147,7 @@ public class Part : MonoBehaviour, ITargetable
         grabInteractable = GetComponent<XRGrabInteractable>();
         col = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
-        outline = gameObject.AddComponent<Outline>();
+        if (!gameObject.TryGetComponent(out outline)) outline = gameObject.AddComponent<Outline>();
         partAttacher = GetComponent<PartAttacher>();
 
         outline.enabled = false;
