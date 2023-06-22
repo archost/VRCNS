@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4044633af4df36b4d8451c8336d6d921, type: 3}
   m_Name: Stage 11
   m_EditorClassIdentifier: 
-  ID: 11
+  ID: 12
   description: "\u0412\u044B\u043D\u0443\u0442\u044C \u0441\u0442\u044F\u0436\u043D\u044B\u0435
     \u0448\u043F\u0438\u043B\u044C\u043A\u0438"
   goalType: 0

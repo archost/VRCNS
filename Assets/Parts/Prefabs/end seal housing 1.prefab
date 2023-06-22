@@ -1964,7 +1964,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e20666bec1ae2eb4c80e03cda2a660f8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0852
+      value: 0.093
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e20666bec1ae2eb4c80e03cda2a660f8,
         type: 3}
@@ -2015,6 +2015,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: oil seal housing rear
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e20666bec1ae2eb4c80e03cda2a660f8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e20666bec1ae2eb4c80e03cda2a660f8, type: 3}

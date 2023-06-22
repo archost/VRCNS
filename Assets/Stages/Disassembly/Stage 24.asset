@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Stage 24
   m_EditorClassIdentifier: 
   ID: 24
-  description: "\u0418\u0437\u0432\u043B\u0435\u0447\u044C \u0440\u043E\u0442\u043E\u0440"
+  description: "\u0421\u043D\u044F\u0442\u044C \u043A\u043E\u0440\u043F\u0443\u0441
+    \u0441\u0430\u043B\u044C\u043D\u0438\u043A\u043E\u0432\u043E\u0433\u043E \u0443\u043F\u043B\u043E\u0442\u043D\u0435\u043D\u0438\u044F
+    \u0441\u043E \u0441\u0442\u043E\u0440\u043E\u043D\u044B \u0432\u0441\u0430\u0441\u044B\u0432\u0430\u043D\u0438\u044F"
   goalType: 0
-  target: {fileID: 11400000, guid: 2e606187a995f5446b46325d630cea7e, type: 2}
+  target: {fileID: 11400000, guid: c505ca91d0532d748a9e8ed0e1f7c13f, type: 2}
   actionCode: 
   assistantClip: {fileID: 0}
   assemblyType: 1

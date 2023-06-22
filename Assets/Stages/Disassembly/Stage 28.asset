@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4044633af4df36b4d8451c8336d6d921, type: 3}
-  m_Name: Stage 23
+  m_Name: Stage 28
   m_EditorClassIdentifier: 
-  ID: 23
-  description: "\u0421\u043D\u044F\u0442\u044C \u043A\u043E\u0440\u043F\u0443\u0441
-    \u0441\u0430\u043B\u044C\u043D\u0438\u043A\u043E\u0432\u043E\u0433\u043E \u0443\u043F\u043B\u043E\u0442\u043D\u0435\u043D\u0438\u044F
-    \u0441\u043E \u0441\u0442\u043E\u0440\u043E\u043D\u044B \u0432\u0441\u0430\u0441\u044B\u0432\u0430\u043D\u0438\u044F"
+  ID: 28
+  description: "\u0421\u043D\u044F\u0442\u044C \u043F\u0435\u0440\u0435\u0434\u043D\u0435\u0435
+    \u0443\u043F\u043B\u043E\u0442\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0435
+    \u043A\u043E\u043B\u044C\u0446\u043E \u0438\u0437 \u043A\u0440\u044B\u0448\u043A\u0438
+    \u0432\u0441\u0430\u0441\u044B\u0432\u0430\u043D\u0438\u044F"
   goalType: 0
-  target: {fileID: 11400000, guid: c505ca91d0532d748a9e8ed0e1f7c13f, type: 2}
+  target: {fileID: 11400000, guid: 381af83a1082cea4d86715b2aea3c2b9, type: 2}
   actionCode: 
   assistantClip: {fileID: 0}
   assemblyType: 1

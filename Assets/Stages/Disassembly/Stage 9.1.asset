@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4044633af4df36b4d8451c8336d6d921, type: 3}
-  m_Name: Stage 9
+  m_Name: Stage 9.1
   m_EditorClassIdentifier: 
-  ID: 10
-  description: "\u0421\u043D\u044F\u0442\u044C \u0437\u0430\u0449\u0438\u0442\u043D\u0443\u044E
-    \u0440\u0443\u0431\u0430\u0448\u043A\u0443"
+  ID: 9
+  description: "\u0421\u043D\u044F\u0442\u044C \u0433\u0430\u0439\u043A\u0443 \u0440\u043E\u0442\u043E\u0440\u0430"
   goalType: 0
-  target: {fileID: 11400000, guid: 40a0ff82ea2c09342a37d66040191930, type: 2}
+  target: {fileID: 11400000, guid: ed247fc442a72ca42b1745cc9506ae87, type: 2}
   actionCode: 
   assistantClip: {fileID: 0}
   assemblyType: 1

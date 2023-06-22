@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a072375b247ad054a85b5c27a477a256, type: 3}
-  m_Name: rotor nut
+  m_Name: rotor nut front
   m_EditorClassIdentifier: 
-  ID: 10
-  PartName: "\u0413\u0430\u0439\u043A\u0430 \u0440\u043E\u0442\u043E\u0440\u0430 "
+  ID: 115
+  PartName: "\u0413\u0430\u0439\u043A\u0430 \u0440\u043E\u0442\u043E\u0440\u0430"
   Description: "\u041C\u0430\u0442\u0435\u0440\u0438\u0430\u043B: 20\u042513 \u041C\u0430\u0441\u0441\u0430:
     2,15 \u043A\u0433. \u041D\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435:
     \u0444\u0438\u043A\u0441\u0438\u0440\u0443\u0435\u0442 \u0434\u0435\u0442\u0430\u043B\u0438,
     \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u043D\u0430\u0445\u043E\u0434\u044F\u0442\u0441\u044F
     \u043D\u0430 \u0432\u0430\u043B\u0443. "
   assemblyClip: {fileID: 7400000, guid: 5a01ca22211719f4e813c0eb4b893135, type: 2}
-  disassemblyClip: {fileID: 7400000, guid: dde02fdcaf819a740a720e415a8e08d8, type: 2}
+  disassemblyClip: {fileID: 0}
   videoClip: {fileID: 0}
