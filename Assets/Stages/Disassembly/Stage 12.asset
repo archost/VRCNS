@@ -20,4 +20,4 @@ MonoBehaviour:
   actionCode: 
   assistantClip: {fileID: 0}
   assemblyType: 1
-  question: {fileID: 0}
+  question: {fileID: 11400000, guid: 86c6f8ae0fe2f3346a601b28ecf17e60, type: 2}
