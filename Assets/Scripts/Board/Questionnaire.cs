@@ -35,8 +35,11 @@ public class Questionnaire : MonoBehaviour
 
     private Question currentQuestion = null;
 
+    private AudioController ac;
+
     private void Awake()
     {
+        ac = GetComponent<AudioController>();
         pl = Camera.main.transform;
 
         multiErrorAllowed = ProjectPreferences.instance.IsTraining;
@@ -76,6 +79,7 @@ public class Questionnaire : MonoBehaviour
             optionsText[i].text = sb.ToString();
 
         }
+        ac.PlayClip("notification");
     }
 
     public void ChooseOption(int index)

@@ -348,9 +348,9 @@ MonoBehaviour:
   m_fontSize: 8
   m_fontSizeBase: 8
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 6
+  m_fontSizeMax: 12
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -2541,7 +2541,7 @@ MonoBehaviour:
   m_SphereCastRadius: 0.1
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 243
   m_RaycastTriggerInteraction: 1
   m_HitClosestOnly: 1
   m_HoverToSelect: 0
@@ -8987,7 +8987,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 049ca8e1452b56248bd98eb8ea766ba5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 049ca8e1452b56248bd98eb8ea766ba5,
         type: 3}
@@ -11808,7 +11808,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 049ca8e1452b56248bd98eb8ea766ba5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 049ca8e1452b56248bd98eb8ea766ba5,
         type: 3}
@@ -15768,9 +15768,9 @@ MonoBehaviour:
   m_fontSize: 12
   m_fontSizeBase: 12
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 8
+  m_fontSizeMax: 14
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
@@ -18251,8 +18251,6 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 26c8fa8aeaed5374c8c6a3f94f3b0d1d, type: 3}
   - key: mistake
     clip: {fileID: 8300000, guid: 1f87bbe10885525499dd04725837d8c0, type: 3}
-  - key: notification
-    clip: {fileID: 8300000, guid: 9ce90d62155a88541886b257c87a8fd0, type: 3}
 --- !u!1 &897157224
 GameObject:
   m_ObjectHideFlags: 0
@@ -31986,7 +31984,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 049ca8e1452b56248bd98eb8ea766ba5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 049ca8e1452b56248bd98eb8ea766ba5,
         type: 3}
@@ -34468,7 +34466,7 @@ PrefabInstance:
     - target: {fileID: 7768860882097800363, guid: 312d89d48117e164ba21a7ddbc283f89,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7768860882097800364, guid: 312d89d48117e164ba21a7ddbc283f89,
         type: 3}
@@ -36418,7 +36416,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 049ca8e1452b56248bd98eb8ea766ba5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 049ca8e1452b56248bd98eb8ea766ba5,
         type: 3}
@@ -36879,9 +36877,9 @@ MonoBehaviour:
   m_fontSize: 8
   m_fontSizeBase: 8
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 6
+  m_fontSizeMax: 12
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -37130,7 +37128,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1650469554}
   m_LocalRotation: {x: 0, y: 0.99131113, z: -0.13153835, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 1.026}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -37729,9 +37727,9 @@ MonoBehaviour:
   m_fontSize: 8
   m_fontSizeBase: 8
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 6
+  m_fontSizeMax: 12
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -38500,7 +38498,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 049ca8e1452b56248bd98eb8ea766ba5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 049ca8e1452b56248bd98eb8ea766ba5,
         type: 3}
@@ -43845,7 +43843,7 @@ MonoBehaviour:
   m_SphereCastRadius: 0.1
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 243
   m_RaycastTriggerInteraction: 1
   m_HitClosestOnly: 1
   m_HoverToSelect: 0
@@ -47233,9 +47231,9 @@ MonoBehaviour:
   m_fontSize: 8
   m_fontSizeBase: 8
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 6
+  m_fontSizeMax: 12
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -51339,6 +51337,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5830509861059593119}
   - component: {fileID: 5830509861059593120}
+  - component: {fileID: 5830509861059593122}
+  - component: {fileID: 5830509861059593121}
   m_Layer: 0
   m_Name: Questionnaire
   m_TagString: Untagged
@@ -51381,9 +51381,120 @@ MonoBehaviour:
   - {fileID: 1709762293}
   - {fileID: 527477894}
   multiErrorAllowed: 0
-  height: 1.5
+  height: 1.8
   mistakeColor: {r: 0.6415094, g: 0.015129937, b: 0.015129937, a: 1}
   correctColor: {r: 0.042066943, g: 0.5660378, b: 0.013349946, a: 1}
+--- !u!114 &5830509861059593121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5830509861059593113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac84212c12b5cd4e8996b74d487056e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipElements:
+  - key: notification
+    clip: {fileID: 8300000, guid: 9ce90d62155a88541886b257c87a8fd0, type: 3}
+--- !u!82 &5830509861059593122
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5830509861059593113}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.466
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &5830509861208342264
 MonoBehaviour:
   m_ObjectHideFlags: 0

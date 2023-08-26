@@ -103,7 +103,6 @@ public class StageController : MonoBehaviour
             questionnaire.SetPosition(e.Part.transform.position);
             questionnaire.SetQuestion(CurrentStage.question);
             questionnaire.OnQuestionAnswered += e.Part.DetachAnimationPlay;
-            player.PlaySound("notification");
         }
     }
 

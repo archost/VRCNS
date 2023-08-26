@@ -11,6 +11,9 @@ public class Part : MonoBehaviour, ITargetable
 {
     public static int floorCollideCounter = 0;
 
+    private static readonly int s_PartLayer = 7;
+    private static readonly int s_IngoreRaycast = 2;
+
     private Outline outline;
     private Rigidbody rb;
     private AudioController audioCon;
@@ -169,7 +172,6 @@ public class Part : MonoBehaviour, ITargetable
 
         playerTransform = Camera.main.gameObject.transform;
 
-
     }
 
     private void Update()
@@ -187,6 +189,7 @@ public class Part : MonoBehaviour, ITargetable
         isAssembly = args.AssemblyType == GameAssemblyType.Assembly;
         if (!isAssembly)
         {
+            gameObject.layer = s_PartLayer;
             sInteractable = gameObject.GetComponent<XRSimpleInteractable>();
             sInteractable.enabled = true;
             sInteractable.selectEntered.AddListener(DetachRequest);
