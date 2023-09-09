@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -21,6 +22,9 @@ public class StartScreen : MonoBehaviour
 
     [SerializeField]
     private TMP_Dropdown scenarioDropdown;
+
+    [SerializeField]
+    private EventSystem _currentEventSystem;
 
     private Vector3 nameFieldRightPos;
 
@@ -44,6 +48,13 @@ public class StartScreen : MonoBehaviour
 
     private void Start()
     {
+        if (ModalWindow.WindowPrefab == null)
+        {
+            ModalWindow.WindowPrefab = Resources.Load<ModalWindow>("Prefabs/ModalWindowContainer");
+            if (ModalWindow.WindowPrefab == null)
+                throw new MissingReferenceException();
+        }
+
         nameFieldRect = nameField.GetComponent<RectTransform>();
         groupFieldRect = groupField.GetComponent<RectTransform>();
         messageRect = invalidMessage.GetComponent<RectTransform>();
@@ -107,6 +118,13 @@ public class StartScreen : MonoBehaviour
 
     }
 
+    public void ShowAbout()
+    {
+        string title = "О прорамме";
+        string content = "Авторы бла бла";
+        Instantiate(ModalWindow.WindowPrefab, transform).Show(title, content);
+    }
+
     public void SetGameMode()
     {
         validMode = (GameMode)gamemodeDropdown.value;
@@ -144,7 +162,7 @@ public class StartScreen : MonoBehaviour
         PlayerDataController.instance.SetFirstParameters(validName, validGroup, validMode, validScenario);
         ProjectPreferences.instance.assemblyType = validScenario;
         ProjectPreferences.instance.gameMode = validMode;
-
+        Destroy(_currentEventSystem.gameObject);
         SceneLoader.LoadScene(1);
     }
 }

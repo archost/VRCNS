@@ -178,7 +178,7 @@ public class Part : MonoBehaviour, ITargetable
     {
         if (isHolding)
         {
-            col.isTrigger = Vector3.Distance(playerTransform.position + Vector3.down * 0.7f, transform.position) < 1.2f;
+            col.isTrigger = Vector3.Distance(playerTransform.position + Vector3.down * 0.1f, transform.position) < 1.2f;
         }
     }
 
