@@ -72,12 +72,12 @@ public class StartScreen : MonoBehaviour
     public void ClearMessage(string s)
     {
         invalidMessage.SetActive(false);
-        invalidMessage.transform.position = new Vector3 (-100, -100, 0);
+        invalidMessage.transform.position = new Vector3(-100, -100, 0);
     }
 
     public void TrySetName(string name)
     {
-        if (IsNameValid(name)) 
+        if (IsNameValid(name))
         {
             nameField.onSelect.RemoveListener(ClearMessage);
             fieldsValid[0] = true;
@@ -88,7 +88,7 @@ public class StartScreen : MonoBehaviour
             validName = "";
             fieldsValid[0] = false;
             nameField.onSelect.AddListener(ClearMessage);
-            nameFieldRightPos = nameField.transform.position + 
+            nameFieldRightPos = nameField.transform.position +
                 (nameFieldRect.rect.width / 4 + messageRect.rect.width / 4) * nameField.transform.right;
             invalidMessage.SetActive(true);
             invalidMessage.transform.position = nameFieldRightPos;
@@ -96,9 +96,9 @@ public class StartScreen : MonoBehaviour
         }
     }
 
-    public void TrySetGroup(string group) 
+    public void TrySetGroup(string group)
     {
-        if (IsGroupValid(group)) 
+        if (IsGroupValid(group))
         {
             groupField.onSelect.RemoveListener(ClearMessage);
             fieldsValid[1] = true;
@@ -120,9 +120,22 @@ public class StartScreen : MonoBehaviour
 
     public void ShowAbout()
     {
-        string title = "О прорамме";
-        string content = "Авторы бла бла";
-        Instantiate(ModalWindow.WindowPrefab, transform).Show(title, content);
+        string title = "О программе";
+        string content = 
+            "Приложение виртуальной реальности \"Виртуальный ремонтный цех\" (вер. " + ProjectPreferences.version + ")<br>" +
+            "Данный программный продукт разработан командой студентов кафедр ВТИК и МОНГП УГНТУ:<br>" +
+            "ВТИК: Щербаков О.В., Султанов А.И., Хаертдинов И.И., Харисов Х.А.<br>" +
+            "МОНГП: Н.В.Мутных, Любимов К.С.<br>" +
+            "Под руководством: Дружинская Е.В., Пензин А.В.<br>" +
+            "Воспроизведение или распространение данной программы или любой её части запрещено.<br>" +
+            "© УГНТУ, 2023 г.";
+        Instantiate(ModalWindow.WindowPrefab, transform).ShowInformation(title, content);
+    }
+
+    public void ShowServerConnectionError(string errorMessage = "")
+    {
+        Instantiate(ModalWindow.WindowPrefab, transform).ShowInformation("Ошибка",
+            $"Ошибка подключения к серверу.<br>{errorMessage}");
     }
 
     public void SetGameMode()
@@ -135,14 +148,24 @@ public class StartScreen : MonoBehaviour
         validScenario = (GameAssemblyType)scenarioDropdown.value;
     }
 
-    private bool IsNameValid(string name) 
+    private bool IsNameValid(string name)
     {
         return name != "";
     }
 
-    private bool IsGroupValid(string group) 
+    private bool IsGroupValid(string group)
     {
         return group != "";
+    }
+
+    public void OnExitButtonClicked()
+    {
+        Instantiate(ModalWindow.WindowPrefab, transform).ShowChoice(
+            new Dictionary<string, UnityEngine.Events.UnityAction>()
+            {
+                {"Назад", null },
+                {"Выйти", () => Application.Quit() }
+            }, contentText: "Вы уверены, что хотите выйти?", closeButtonVisibility: false);
     }
 
     [ContextMenu("Test DB")]

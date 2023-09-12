@@ -53,7 +53,7 @@ public class PlayerDataController : MonoBehaviour
         playerData.Scenario = 0;
         playerData.GameMode = 0;
         playerData.Score = 0;
-        playerData.TestResult = "None";
+        playerData.TestResult = false;
         playerData.TestLength = TimeSpan.Zero;
     }
 
@@ -69,7 +69,7 @@ public class PlayerDataController : MonoBehaviour
 
     public void SetTestResult(bool res)
     {
-        playerData.TestResult = res ? "Зачет" : "Незачет";
+        playerData.TestResult = res;
     }
 
     public void SetTestDateToNow()

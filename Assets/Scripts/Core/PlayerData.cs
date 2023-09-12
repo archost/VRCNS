@@ -18,7 +18,7 @@ public struct PlayerData
 
     public short Score;
 
-    public string TestResult;
+    public bool TestResult;
 
     public TimeSpan TestLength;
 
@@ -30,7 +30,7 @@ public struct PlayerData
         Scenario = 0;
         GameMode = 0;
         Score = 0;
-        TestResult = "None";
+        TestResult = false;
         TestLength = TimeSpan.Zero;
     }
 }

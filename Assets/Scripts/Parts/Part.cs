@@ -9,8 +9,6 @@ using VREventArgs;
 [RequireComponent(typeof(Rigidbody), typeof(PartAttacher), typeof(AudioController))]
 public class Part : MonoBehaviour, ITargetable
 {
-    public static int floorCollideCounter = 0;
-
     private static readonly int s_PartLayer = 7;
     private static readonly int s_IngoreRaycast = 2;
 
@@ -119,7 +117,6 @@ public class Part : MonoBehaviour, ITargetable
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
-            floorCollideCounter++;
             audioCon.PlayClip("fall");
             if (collision.relativeVelocity.y < 2f)
                 Debug.Log("This fall doesn't count", this.gameObject);

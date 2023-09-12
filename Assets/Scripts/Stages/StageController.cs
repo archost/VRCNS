@@ -94,6 +94,15 @@ public class StageController : MonoBehaviour
         StartCoroutine(InitScene());
     }
 
+    private void OnDestroy()
+    {
+        OnPartInstalled = null;
+        OnActionTaken = null;
+        OnMadeMistake = null;
+        OnPartSelected = null;
+        OnPartClicked = null;
+    }
+
     private void PartClicked(PartClickedEventArgs e)
     {
         if (CurrentStage.question == null)
@@ -168,9 +177,10 @@ public class StageController : MonoBehaviour
         OnScoreChanged?.Invoke(score);
     }
 
+    [ContextMenu("Restart")]
     public void RestartScene()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     private void PartSelected(PartSelectedEventArgs e)
