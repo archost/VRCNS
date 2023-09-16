@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Stage 9.1
   m_EditorClassIdentifier: 
   ID: 9
-  description: "\u0421\u043D\u044F\u0442\u044C \u0433\u0430\u0439\u043A\u0443 \u0440\u043E\u0442\u043E\u0440\u0430"
+  description: "\u0421\u043D\u044F\u0442\u044C \u0433\u0430\u0439\u043A\u0443 \u0440\u043E\u0442\u043E\u0440\u0430
+    \u0441\u043E \u0441\u0442\u043E\u0440\u043E\u043D\u044B \u043D\u0430\u0433\u043D\u0435\u0442\u0430\u043D\u0438\u044F"
   goalType: 0
   target: {fileID: 11400000, guid: ed247fc442a72ca42b1745cc9506ae87, type: 2}
   actionCode: 

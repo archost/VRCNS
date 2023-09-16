@@ -4036,7 +4036,7 @@ MonoBehaviour:
   wrongOutlineColor: {r: 1, g: 0, b: 0, a: 1}
   outlineWidth: 5
   gameMode: 0
-  assemblyType: 0
+  assemblyType: 1
   multiErrorAllowed: 1
   maxScore: 25
   VRTesting: 1
@@ -4060,7 +4060,7 @@ MonoBehaviour:
     Scenario: 0
     GameMode: 0
     Score: 0
-    TestResult: 
+    TestResult: 0
 --- !u!1 &185913975
 GameObject:
   m_ObjectHideFlags: 0
@@ -20118,7 +20118,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 136.1
+  m_fontSize: 136.15
   m_fontSizeBase: 126.7
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -42741,7 +42741,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 158.75
+  m_fontSize: 159.5
   m_fontSizeBase: 126.7
   m_fontWeight: 400
   m_enableAutoSizing: 1

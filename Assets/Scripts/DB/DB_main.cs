@@ -29,9 +29,15 @@ public class DB_main : MonoBehaviour
     public void CallDB()
     {
         var currentD = PlayerDataController.instance.CurrentPlayerData;
-
-        string name = currentD.PlayerName.Split(' ')[1];
-        string surname = currentD.PlayerName.Split(' ')[0];
+        var splitted = currentD.PlayerName.Split(' ');
+        string name = currentD.PlayerName;
+        string surname = name;
+        if (splitted.Length > 1 ) 
+        { 
+            name = splitted[0];
+            surname= splitted[1];
+        }
+        
         StartCoroutine(PostData(name, surname, currentD.Group, currentD.TestResult ? 1 : 0, DateTime.UtcNow.ToString("yyyy-MM-dd"), 
             currentD.Score, currentD.Scenario + 1));
     }
