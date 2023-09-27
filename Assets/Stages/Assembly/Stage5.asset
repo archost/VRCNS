@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Stage5
   m_EditorClassIdentifier: 
   ID: 5
-  description: "\u041D\u0430\u0432\u0435\u0440\u043D\u0443\u0442\u044C \u043D\u0430
-    \u0432\u0430\u043B \u0433\u0430\u0439\u043A\u0443 \u0440\u043E\u0442\u043E\u0440\u0430
-    \u0441\u043E \u0441\u0442\u043E\u0440\u043E\u043D\u044B \u0432\u0441\u0430\u0441\u044B\u0432\u0430\u043D\u0438\u044F"
+  description: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u0441\u0435\u043A\u0446\u0438\u044E
+    \u043F\u0440\u043E\u043C\u0435\u0436\u0443\u0442\u043E\u0447\u043D\u043E\u0439
+    \u0441\u0442\u0443\u043F\u0435\u043D\u0438"
   goalType: 0
-  target: {fileID: 11400000, guid: ed247fc442a72ca42b1745cc9506ae87, type: 2}
+  target: {fileID: 11400000, guid: 697230e7cd4cfdf4ebe79fffe1260450, type: 2}
   actionCode: 
-  assistantClip: {fileID: 0}
+  assistantClip: {fileID: 8300000, guid: 2f8335806d45866419f438bcf904fadc, type: 3}
   assemblyType: 0
   question: {fileID: 0}

@@ -79,7 +79,7 @@ namespace VREventArgs
 
         public override string Display()
         {
-            return $"На вопрос \"{Question.questionDescription}\" дан неверный ответ - {Question.options[ChoosedOption]}. " +
+            return $"На вопрос \"{Question.questionDescription}\" дан неверный ответ - \"{Question.options[ChoosedOption]}\". " +
                 $"(Правильный ответ - {Question.options[Question.correctOption]})";
         }
 
