@@ -38,11 +38,11 @@ public class DB_main : MonoBehaviour
             surname= splitted[1];
         }
         
-        StartCoroutine(PostData(name, surname, currentD.Group, currentD.TestResult ? 1 : 0, DateTime.UtcNow.ToString("yyyy-MM-dd"), 
+        StartCoroutine(PostData(name, surname, currentD.Group, currentD.TestResult ? 1 : 0, currentD.TestTime, DateTime.UtcNow.ToString("yyyy-MM-dd"), 
             currentD.Score, currentD.Scenario + 1));
     }
 
-    private IEnumerator PostData(string name, string surname, string group, int mark, string udate, int points, int test)
+    private IEnumerator PostData(string name, string surname, string group, int mark, string time, string udate, int points, int test)
     {
         string url = URL + "/sendData";
         WWWForm form = new WWWForm();
@@ -50,6 +50,7 @@ public class DB_main : MonoBehaviour
         form.AddField("surname", surname);
         form.AddField("group", group);
         form.AddField("mark", mark);
+        form.AddField("utime", time);
         form.AddField("udate", udate);
         form.AddField("points", points);
         form.AddField("test", test);

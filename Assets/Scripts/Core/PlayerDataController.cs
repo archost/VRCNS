@@ -54,12 +54,12 @@ public class PlayerDataController : MonoBehaviour
         playerData.GameMode = 0;
         playerData.Score = 0;
         playerData.TestResult = false;
-        playerData.TestLength = TimeSpan.Zero;
+        playerData.TestTime = "";
     }
 
-    public void SetTestTime(int seconds)
+    public void SetTestTime(string timeFormatted)
     {
-        playerData.TestLength = TimeSpan.FromSeconds(seconds);
+        playerData.TestTime = timeFormatted;
     }
 
     public void SetScore(int score)

@@ -20,7 +20,7 @@ public struct PlayerData
 
     public bool TestResult;
 
-    public TimeSpan TestLength;
+    public string TestTime;
 
     public PlayerData(string playerName, string group)
     {
@@ -31,6 +31,6 @@ public struct PlayerData
         GameMode = 0;
         Score = 0;
         TestResult = false;
-        TestLength = TimeSpan.Zero;
+        TestTime = "00:00";
     }
 }

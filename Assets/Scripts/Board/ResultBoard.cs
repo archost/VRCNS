@@ -48,7 +48,7 @@ public class ResultBoard : MonoBehaviour
         PlayerData data = PlayerDataController.instance.CurrentPlayerData;       
         nameText.text = $"Проходил: {data.PlayerName}";
         groupText.text = $"Группа: {data.Group}";
-        PlayerDataController.instance.SetTestTime(ProjectPreferences.instance.IsTraining ? TimerScript.CurrentTime : TimerScript.BackCurrentTime);
+        PlayerDataController.instance.SetTestTime(ProjectPreferences.instance.IsTraining ? TimerScript.CurrentTimeFormat : TimerScript.BackwardsTimeFormat);
         string time = ProjectPreferences.instance.IsTraining ? TimerScript.CurrentTimeFormat : TimerScript.BackwardsTimeFormat;
         timeText.text = $"Время: {time}";
         PlayerDataController.instance.SetTestDateToNow();
