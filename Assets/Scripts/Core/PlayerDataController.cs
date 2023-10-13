@@ -33,9 +33,9 @@ public class PlayerDataController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void SetFirstParameters(string name, string group, GameMode mode, GameAssemblyType scenario)
+    public void SetFirstParameters(string name, string surname, string group, GameMode mode, GameAssemblyType scenario)
     {
-        playerData = new(name, group)
+        playerData = new(name, surname, group)
         {
             Scenario = (short)scenario,
             GameMode = (short)mode

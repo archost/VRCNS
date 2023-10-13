@@ -15,6 +15,9 @@ public class StartScreen : MonoBehaviour
     private TMP_InputField nameField;
 
     [SerializeField]
+    private TMP_InputField surnameField;
+
+    [SerializeField]
     private TMP_InputField groupField;
 
     [SerializeField]
@@ -26,17 +29,11 @@ public class StartScreen : MonoBehaviour
     [SerializeField]
     private EventSystem _currentEventSystem;
 
-    private Vector3 nameFieldRightPos;
-
-    private Vector3 groupFieldRightPos;
-
-    private RectTransform nameFieldRect;
-
-    private RectTransform groupFieldRect;
-
     private RectTransform messageRect;
 
     private string validName = "";
+
+    private string validSurname = "";
 
     private string validGroup = "";
 
@@ -44,7 +41,7 @@ public class StartScreen : MonoBehaviour
 
     private GameAssemblyType validScenario = 0;
 
-    private bool[] fieldsValid = new bool[2] { false, false };
+    private bool[] fieldsValid = new bool[3] { false, false, false };
 
     private void Start()
     {
@@ -55,17 +52,19 @@ public class StartScreen : MonoBehaviour
                 throw new MissingReferenceException();
         }
 
-        nameFieldRect = nameField.GetComponent<RectTransform>();
-        groupFieldRect = groupField.GetComponent<RectTransform>();
         messageRect = invalidMessage.GetComponent<RectTransform>();
 
         if (PlayerDataController.instance.IsSoftReset)
         {
             PlayerData pd = PlayerDataController.instance.CurrentPlayerData;
             nameField.SetTextWithoutNotify(pd.PlayerName);
+            surnameField.SetTextWithoutNotify(pd.PlayerSurname);
             groupField.SetTextWithoutNotify(pd.Group);
             gamemodeDropdown.SetValueWithoutNotify(pd.GameMode);
             scenarioDropdown.SetValueWithoutNotify(pd.Scenario);
+            TrySetName(pd.PlayerName);
+            TrySetSurname(pd.PlayerSurname);
+            TrySetGroup(pd.Group);
         }
     }
 
@@ -87,12 +86,23 @@ public class StartScreen : MonoBehaviour
         {
             validName = "";
             fieldsValid[0] = false;
-            nameField.onSelect.AddListener(ClearMessage);
-            nameFieldRightPos = nameField.transform.position +
-                (nameFieldRect.rect.width / 4 + messageRect.rect.width / 4) * nameField.transform.right;
-            invalidMessage.SetActive(true);
-            invalidMessage.transform.position = nameFieldRightPos;
-            invalidMessage.GetComponentInChildren<TextMeshProUGUI>().text = "Неправильно введено ФИО";
+            ShowErrorInputMessage(ref nameField, "Неправильно введено имя");
+        }
+    }
+
+    public void TrySetSurname(string surname)
+    {
+        if (IsSurnameValid(surname))
+        {
+            surnameField.onSelect.RemoveListener(ClearMessage);
+            fieldsValid[1] = true;
+            validSurname = surname;
+        }
+        else
+        {
+            validSurname = "";
+            fieldsValid[1] = false;
+            ShowErrorInputMessage(ref surnameField, "Неправильно введена фамилия");
         }
     }
 
@@ -101,27 +111,33 @@ public class StartScreen : MonoBehaviour
         if (IsGroupValid(group))
         {
             groupField.onSelect.RemoveListener(ClearMessage);
-            fieldsValid[1] = true;
+            fieldsValid[2] = true;
             validGroup = group;
         }
         else
         {
             validGroup = "";
-            fieldsValid[1] = false;
-            groupField.onSelect.AddListener(ClearMessage);
-            groupFieldRightPos = groupField.transform.position +
-                (groupFieldRect.rect.width / 4 + messageRect.rect.width / 4) * groupField.transform.right;
-            invalidMessage.SetActive(true);
-            invalidMessage.transform.position = groupFieldRightPos;
-            invalidMessage.GetComponentInChildren<TextMeshProUGUI>().text = "Неправильно введена группа";
+            fieldsValid[2] = false;
+            ShowErrorInputMessage(ref groupField, "Неправильно введена группа");
         }
 
+    }
+
+    private void ShowErrorInputMessage(ref TMP_InputField inputField, string message)
+    {
+        inputField.onSelect.AddListener(ClearMessage);
+        var fieldRect = inputField.transform as RectTransform;
+        var messagePos = inputField.transform.position +
+            (fieldRect.rect.width / 4 + messageRect.rect.width / 4) * inputField.transform.right;
+        invalidMessage.SetActive(true);
+        invalidMessage.transform.position = messagePos;
+        invalidMessage.GetComponentInChildren<TextMeshProUGUI>().text = message;
     }
 
     public void ShowAbout()
     {
         string title = "О программе";
-        string content = 
+        string content =
             "Приложение виртуальной реальности \"Виртуальный ремонтный цех\" (вер. " + ProjectPreferences.version + ")<br>" +
             "Данный программный продукт создан командой разработчиков УГНТУ:<br>" +
             "Кафедра ВТИК: Щербаков О.В., Султанов А.И., Хаертдинов И.И., Харисов Х.А.<br>" +
@@ -153,6 +169,11 @@ public class StartScreen : MonoBehaviour
         return name != "";
     }
 
+    private bool IsSurnameValid(string surname)
+    {
+        return surname != "";
+    }
+
     private bool IsGroupValid(string group)
     {
         return group != "";
@@ -176,13 +197,30 @@ public class StartScreen : MonoBehaviour
 
     public void NextStage()
     {
-
-        foreach (var item in fieldsValid)
+        for (int i = 0; i < fieldsValid.Length; i++)
         {
-            if (!item) return;
+            if (!fieldsValid[i])
+            {
+                switch (i)
+                {
+                    case 0:
+                        ShowErrorInputMessage(ref nameField, "Неправильно введено имя");
+                        break;
+                    case 1:
+                        ShowErrorInputMessage(ref surnameField, "Неправильно введена фамилия");
+                        break;
+                    case 2:
+                        ShowErrorInputMessage(ref groupField, "Неправильно введена группа");
+                        break;
+                    default:
+                        break;
+                }
+                return;
+            }
         }
 
-        PlayerDataController.instance.SetFirstParameters(validName, validGroup, validMode, validScenario);
+
+        PlayerDataController.instance.SetFirstParameters(validName, validSurname, validGroup, validMode, validScenario);
         ProjectPreferences.instance.assemblyType = validScenario;
         ProjectPreferences.instance.gameMode = validMode;
         Destroy(_currentEventSystem.gameObject);

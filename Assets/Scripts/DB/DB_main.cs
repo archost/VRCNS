@@ -29,14 +29,8 @@ public class DB_main : MonoBehaviour
     public void CallDB()
     {
         var currentD = PlayerDataController.instance.CurrentPlayerData;
-        var splitted = currentD.PlayerName.Split(' ');
         string name = currentD.PlayerName;
-        string surname = name;
-        if (splitted.Length > 1 ) 
-        { 
-            name = splitted[0];
-            surname= splitted[1];
-        }
+        string surname = currentD.PlayerSurname;
         
         StartCoroutine(PostData(name, surname, currentD.Group, currentD.TestResult ? 1 : 0, currentD.TestTime, DateTime.UtcNow.ToString("yyyy-MM-dd"), 
             currentD.Score, currentD.Scenario + 1));
@@ -93,27 +87,5 @@ public class DB_main : MonoBehaviour
             }
         }
         
-    }
-
-    [Obsolete]
-    IEnumerator Register(string groupfield, string namefield, short score, string result,int scenario, string testdate, string testlength)
-    {
-        WWWForm form = new WWWForm();
-
-        form.AddField("name", namefield);
-        form.AddField("group", groupfield);
-        form.AddField("score", score);
-        form.AddField("result", result);
-        form.AddField("scenario", scenario);
-        form.AddField("testdate", testdate);
-        form.AddField("testlength", testlength);
-
-        WWW www = new WWW("http://localhost/sqlconnect/VrcnsDb.php", form);
-        yield return www;
-
-        if (www.text == "0")
-            Debug.Log("User created ");
-        else
-            Debug.Log("User creation failed:" + www.text);
     }
 }

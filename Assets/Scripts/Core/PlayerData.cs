@@ -8,6 +8,8 @@ public struct PlayerData
 {
     public string PlayerName;
 
+    public string PlayerSurname;
+
     public string Group;
 
     public DateTime TestDate;
@@ -22,9 +24,10 @@ public struct PlayerData
 
     public string TestTime;
 
-    public PlayerData(string playerName, string group)
+    public PlayerData(string name, string surname, string group)
     {
-        PlayerName = playerName;
+        PlayerName = name;
+        PlayerSurname = surname;
         Group = group;
         TestDate = DateTime.MinValue;
         Scenario = 0;

@@ -32,21 +32,10 @@ public class ResultBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI timeText;
 
-    private struct TestingResults
-    {
-        public string studentName;
-        public string groupName;
-        public string time;
-        public string assemblyType;
-        public int score;
-        public int maxScore;
-        public bool result;
-    }
-
     public void InitWindow(StageController sc)
     {
         PlayerData data = PlayerDataController.instance.CurrentPlayerData;       
-        nameText.text = $"Проходил: {data.PlayerName}";
+        nameText.text = $"Проходил: {data.PlayerSurname} {data.PlayerName}";
         groupText.text = $"Группа: {data.Group}";
         PlayerDataController.instance.SetTestTime(ProjectPreferences.instance.IsTraining ? TimerScript.CurrentTimeFormat : TimerScript.BackwardsTimeFormat);
         string time = ProjectPreferences.instance.IsTraining ? TimerScript.CurrentTimeFormat : TimerScript.BackwardsTimeFormat;
@@ -60,13 +49,12 @@ public class ResultBoard : MonoBehaviour
             string mark = sc.Score < ProjectPreferences.instance.maxScore * 0.8f ? "Незачет" : "Зачет";
             PlayerDataController.instance.SetTestResult(sc.Score > ProjectPreferences.instance.maxScore * 0.8f);
             markText.text = mark;
+            SaveResults();
         }
         else 
         {
             TrainingPanel.SetActive(true);
         }
-
-        SaveResults();
     }
 
     public void SoftReset()

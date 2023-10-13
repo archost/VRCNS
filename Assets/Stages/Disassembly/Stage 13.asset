@@ -18,6 +18,6 @@ MonoBehaviour:
   goalType: 0
   target: {fileID: 11400000, guid: 4d53cdddde694b44b91de9be8cfec8ca, type: 2}
   actionCode: 
-  assistantClip: {fileID: 0}
+  assistantClip: {fileID: 8300000, guid: 136dd226a17e49b4885c3402ce1e7deb, type: 3}
   assemblyType: 1
   question: {fileID: 11400000, guid: 4ffb7a28c383dbc42a6412e324757133, type: 2}

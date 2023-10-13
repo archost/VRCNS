@@ -236,7 +236,7 @@ public class Part : MonoBehaviour, ITargetable
         }
         else
         {
-            isHolding = false;
+            //isHolding = false;
             col.isTrigger = false;
         }
         if (isTarget && ProjectPreferences.instance.IsTraining)
