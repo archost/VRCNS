@@ -33,6 +33,8 @@ public class Part : MonoBehaviour, ITargetable
 
     private bool isAssembly = false;
 
+    private bool isInHand = false;
+
     public bool IsHolding => isHolding;
 
     public int PartID { get; private set; }
@@ -173,7 +175,7 @@ public class Part : MonoBehaviour, ITargetable
 
     private void Update()
     {
-        if (isHolding)
+        if (isHolding && isInHand)
         {
             col.isTrigger = Vector3.Distance(playerTransform.position + Vector3.down * 0.1f, transform.position) < 1.2f;
         }
@@ -220,7 +222,7 @@ public class Part : MonoBehaviour, ITargetable
     private void ResetCollider()
     {
         if (!isSelected) return;
-        isHolding = true;
+        isInHand = true;
     }
 
     private void Selected(bool isSelected)
@@ -229,14 +231,16 @@ public class Part : MonoBehaviour, ITargetable
             UpdateState(PartState.Idle);
         
         this.isSelected = isSelected;
+        isInHand = false;
         if (isSelected)
-        {
+        {           
+            isHolding = true;
             col.isTrigger = true;
             Invoke(nameof(ResetCollider), 0.3f);
         }
         else
         {
-            //isHolding = false;
+            isHolding = false;
             col.isTrigger = false;
         }
         if (isTarget && ProjectPreferences.instance.IsTraining)
