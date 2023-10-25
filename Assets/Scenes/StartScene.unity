@@ -1397,11 +1397,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData:
-    PlayerName: "\u0422\u0435\u0441\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435
-      \u0431\u0440\u043E"
-    PlayerSurname: 
+    PlayerName: "\u041E\u043B\u0435\u0433"
+    PlayerSurname: "\u0429\u0435\u0440\u0431\u0430\u043A\u043E\u0432"
     Group: "\u0411\u041F\u041E\u0438-21-03"
-    Scenario: 0
+    Scenario: 1
     GameMode: 0
     Score: 25
     TestResult: 1
@@ -7851,7 +7850,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -325.69, y: 59.000053}
+  m_AnchoredPosition: {x: -325.69, y: 59}
   m_SizeDelta: {x: 243.94, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1982150917

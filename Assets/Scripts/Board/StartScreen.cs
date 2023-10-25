@@ -65,6 +65,8 @@ public class StartScreen : MonoBehaviour
             TrySetName(pd.PlayerName);
             TrySetSurname(pd.PlayerSurname);
             TrySetGroup(pd.Group);
+            validMode = (GameMode)pd.GameMode;
+            validScenario = (GameAssemblyType)pd.Scenario;
         }
     }
 
