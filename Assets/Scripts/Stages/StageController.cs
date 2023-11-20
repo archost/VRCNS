@@ -59,6 +59,8 @@ public class StageController : MonoBehaviour
 
     public int Score => score;
 
+    public List<MistakeEventArgs> Mistakes => mistakesList;
+
     private Stage CurrentStage
     {
         get

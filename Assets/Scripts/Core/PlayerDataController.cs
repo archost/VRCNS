@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using VREventArgs;
 
 public class PlayerDataController : MonoBehaviour
 {
@@ -55,6 +56,7 @@ public class PlayerDataController : MonoBehaviour
         playerData.Score = 0;
         playerData.TestResult = false;
         playerData.TestTime = "";
+        playerData.Mistakes = new string[0];
     }
 
     public void SetTestTime(string timeFormatted)
@@ -75,5 +77,15 @@ public class PlayerDataController : MonoBehaviour
     public void SetTestDateToNow()
     {
         playerData.TestDate = DateTime.UtcNow;
+    }
+
+    public void SetMistakes(List<MistakeEventArgs> mistakesEvents)
+    {
+        var mistakes = new string[mistakesEvents.Count];
+        for (int i = 0; i < mistakesEvents.Count; i++)
+        {
+            mistakes[i] = mistakesEvents[i].ToString();
+        }
+        playerData.Mistakes = mistakes;
     }
 }

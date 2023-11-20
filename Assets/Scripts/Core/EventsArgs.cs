@@ -29,6 +29,11 @@ namespace VREventArgs
         public MistakeEventArgs(object sender) : base(sender) 
         { 
         }
+
+        public override string ToString()
+        {
+            return Display();
+        }
     }
 
     public class PartFellEventArgs : MistakeEventArgs

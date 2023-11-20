@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,6 +9,8 @@ using UnityEngine.UI;
 
 public class StartScreen : MonoBehaviour
 {
+    private static Regex s_groupRegex = new Regex("[А-Яа-я0-9]+-[0-9]+", RegexOptions.CultureInvariant);
+
     [SerializeField]
     private GameObject invalidMessage;
 
@@ -141,7 +144,7 @@ public class StartScreen : MonoBehaviour
         string title = "О программе";
         string content =
             "Приложение виртуальной реальности \"Виртуальный ремонтный цех\" <br>" +
-            "Версия " + ProjectPreferences.version + "<br>" +
+            "Версия " + Application.version + "<br>" +
             "Данный программный продукт создан командой разработчиков УГНТУ:<br>" +
             "Кафедра ВТИК: Щербаков О.В., Султанов А.И., Хаертдинов И.И., Харисов Х.А.<br>" +
             "Кафедра МОНГП: Мутных Н.В., Любимов К.С.<br>" +
@@ -179,7 +182,7 @@ public class StartScreen : MonoBehaviour
 
     private bool IsGroupValid(string group)
     {
-        return group != "";
+        return (group != "" && s_groupRegex.IsMatch(group));
     }
 
     public void OnExitButtonClicked()

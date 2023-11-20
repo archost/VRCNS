@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ProjectPreferences : MonoBehaviour
 {
-    public static readonly string version = "pre-release 1.0";
-
     public static ProjectPreferences instance = null;
 
     [Header("Outline Settings")]

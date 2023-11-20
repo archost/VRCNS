@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class ResultBoard : MonoBehaviour
 {
@@ -46,15 +47,23 @@ public class ResultBoard : MonoBehaviour
             TestingPanel.SetActive(true);
             PlayerDataController.instance.SetScore(sc.Score);
             scoreText.text = $"Баллы: {sc.Score}/{ProjectPreferences.instance.maxScore}";
-            string mark = sc.Score < ProjectPreferences.instance.maxScore * 0.8f ? "Незачет" : "Зачет";
-            PlayerDataController.instance.SetTestResult(sc.Score > ProjectPreferences.instance.maxScore * 0.8f);
-            markText.text = mark;
+            bool mark = GetResult(sc.Score);
+            PlayerDataController.instance.SetTestResult(mark);
+            PlayerDataController.instance.SetMistakes(sc.Mistakes);
+            markText.text = mark ? "Зачёт" : "Незачёт";
             SaveResults();
         }
         else 
         {
             TrainingPanel.SetActive(true);
         }
+    }
+
+    private bool GetResult(int score)
+    {
+        if (ProjectPreferences.instance.IsTesting && TimerScript.BackCurrentTime <= 0)
+            return false;
+        return score >= ProjectPreferences.instance.maxScore * 0.8f;
     }
 
     public void SoftReset()

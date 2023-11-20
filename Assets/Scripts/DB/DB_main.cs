@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
+using Newtonsoft.Json;
 
 public class DB_main : MonoBehaviour
 {
@@ -32,11 +34,15 @@ public class DB_main : MonoBehaviour
         string name = currentD.PlayerName;
         string surname = currentD.PlayerSurname;
         
-        StartCoroutine(PostData(name, surname, currentD.Group, currentD.TestResult ? 1 : 0, currentD.TestTime, DateTime.UtcNow.ToString("yyyy-MM-dd"), 
-            currentD.Score, currentD.Scenario + 1));
+        
+        StartCoroutine(PostData(name, surname, currentD.Group, 
+            currentD.TestResult ? 1 : 0, currentD.TestTime, DateTime.UtcNow.ToString("yyyy-MM-dd"), 
+            currentD.Score, currentD.Scenario + 1, currentD.Mistakes));
     }
 
-    private IEnumerator PostData(string name, string surname, string group, int mark, string time, string udate, int points, int test)
+    private IEnumerator PostData(string name, 
+        string surname, string group, int mark, 
+        string time, string udate, int points, int test, string[] mistakes)
     {
         string url = URL + "/sendData";
         WWWForm form = new WWWForm();
@@ -48,6 +54,7 @@ public class DB_main : MonoBehaviour
         form.AddField("udate", udate);
         form.AddField("points", points);
         form.AddField("test", test);
+        form.AddField("mistakes", JsonConvert.SerializeObject(mistakes, Formatting.None));
         using var request = UnityWebRequest.Post(url, form);
         yield return request.SendWebRequest();
         if (request.responseCode == 200)

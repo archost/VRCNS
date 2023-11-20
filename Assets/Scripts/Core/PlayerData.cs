@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using VREventArgs;
 
 [Serializable]
 public struct PlayerData
@@ -24,6 +26,8 @@ public struct PlayerData
 
     public string TestTime;
 
+    public string[] Mistakes;
+
     public PlayerData(string name, string surname, string group)
     {
         PlayerName = name;
@@ -35,5 +39,6 @@ public struct PlayerData
         Score = 0;
         TestResult = false;
         TestTime = "00:00";
+        Mistakes = new string[0];
     }
 }
