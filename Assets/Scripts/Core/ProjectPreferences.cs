@@ -6,6 +6,8 @@ public class ProjectPreferences : MonoBehaviour
 {
     public static ProjectPreferences instance = null;
 
+    public static readonly string BackendAddressKey = "APIKey";
+
     [Header("Outline Settings")]
     public Color highlightOutlineColor;
     public Color wrongOutlineColor;

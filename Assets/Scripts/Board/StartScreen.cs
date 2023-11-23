@@ -139,6 +139,16 @@ public class StartScreen : MonoBehaviour
         invalidMessage.GetComponentInChildren<TextMeshProUGUI>().text = message;
     }
 
+    public void ShowInputInfo()
+    {
+        string title = "Как заполнять данные";
+        string content = "При заполнении данных о себе соблюдайте следующие правила:<br>" +
+            "- Заполняйте фамилию и имя точно и без ошибок. Заносите их в разные поля.<br>" +
+            "- При вводе группы, указывайте ее название полностью и точно (пр. БМП-20-01). Не используйте пробелы (программа не даст вам запуститься). <br>" +
+            "Следование этим правилам поможет преподавателю легче найти вас по фамилии, имени и группе.";
+        Instantiate(ModalWindow.WindowPrefab, transform).ShowInformation(title, content);
+    }
+
     public void ShowAbout()
     {
         string title = "О программе";
