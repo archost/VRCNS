@@ -52,7 +52,6 @@ public class AdminPanel : MonoBehaviour
             var pass = Encoder.EncodeString(value);
             _password = Encoder.ByteToString(pass);
             PlayerPrefs.SetString(ADMINPASS_KEY, _password);
-            _authPasswordField.SetTextWithoutNotify(string.Empty);
             AuthValidated();
         }
         else
@@ -60,7 +59,6 @@ public class AdminPanel : MonoBehaviour
             string val = Encoder.ByteToString(Encoder.EncodeString(value));
             if (_password.Equals(val))
             {
-                _authPasswordField.SetTextWithoutNotify(string.Empty);
                 AuthValidated();
             }    
         }
@@ -83,5 +81,13 @@ public class AdminPanel : MonoBehaviour
     public void SubmitAPI(string value)
     {
         PlayerPrefs.SetString(ProjectPreferences.BackendAddressKey, value);
+        DB_main.instance.CheckConnection();
+    }
+
+    public void SubmitNewPassword(string value)
+    {
+        var pass = Encoder.EncodeString(value);
+        _password = Encoder.ByteToString(pass);
+        PlayerPrefs.SetString(ADMINPASS_KEY, _password);
     }
 }

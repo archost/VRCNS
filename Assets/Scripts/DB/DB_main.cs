@@ -9,7 +9,7 @@ public class DB_main : MonoBehaviour
 {
     public static DB_main instance;
 
-    private static readonly string URL = "http://217.18.60.195:8080";
+    private string URL = null;
 
     private void Awake()
     {
@@ -24,7 +24,20 @@ public class DB_main : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(CheckServerConnection());
+        CheckConnection();
+    }
+
+    public void CheckConnection()
+    {
+        if (PlayerPrefs.HasKey(ProjectPreferences.BackendAddressKey))
+        {
+            URL = PlayerPrefs.GetString(ProjectPreferences.BackendAddressKey);
+            StartCoroutine(CheckServerConnection());
+        }
+        else
+        {
+            FindObjectOfType<StartScreen>().ShowServerConnectionError("Не задан адрес отправки данных!");
+        }
     }
 
     [ContextMenu("Test")]
