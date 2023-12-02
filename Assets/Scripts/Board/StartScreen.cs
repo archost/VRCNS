@@ -46,7 +46,7 @@ public class StartScreen : MonoBehaviour
 
     private bool[] fieldsValid = new bool[3] { false, false, false };
 
-    private void Start()
+    private void Awake()
     {
         if (ModalWindow.WindowPrefab == null)
         {
